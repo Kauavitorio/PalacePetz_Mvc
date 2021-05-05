@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -18,6 +19,8 @@ namespace palacepetz.Models.User
         public string birth_date { get; set; }
         public int user_type { get; set; }
         public string img_user { get; set; }
+
+        [Required(ErrorMessage = "Email ou senha invelido")]
         public string password { get; set; }
     }
 }
