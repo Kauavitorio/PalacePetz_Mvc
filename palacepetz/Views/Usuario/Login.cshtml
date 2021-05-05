@@ -1,0 +1,54 @@
+﻿@model palacepetz.Models.User.DtoUser
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PalacePetz</title>
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+    <section>
+        @using (Html.BeginForm()){
+        <div>
+            <div class="user Func">
+                <div class="imgBox"><img src="./dog1.jpg" alt="" id="img"></div>
+                <div class="formBox">
+                    <form>
+                        <h2 id="text-title">LOGIN</h2>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group" style="margin-bottom: 10%">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de email", @class = "field", @id = "id_func" } })
+                                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 10%">
+                            <div class="col-md-10">
+                                @Html.PasswordFor(model => model.password, new { placeholder = "Senha de Usuário", @class = "editor" })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Entrar" class="btn" onclick="EntrarUser()" />
+                            </div>
+                        </div>
+                        <p class="signup"><a href="#" onclick=""> Esqueceu a senha? Recupere.</a></p>
+                        <p class="signup"><a href="#" onclick="toggleFormCriaConta();"> Criar Conta.</a></p>
+                        @ViewBag.test;
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    </section>
+</body>
+</html>
+
+
