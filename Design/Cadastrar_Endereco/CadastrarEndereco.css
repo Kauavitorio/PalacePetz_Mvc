@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI' serif;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+section{
+    position: relative;
+    min-height: 100vh;
+    background: var(--main-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+section .container{
+    position: relative;
+    width: 800px;
+    height: 500px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+    margin-left: 10%;
+    overflow: hidden;
+}
+
+section .container .user{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+section .container .user .imgBox{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+#img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+    object-fit: cover;
+}
+#text-title {
+    font: bold 2rem Segoe UI;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 20%;
+    color: #555;
+}
+
+.column_two{
+    margin-left: 10%;
+}
+
+.field{
+    display: block;
+    position: relative;
+    padding: 10px;
+    width: 360px;
+    background: transparent;
+    border: none;
+    border-bottom: solid 7px var(--border-field);
+    color: var(--text);
+    font: normal 12pt Segoe UI;
+    letter-spacing: 1px;
+    outline: none;
+    transition: 0.5s;
+}
+.inactive{
+    border-bottom: solid 7px var(--border-field);
+    opacity: 40%;
+} 
+.field::placeholder{
+    font: normal 14pt Segoe UI;
+    color: #444B54;
+    opacity: 50%;
+}
+
+.btn {
+    color: #fff;
+    background: var(--button);
+    border-radius: 50px;
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    padding: 15px 80px 15px 80px;  /* top, right, bottom, left */
+    margin: 5% 0 ;
+    width: 100%;
+    max-width: 100%;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.btn:hover{
+    opacity: 80%;
+}
+
+.signup {
+    position: relative;
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+    .signup a {
+        color: var(--text);
+        font: normal 12pt Segoe UI;
+        font-weight: 600;
+        text-decoration: underline;
+ 
+    }
+
+.text-danger{
+    color: var(--alert-red);
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: 1%;
+    font-style: italic;
+}
+

@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI' serif;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+section{
+    position: relative;
+    min-height: 100vh;
+    background: var(--main-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.img{
+
+}
+.text{
+    font-family: 'Segoe UI' serif;
+    font: 15px Arial, sans-serif;
+}
