@@ -102,6 +102,16 @@ section .container .user .imgBox{
     opacity: 50%;
 }
 
+
+.checkbox{
+    border-radius: 10px;
+    border: solid 5px var(--border-field);
+}
+#label{
+    font: regular 1rem Segoe UI;
+    color: var(--text);
+}
+
 .btn {
     color: #fff;
     background: var(--button);
