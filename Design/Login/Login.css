@@ -60,10 +60,11 @@ section .container .user .imgBox{
     width: 120%;
     height: 90vh;
     margin-left: 60%;
-    display: flex;
+    display: block;
     justify-content:start;
     align-items: center;
     padding-left:10%;
+    padding-top: 22%;
     transition: 0.5s;
 }
 #text-title {
