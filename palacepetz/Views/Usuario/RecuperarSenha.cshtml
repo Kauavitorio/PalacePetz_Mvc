@@ -1,0 +1,74 @@
+﻿@model palacepetz.Models.User.DtoUser
+@{
+    ViewBag.Title = "Recuperar Senha - PalacePetz";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="og:title" content="PalacePetz">
+    <meta property="og:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="twitter:title" content="PalacePetz">
+    <meta property="twitter:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="twitter:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+    <title>Recuperar Senha - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/RecoverPassword/RecoverPassword.css" />
+    <!--<link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/RecoverPassword/RecoverPassword.css" />-->
+    <!-- Loading -->
+    <!--<link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/loading/loading.css" /> -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/loading/loading.css" />
+</head>
+<body>
+    <section>
+        @using (Html.BeginForm())
+        {
+            <div class="main_conatiner">
+                <div class="img">
+                    <img src="https://www.kauavitorio.com/palacepetz/RecoverPassword/emoji.png">
+                </div>
+                <div class="container_text">
+                    <h2 class="text">
+                        esqueceu a senha?
+                        <h1 class="text1">Sem problemas,<br />vamos te ajudar.</h1>
+                    </h2>
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de e-mail", @class = "enter", @onclick = "hiddenTextDanger()" } })
+                    @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" })
+                    <h3 class="text-danger">@ViewBag.statusRecoverPassowrd</h3>
+                    <input type="submit" value="trocar senha" class="singup" />
+                </div>
+            </div>
+        }
+    </section>
+
+    <div class="container_loading">
+        <h2 class="animate">Carregando...</h2>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script>
+        $(window).on('load', function () {
+        $(".container_loading").fadeOut("slow");
+        });
+        $(window).on('beforeunload', function () {
+        $(".container_loading").fadeIn(50);
+        });
+    </script>
+</body>
+</html>
