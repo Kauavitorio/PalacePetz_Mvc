@@ -60,7 +60,7 @@ section .container .user .imgBox{
     width: 120%;
     height: 90vh;
     margin-left: 60%;
-    display: flex;
+    display: block;
     justify-content:start;
     align-items: center;
     padding-left:10%;
