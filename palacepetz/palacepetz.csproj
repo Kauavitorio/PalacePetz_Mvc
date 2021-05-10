@@ -270,6 +270,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Dados\Auth\Cryption.cs" />
     <Compile Include="Dados\Auth\Login.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -282,13 +283,50 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\login\login.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\.gitignore" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\dist\jquery.mask.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\dist\jquery.mask.min.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\Gruntfile.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\package.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\src\jquery.mask.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\jquery.mask.test.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\qunit.css" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\qunit.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\sinon-1.10.3.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\sinon-qunit-1.0.0.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\sinon-qunit.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-1.11.1.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-1.7.2.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-1.8.3.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-1.9.1.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-2.1.1.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-jquery-3.0.0.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\test-for-zepto.html" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\zepto\data.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\zepto\event.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\test\zepto\zepto.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\.jshintrc" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\.ruby-version" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\.travis.yml" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\bower.json" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\CHANGELOG.md" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\component.json" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\composer.json" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\CONTRIBUTING.md" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\deploy.rb" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\docker-compose.yml" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\Dockerfile" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\ISSUE_TEMPLATE.md" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\LICENSE" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\package-lock.json" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\package.json" />
+    <Content Include="lib\jQuery-Mask-Plugin-master\README.md" />
     <None Include="Properties\PublishProfiles\palacepetz - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -313,11 +351,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Usuario\CreateAccount.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Usuario\RecuperarSenha.cshtml" />
+    <Content Include="Views\Usuario\SetNewPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,123 @@
+﻿@model palacepetz.Models.User.DtoUser
+@{
+    ViewBag.Title = "Criar Conta - PalacePetz";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <title>PalacePetz</title>
+    <meta name="title" content="PalacePetz">
+    <meta name="description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="og:title" content="PalacePetz">
+    <meta property="og:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="twitter:title" content="PalacePetz">
+    <meta property="twitter:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="twitter:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+    <link rel="shortcut icon" href="https://images-ext-2.discordapp.net/external/4HMdm3taSy4ACH3ApsKqhC-RKnRd3Ag6juKpWoqjXoo/%3Fwidth%3D455%26height%3D467/https/media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png" type="image/x-icon">
+    <title>Criar Conta - PalacePetz</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/createaccount/createaccount.css" />
+    <!-- <link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/createaccount/createaccount.css" /> -->
+
+    <!-- Loading -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/loading/loading.css" />
+</head>
+<body>
+    <section>
+        @using (Html.BeginForm())
+        {
+            <div>
+                <div class="user Func">
+                    <div class="formBox">
+                        <form>
+                            <h2 id="text-title">CRIAR CONTA</h2>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group" style="margin-bottom: 3%">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Firstname_user, new { htmlAttributes = new { placeholder = "Primeiro Nome", @class = "field" } })
+                                    @Html.ValidationMessageFor(model => model.Firstname_user, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 3%">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Lastname_user, new { htmlAttributes = new { placeholder = "Último Nome", @class = "field" } })
+                                    @Html.ValidationMessageFor(model => model.Lastname_user, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 3%">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Email", @class = "field", @type = "email" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 3%">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { placeholder = "CPF", @class = "field", @id = "txtCPF" } })
+                                    @Html.ValidationMessageFor(model => model.cpf_user, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 3%">
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(model => model.password, new { placeholder = "Senha", @class = "field", @id = "inputPassword" })
+                                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(model => model.confirmpassword, new { placeholder = "Confirmar Senha", @class = "field", @id = "inputConfPassword" })
+                                    @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @ViewBag.StatusCreateAccount
+                            <div class="form-group" style="justify-content: center; display:flex;">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Criar Conta" class="btn" onclick="EntrarUser()" />
+                                </div>
+                            </div>
+                            <p class="signup"><a href="" style="text-decoration: none; cursor: auto;" onclick="toggleFormCriaConta(); "> Já tem uma conta?</a> <a style="text-decoration: underline; cursor: pointer;" href="/login">Entre.</a> </p>
+                        </form>
+                    </div>
+                    <div class="imgBox"><img src="https://cdn.discordapp.com/attachments/756546249901211749/839879535653945394/dog2.jpg" alt="" id="img"></div>
+                </div>
+            </div>
+        }
+    </section>
+
+    <div class="container_loading">
+        <h2 class="animate">Loading</h2>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $seuCampoCpf = $("#txtCPF");
+            $seuCampoCpf.mask('000.000.000-00', { reverse: true });
+        });
+    </script>
+    <script>
+        $(window).on('load', function () {
+            $(".container_loading").fadeOut("slow");
+        });
+        $(window).on('beforeunload', function () {
+            $(".container_loading").fadeIn(50);
+        });
+    </script>
+</body>
+</html>

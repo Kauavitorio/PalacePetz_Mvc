@@ -9,23 +9,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:locale" content="en-us">
-    <meta property="og:url" content="http://palacepetz.azurewebsites.net/">
-    <meta property="og:title" content="PalacePetz - Login">
-    <meta property="og:site_name" content="PalacePetz">
-    <meta property="og:description" content="PetShop">
-    <meta property="og:image" content="https://cdn.discordapp.com/attachments/835238751176753232/839638176133021696/dog1.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="800px">
-    <meta property="og:image:height" content="700px">
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="PalacePetz">
+    <meta name="description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="og:title" content="PalacePetz">
+    <meta property="og:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://palacepetz.azurewebsites.net/">
+    <meta property="twitter:title" content="PalacePetz">
+    <meta property="twitter:description" content="Tudo de melhor para seu pet está aquí!!">
+    <meta property="twitter:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
     <title>Login - PalacePetz</title>
-    @Styles.Render("~/Content/login/login.css")
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon" />
-    <!--<link rel="stylesheet" href="http://127.0.0.1:5501/public/palacepetz/login/login.css" /> -->
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/login/login.css" />
+    <!--<link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/login/login.css" /> -->
+
+    <!-- Loading -->
+    <!---<link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/loading/loading.css" /> -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/loading/loading.css" /> 
 </head>
 <body>
-    <section>
+    <section id="section">
         @using (Html.BeginForm())
         {
         <div>
@@ -37,15 +51,19 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group" style="margin-bottom: 5%">
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de email", @class = "field",  @onclick="hiddenTextDanger()" } })
+                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de email", @class = "field", @onclick = "hiddenTextDanger()" } })
                                 @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group" style="margin-bottom: 0%">
                             <div class="col-md-10">
-                                @Html.PasswordFor(model => model.password, new { placeholder = "Senha de Usuário", @class = "field",  @onclick= "hiddenTextDanger()" })
-                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger"  })
+                                @Html.PasswordFor(model => model.password, new { placeholder = "Senha de Usuário", @class = "field", @onclick = "hiddenTextDanger()" })
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                             </div>
+                        </div>
+                        <div style="display: flex;">
+                            @Html.CheckBoxFor(model => model.rememberPassword, new { @id="checkbox", @class="checkbox" })
+                            <label for="checkbox" id="label">Lembrar de mim</label>
                         </div>
                         <div class="form-group" style="justify-content: center; display:flex;">
                             <div class="col-md-offset-2 col-md-10">
@@ -53,17 +71,29 @@
                                 <input type="submit" value="Entrar" class="btn" onclick="EntrarUser()" />
                             </div>
                         </div>
-                        <p class="signup"><a href="#" onclick=""> Esqueceu a senha? Recupere.</a></p>
-                        <p class="signup"><a href="../Criar_Conta/CriarConta.html" onclick="toggleFormCriaConta();"> Criar Conta.</a></p>
-                </form>
+                        <p class="signup"><a href="/recuperarsenha" onclick=""> Esqueceu a senha? Recupere.</a></p>
+                        <p class="signup"><a href="/criarconta" onclick="toggleFormCriaConta();"> Criar Conta.</a></p>
+                    </form>
+                </div>
             </div>
         </div>
-         </div>
         }
     </section>
+    <div class="container_loading">
+        <h2 class="animate">Carregando...</h2>
+    </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
     <script>
-
+        $(window).on('load', function () {
+        $(".container_loading").fadeOut("slow");
+        });
+        $(window).on('beforeunload', function () {
+        $(".container_loading").fadeIn(50);
+        });
+    </script>
+    <script>
         function hiddenTextDanger() {
             document.getElementById("alert").style.display = "none";
         }

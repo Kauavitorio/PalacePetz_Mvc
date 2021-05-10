@@ -21,26 +21,40 @@ namespace palacepetz.Dados.Auth
 
         public static async Task<string> Authlogin(string email, string password)
         {
-
+            string status = "";
             var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             try
             {
-                await auth.SignInWithEmailAndPasswordAsync(email, password);
-                int result = GetUserInformation(email, password);
-                if (result == 200)
+                await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith((authTask) =>
                 {
-                    return responseBody;
-                }
-                else
-                {
-                    return "Error";
-                }
+                    if (authTask.IsCanceled)
+                    {
+                        status = "Erro ao enviar a requisição, por favor, tente mais tarde!";
+                    }
+                    else if (authTask.IsFaulted)
+                    {
+                        status = "Email ou senha inválido!";
+                    }
+                    else if (authTask.IsCompleted)
+                    {
+                        int result = GetUserInformation(email, password);
+                        if (result == 200)
+                        {
+                            status = responseBody;
+                        }
+                        else
+                        {
+                            status = "Error";
+                        }
+                    }
+                });
+                return status;
 
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Exception was thrown: " + ex.ToString());
-                return "EmailOrPassword";
+                return "Email ou senha inválido!";
             }
         }
 
@@ -57,11 +71,12 @@ namespace palacepetz.Dados.Auth
             {
                 try
                 {
-                    var registerUser = await auth.CreateUserWithEmailAndPasswordAsync(email, password, name_user, true);
-                    return 200;
+                    var registerUser = await auth.CreateUserWithEmailAndPasswordAsync(email, password, name_user, false);
+                    return resultInsertApi;
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("Exception was thrown: " + ex.ToString());
                     return 500;
                 }
             }
@@ -70,6 +85,37 @@ namespace palacepetz.Dados.Auth
                 return resultInsertApi;
             }
 
+        }
+
+        public static async Task<string> RecoverPassword(string email)
+        {
+            string status = "";
+            var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
+            try
+            {
+                await auth.SendPasswordResetEmailAsync(email).ContinueWith((authTask) =>
+                {
+                    if (authTask.IsCanceled)
+                    {
+                        status = "Erro ao enviar a requisição, por favor, tente mais tarde!";
+                    }
+                    else if (authTask.IsFaulted)
+                    {
+                        status = "A requisição falhou, por favor, tente mais tarde!";
+                    }
+                    else if (authTask.IsCompleted)
+                    {
+                        status = "Sucesso! Enviamos um email para sua troca de senha!";
+                    }
+                });
+                return status;
+            }
+            catch (Exception ex)
+            {
+                status = "Error";
+                System.Diagnostics.Debug.WriteLine("Exception was thrown: " + ex.ToString());
+                return status;
+            }
         }
 
         private static int GetUserInformation(string email, string password)
@@ -137,7 +183,7 @@ namespace palacepetz.Dados.Auth
         {
             var url = BASE_URL + "user/register";
             var request = (HttpWebRequest)WebRequest.Create(url);
-            string json = $"{{\"name_user\":\"{email}\",\"email\":\"{name_user}\",\"cpf_user\":\"{cpf_user}\",\"password\":\"{password}\"}}";
+            string json = $"{{\"name_user\":\"{name_user}\",\"email\":\"{email}\",\"cpf_user\":\"{cpf_user}\",\"password\":\"{password}\"}}";
 
             System.Diagnostics.Debug.WriteLine("" + json);
             request.Method = "POST";
