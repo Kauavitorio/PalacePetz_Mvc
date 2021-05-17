@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace palacepetz.Models.products
+{
+    public class DtoProduct
+    {
+        [DisplayName("Código")]
+        public int cd_prod { get; set; }
+
+        [DisplayName("Código Categoria")]
+        public string cd_category { get; set; }
+
+        [DisplayName("Nome")]
+        public string nm_product { get; set; }
+
+        [DisplayName("Quantidade")]
+        public int amount { get; set; }
+
+        [DisplayName("Especie")]
+        public string species { get; set; }
+
+        [DisplayName("Preço")]
+        public string product_price { get; set; }
+
+        [DisplayName("Descrição")]
+        public string description { get; set; }
+
+        [DisplayName("Data de cadastro")]
+        public string date_prod { get; set; }
+
+        [DisplayName("Data de Validade")]
+        public string shelf_life { get; set; }
+
+        [DisplayName("Imagem")]
+        public string image_prod { get; set; }
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        [Required(ErrorMessage = "Please choose file to upload.")]
+        public string file { get; set; }
+    }
+}
