@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--main-background);
+    position: relative;
+    min-height: 100vh;
+}
+
+section{
+    margin-top: 10%;
+}
+
+#menu{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    z-index: 1000;
+    background: var(--text);
+}
+#menu2{
+    display: flex;
+    margin-left: 15%; 
+    align-items: center;
+    list-style: none;
+}
+ul li{
+    font-family: 'Segoe UI';
+    font-size: 1.2em;
+    color: var(--white);
+    text-transform: uppercase;
+    padding: 25px;
+    cursor: pointer;
+}
+#loc {
+    background: var(--border-field);
+    padding: 5px 20px 5px 20px;
+    border-radius: 300px;
+}
+
+.logo{
+    width: 35%;
+    margin-bottom: 9%
+}
+.car{
+    width: 10%;
+    margin-top: 4%;
+    margin-left: 45%
+}
+.tit_category{
+    font: bold 1.3em Segoe UI;
+    color: var(--text);
+    margin: auto 6%;
+}
+
+.subTit_category{
+    font: normal 1em Segoe UI;
+    color: #000;
+    margin: auto 5%;
+}
+.container_one{
+    display: flex;
+    margin: auto 3.5%;
+}
+.category{
+    margin: 2%;
+    display: flex;
+}
+.box_category{
+    text-align: center;
+    position: relative;
+    background: var(--white);
+    width: 25%;
+    height: 105%;
+    padding-top: 2%;
+    margin: auto 1%;
+    border-radius: 15px;
+    cursor: pointer;
+}
+/* .box_category:active{
+    border: solid 2px var(--button);
+} */
+.img_category{
+    width: 20%;
+}
+.search{
+    margin-right: 5%;
+    width: 100%;
+    display: flex; 
+}
+.input_search{
+    margin: 8% 5%;
+    padding-left: 15px;
+    background: var(--white);
+    border: none;
+    width: 115%;
+    height: 50%;
+    border-radius: 15px;
+    outline: none;
+    font: bold 16pt Segoe UI;
+}
+.input_search::placeholder{
+    font: bold 16pt Segoe UI;
+    opacity: 50%;
+}
+.buttonSearch{
+    color: #fff;
+    background: var(--button);
+    border-radius: 10px;
+    border: none;
+    text-decoration: none;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10%;
+    width: 25%;
+    height: 35%;
+    transition: 0.5s;
+    cursor: pointer;
+}

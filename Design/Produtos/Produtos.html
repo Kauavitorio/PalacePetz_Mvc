@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://www.kauavitorio.com/">
+    <meta property="og:title" content="PalacePetz - Login">
+    <meta property="og:site_name" content="PalacePetz">
+    <meta property="og:description" content="PetShop">
+    <meta property="og:image" content="./dog1.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="800px">
+    <meta property="og:image:height" content="700px">
+    <meta property="og:type" content="website">
+    <title>Produtos - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="Produtos.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="../Home/Menu/icon_main.png" class="logo"></li>
+            <li><a alt="">home</a></li>
+            <li><a id="loc" alt="">produtos</a></li>
+            <li><a alt="">serviços</a></li>
+            <li><a alt="">pedidos</a></li>
+            <li><a alt="">sair</a></li>
+            <li><a><img src="../Home/Menu/shopping-cart.png" class="car"></a></li>
+        </ul>
+    </header>
+    <section>
+         <!--@using (Html.BeginForm()){
+            @Html.AntiForegyToken()-->
+            <h2 class="tit_category">Categorias</h2>
+            <div class="container_one">
+                <div class="category">
+                    <div class="box_category" onclick="BorderCategory()">
+                        <img class="img_category" src="../Produtos/Categoria/icon-category-racao.png" alt="">
+                        <h3 class="subTit_category">Alimentos</h3>
+                    </div>
+                    <div class="box_category">
+                        <img class="img_category" src="../Produtos/Categoria/icon-category-acessorios.png" alt="">
+                        <h3 class="subTit_category">Acessórios</h3>
+                    </div>
+                    <div class="box_category">
+                        <img class="img_category" src="../Produtos/Categoria/icon-category-medicamentos.png" alt="">
+                        <h3 class="subTit_category">Medicamentos</h3>
+                    </div>
+                    <div class="box_category">
+                        <img class="img_category" src="../Produtos/Categoria/icon-category-estetica.png" alt="">
+                        <h3 class="subTit_category">Estética</h3>
+                    </div>
+                </div>
+                <div class="search">
+                    <input type="search" class="input_search" name="" id="" placeholder="Buscar Produto.....">
+                    <input type="button" value="Buscar" class="buttonSearch">
+                </div>
+            </div>
+        <!--}-->
+    </section>
+</body>
+</html>
