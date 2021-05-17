@@ -268,13 +268,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Dados\Auth\Cryption.cs" />
     <Compile Include="Dados\Auth\Login.cs" />
+    <Compile Include="Dados\Category\actions.cs" />
+    <Compile Include="Dados\Product\actions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\category\DtoCategory.cs" />
+    <Compile Include="Models\products\DtoProduct.cs" />
     <Compile Include="Models\User\DtoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -355,9 +360,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usuario\RecuperarSenha.cshtml" />
     <Content Include="Views\Usuario\SetNewPassword.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\RegisterProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

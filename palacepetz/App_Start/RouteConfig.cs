@@ -32,6 +32,24 @@ namespace palacepetz
             );
 
             routes.MapRoute(
+                name: "recuperarsenhaset",
+                url: "novasenha",
+                defaults: new { controller = "Usuario", action = "RecuperarSenha", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "setnewpassword",
+                url: "novasenha/{requestId}/{userId}",
+                defaults: new { controller = "Usuario", action = "SetNewPassword", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "registernewprod",
+                url: "funcionario/registrarnovoproduto",
+                defaults: new { controller = "Employee", action = "RegisterProduct", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

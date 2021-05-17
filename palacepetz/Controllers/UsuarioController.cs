@@ -13,6 +13,7 @@ namespace palacepetz.Controllers
 {
     public class UsuarioController : Controller
     {
+        DtoUser dto = new DtoUser();
         public async Task<ActionResult> Login()
         {
             string email_user = string.Empty;
@@ -34,21 +35,23 @@ namespace palacepetz.Controllers
             string password = userinfoDto.password;
             bool checkboxPassowrd = userinfoDto.rememberPassword;
             string userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email, password));
-            if (userinfo == "Email ou senha inválido!" || userinfo == " " || userinfo == "")
-            {
-                if (Request.Cookies["userInfo"] != null)
-                {
-                    var c = new HttpCookie("userInfo");
-                    c.Expires = DateTime.Now.AddSeconds(1);
-                    Response.Cookies.Add(c);
-                }
+            if (userinfo == "401"){
+                RemoveCookie();
+                System.Diagnostics.Debug.WriteLine("Retorno Api: " + userinfo);
                 ViewBag.statusLogin = "Email ou senha invalido!!";
-            } else if (userinfo == "error") {
+            } else if (userinfo == "405"){
+                RemoveCookie();
+                System.Diagnostics.Debug.WriteLine("Retorno Api: " + userinfo);
+                ViewBag.statusLogin = "O seu email não foi verificado!";
+            }else if (userinfo == "500"){
+                RemoveCookie();
+                System.Diagnostics.Debug.WriteLine("Retorno Api: " + userinfo);
                 ViewBag.statusLogin = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
-            } else if (userinfo == "Erro ao enviar a requisição, por favor, tente mais tarde!")
-            {
-                ViewBag.statusLogin = userinfo;
-            } else {
+            }else if(userinfo == "" || userinfo == " " || userinfo == null){
+                RemoveCookie();
+                System.Diagnostics.Debug.WriteLine("Retorno Api: " + userinfo);
+                ViewBag.statusLogin = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
+            }else{
                 JObject obj = JObject.Parse(userinfo);
                 string email_user = (string)obj["email"];
                 if (checkboxPassowrd)
@@ -109,7 +112,6 @@ namespace palacepetz.Controllers
 
         public ActionResult RecuperarSenha()
         {
-
             return View();
         }
 
@@ -119,19 +121,75 @@ namespace palacepetz.Controllers
             if (email == null || email == " " || email == "")
             {
                 ViewBag.statusRecoverPassowrd = "O campo email, não pode estar vazio.";
+                return View();
             }
             else
             {
-                string result = await Dados.Auth.Login.RecoverPassword(email);
-                ViewBag.statusRecoverPassowrd = result;
+                int resultRequest = await Dados.Auth.Login.RecoverPassword(email);
+                if(resultRequest == 200)
+                {
+                    ViewBag.statusRecoverPassowrd = "Enviamos um e-mail para você redefinir sua senha";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.statusRecoverPassowrd = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
+                    return View();
+                }
+            }
+        }
+
+        public ActionResult SetNewPassword(string requestId, int userId = 0)
+        {
+            if (requestId.Substring(0, 4) != "pswd" || requestId.Substring(requestId.Length - 2) != "p0")
+                return RedirectToAction("Index", "Home");
+            else
+            {
+                Session["userId_password"] = userId;
+                Session["verify_id"] = requestId;
+                return View(dto);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SetNewPassword(DtoUser userinfo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userinfo);
+            }
+            else
+            {
+                int idUserRequest = (int)Session["userId_password"];
+                string verify_id = (string)Session["verify_id"];
+                int resultChange = await Dados.Auth.Login.ChangePassword(verify_id, idUserRequest, userinfo.password);
+                if(resultChange == 200)
+                {
+                    ViewBag.statusRecoverPassowrd = "Sua senha foi alterada, volte a aplicaçao e faça login";
+                }else if(resultChange == 405)
+                {
+                    ViewBag.statusRecoverPassowrd = "Você não está autorizado a alterar sua senha, entre em contato com um funcionário!";
+                }else if(resultChange == 401)
+                {
+                    ViewBag.statusRecoverPassowrd = "Seu e-mail não foi verificado";
+                }
+                else
+                {
+                    ViewBag.statusRecoverPassowrd = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
+                }
             }
 
             return View();
         }
 
-        public ActionResult SetNewPassword()
+        public void RemoveCookie()
         {
-            return View();
+            if (Request.Cookies["userInfo"] != null)
+            {
+                var c = new HttpCookie("userInfo");
+                c.Expires = DateTime.Now.AddSeconds(1);
+                Response.Cookies.Add(c);
+            }
         }
     }
 }
