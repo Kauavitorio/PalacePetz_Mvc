@@ -274,6 +274,7 @@
     <Compile Include="Dados\Auth\Cryption.cs" />
     <Compile Include="Dados\Auth\Login.cs" />
     <Compile Include="Dados\Category\actions.cs" />
+    <Compile Include="Dados\Product\AcProducts.cs" />
     <Compile Include="Dados\Product\actions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -357,11 +358,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Usuario\CreateAccount.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Usuario\RecuperarSenha.cshtml" />
     <Content Include="Views\Usuario\SetNewPassword.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\RegisterProduct.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

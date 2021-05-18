@@ -62,6 +62,7 @@ namespace palacepetz.Dados.Auth
                             {
                                 //  Saving everything that was read in the responseBody
                                 responseBody = objReader.ReadToEnd();
+                                System.Diagnostics.Debug.WriteLine("" + responseBody);
                                 return responseBody;
                             }
                         }

@@ -1,6 +1,85 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
-<h2>@ViewBag.getemail</h2>
+﻿@model IEnumerable<palacepetz.Models.products.DtoProduct>
 
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalacePetz</title>
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/home/home.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><a id="loc" alt="">home</a></li>
+            <li><a alt="">produtos</a></li>
+            <li><a alt="">serviços</a></li>
+            <li><a alt="">pedidos</a></li>
+            <li><a alt="">sair</a></li>
+            <li><a><img src="@ViewBag.imguser" class="user"></a></li>
+            <li><a><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"><a /></li>
+        </ul>
+    </header>
+    <section class="a">
+        <div class="main_container">
+            <div class="texts">
+                <h1 class="first1" style="font-size: 38px; text-transform: uppercase; margin-top: -1%;">
+                    melhor ração<br />
+                    você encontra aqui.
+                </h1>
+                <h2 class="first2" style="font-size: 25px; margin-top: 8%;">Na Palace você encontra alimento de qualidade.</h2>
+
+                <h1 style="font-size: 38px; text-transform: uppercase; margin-top: -1%;">
+                    cuide do seu pet<br />
+                    com carinho.
+                </h1>
+                <h2 style="font-size: 25px; margin-top: 8%;">Venha encontrar o medicamente para seu Pet.</h2>
+
+                <h1 style="font-size: 38px; text-transform: uppercase; margin-top: -1%;">
+                    seu pet com o máximo de<br />
+                    estilo você encontra aqui.
+                </h1>
+                <h2 style="font-size: 25px; margin-top: 8%;">Encontre os melhores acessórios na PalacePetz.</h2>
+
+                <h1 style="font-size: 38px; text-transform: uppercase; margin-top: -1%;">
+                    deixe seu pet limpinho<br />
+                    máximo de estilo.
+                </h1>
+                <h2 style="font-size: 25px; margin-top: 8%;">Encontre produtos de estética para seu Pet aqui.</h2>
+            </div>
+            <input type="submit" value="ver produtos" class="prod_button">
+            <div class="sliders">
+                <img class="selected" src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-one.png" style="width: 39%; margin: -4% 0 0 34%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-two.png" style="width: 32%; margin: -6% 0 0 33%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-tree.png" style="width: 33%; margin: -3% 0 0 34%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-four.png" style="width: 42%; margin: -3% 0 0 33%; /* topo | direita | inferior | esquerda */">
+            </div>
+            <div class="circle"></div>
+        </div>
+        <div class="destaque">
+            <h2 style="font-family: 'Segoe UI'; color: var(--text); font-size: 25px; text-transform: uppercase; margin: 10% 0 0 6%;">Produtos em destaque</h2>
+            <div class="box-destaque">
+                @foreach (var item in Model)
+                {
+                    <div class="section_item" style="background: linear-gradient(120deg, #FF94A1 0%, #FACCD6 100%)">
+                        <div class="itens">
+                            <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                            <h3>@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                            <h4 style="align-items: center;">@Html.DisplayFor(modelItem => item.product_price)</h4>
+                        </div>
+                    </div>
+                    <div class="border-destaque"></div>
+                }
+            </div>
+        </div>
+    </section>
+    <script src="https://www.kauavitorio.com/palacepetz/home/script.js"></script>
+</body>
+</html>

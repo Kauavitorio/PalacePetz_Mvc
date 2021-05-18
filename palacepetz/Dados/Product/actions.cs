@@ -1,8 +1,12 @@
 ﻿using Firebase.Auth;
 using Firebase.Storage;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using palacepetz.Models.products;
+using palacepetz.Models.User;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -26,7 +30,7 @@ namespace palacepetz.Dados.Product
         {
             string cd_category = prodInfo.cd_category;
             string nm_product = prodInfo.nm_product;
-            int amount = prodInfo.amount;
+            string amount = prodInfo.amount;
             string species = prodInfo.species;
             string product_price = prodInfo.product_price;
             string description = prodInfo.description;

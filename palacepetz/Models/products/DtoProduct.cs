@@ -10,7 +10,7 @@ namespace palacepetz.Models.products
     public class DtoProduct
     {
         [DisplayName("Código")]
-        public int cd_prod { get; set; }
+        public long cd_prod { get; set; }
 
         [DisplayName("Código Categoria")]
         public string cd_category { get; set; }
@@ -19,7 +19,7 @@ namespace palacepetz.Models.products
         public string nm_product { get; set; }
 
         [DisplayName("Quantidade")]
-        public int amount { get; set; }
+        public string amount { get; set; }
 
         [DisplayName("Especie")]
         public string species { get; set; }
@@ -33,6 +33,12 @@ namespace palacepetz.Models.products
         [DisplayName("Data de cadastro")]
         public string date_prod { get; set; }
 
+        [DisplayName("Categoria")]
+        public string nm_category { get; set; }
+
+        [DisplayName("Popular")]
+        public string popular { get; set; }
+
         [DisplayName("Data de Validade")]
         public string shelf_life { get; set; }
 
@@ -40,7 +46,10 @@ namespace palacepetz.Models.products
         public string image_prod { get; set; }
         [DataType(DataType.Upload)]
         [Display(Name = "Upload File")]
-        [Required(ErrorMessage = "Please choose file to upload.")]
         public string file { get; set; }
+
+        public string img_user { get; set; }
+
+        public List<Dictionary<string, object>> Search { get; set; }
     }
 }
