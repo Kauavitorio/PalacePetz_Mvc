@@ -35,7 +35,7 @@
             <h2 class="tit_category">Categorias</h2>
             <div class="container_one">
                 <div class="category">
-                    <div class="box_category" onclick="BorderCategory()">
+                    <div class="box_category active" onclick="BorderCategory()">
                         <img class="img_category" src="../Produtos/Categoria/icon-category-racao.png" alt="">
                         <h3 class="subTit_category">Alimentos</h3>
                     </div>
@@ -55,6 +55,25 @@
                 <div class="search">
                     <input type="search" class="input_search" name="" id="" placeholder="Buscar Produto.....">
                     <input type="button" value="Buscar" class="buttonSearch">
+                </div>
+            </div>
+            <h2 class="tit_filter">Filtrar</h2>
+            <div class="container_two">
+                <div class="filter_animals">
+                    <select name="" id="" class="field-select">
+                        <option value="" >Filtrar por animais</option>
+                        <option value="" >Cachorro</option>
+                        <option value="" >Gato</option>
+                        <option value="" >Coelho</option>
+                        <option value="" >Peixe</option>
+                        <option value="" >Hamster</option>
+                    </select>
+                    <!-- @Html.DropDownList("animal", ViewBag.animal as List<SelectListItem>, "Filtrar por animais", new {class = "field-select"}) -->
+                </div>
+                <div class="filter_products">
+                    <div class="box_products">Menor Preço</div>
+                    <div class="box_products">Maior Preço</div>
+                    <div class="box_products active">Populares</div>
                 </div>
             </div>
         <!--}-->

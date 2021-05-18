@@ -1,3 +1,5 @@
+@import url("https://fontawesome.com/v4.7.0/icon/chevron-circle-down");
+
 *{
     margin: 0;
     padding: 0;
@@ -59,7 +61,7 @@ ul li{
     margin-top: 4%;
     margin-left: 45%
 }
-.tit_category{
+.tit_category, .tit_filter{
     font: bold 1.3em Segoe UI;
     color: var(--text);
     margin: auto 6%;
@@ -70,11 +72,11 @@ ul li{
     color: #000;
     margin: auto 5%;
 }
-.container_one{
+.container_one, .container_two{
     display: flex;
-    margin: auto 3.5%;
+    margin: auto 3.5% 2% 3.5%;
 }
-.category{
+.category, .filter{
     margin: 2%;
     display: flex;
 }
@@ -83,15 +85,15 @@ ul li{
     position: relative;
     background: var(--white);
     width: 25%;
-    height: 105%;
+    height: 100%;
     padding-top: 2%;
     margin: auto 1%;
     border-radius: 15px;
     cursor: pointer;
 }
-/* .box_category:active{
-    border: solid 2px var(--button);
-} */
+.container_one .active, .container_two .active{
+    border: solid 3px var(--button);
+}
 .img_category{
     width: 20%;
 }
@@ -127,5 +129,32 @@ ul li{
     width: 25%;
     height: 35%;
     transition: 0.5s;
+    cursor: pointer;
+}
+.container_two{
+    display: flex;
+    margin: 1% 6%;
+}
+.field-select{
+    padding: 10px 100px 10px 10px;
+    border-radius: 15px;
+    border: none;
+    width: 210%;
+    font: bold 14pt Segoe UI;
+    color: rgba(0, 0, 0, 0.39);
+    cursor: pointer;
+}
+.filter_products{
+    margin-left: 25%;
+    width: 90%;
+    display: flex;
+}
+.box_products{
+    border: solid 3px var(--white);
+    margin-left: 3%;
+    padding: 1.5% 8%;
+    background: var(--white);
+    font: normal 10pt Segoe UI;
+    border-radius: 70px;
     cursor: pointer;
 }
