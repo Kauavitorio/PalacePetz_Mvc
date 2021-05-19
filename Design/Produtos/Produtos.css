@@ -85,15 +85,14 @@ ul li{
     position: relative;
     background: var(--white);
     width: 25%;
-    height: 100%;
+    height: 120%;
+    border: none;
     padding-top: 2%;
     margin: auto 1%;
     border-radius: 15px;
     cursor: pointer;
 }
-.container_one .active, .container_two .active{
-    border: solid 3px var(--button);
-}
+
 .img_category{
     width: 20%;
 }
@@ -131,6 +130,9 @@ ul li{
     transition: 0.5s;
     cursor: pointer;
 }
+.buttonSearch:hover{
+    opacity: 80%;
+}
 .container_two{
     display: flex;
     margin: 1% 6%;
@@ -160,6 +162,9 @@ ul li{
     border-radius: 70px;
     cursor: pointer;
 }
+.box_category:focus, .box_products:focus, .input_search:focus, .field-select:focus{
+    border: solid 3px var(--button);
+}
 
 .container_three{
     margin: 2.5% ;
@@ -174,8 +179,8 @@ ul li{
     cursor: pointer;
     border-radius: 30px;
     background: var(--white);
-    min-width: 100%;
-    max-width: 100%;
+    min-width: 80%;
+    max-width: 80%;
     min-height: 120%;
     max-height: 170%;
     
