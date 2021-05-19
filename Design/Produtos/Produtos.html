@@ -30,27 +30,33 @@
         </ul>
     </header>
     <section>
-         <!--@using (Html.BeginForm()){
-            @Html.AntiForegyToken()-->
             <h2 class="tit_category">Categorias</h2>
             <div class="container_one">
                 <div class="category">
-                    <div class="box_category active" >
-                        <img class="img_category" src="../Produtos/Categoria/icon-category-racao.png" alt="">
-                        <h3 class="subTit_category">Alimentos</h3>
-                    </div>
-                    <div class="box_category" id="boxCategory" >
-                        <img class="img_category" src="../Produtos/Categoria/icon-category-acessorios.png" alt="">
-                        <h3 class="subTit_category">Acessórios</h3>
-                    </div>
-                    <div class="box_category" id="boxCategory"  >
-                        <img class="img_category" src="../Produtos/Categoria/icon-category-medicamentos.png" alt="">
-                        <h3 class="subTit_category">Medicamentos</h3>
-                    </div>
-                    <div class="box_category" id="boxCategory"  >
-                        <img class="img_category" src="../Produtos/Categoria/icon-category-estetica.png" alt="">
-                        <h3 class="subTit_category">Estética</h3>
-                    </div>
+                    <!--<a href="/produtos/Alimentos">-->
+                        <button class="box_category">
+                            <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-racao.png" alt="">
+                            <h3 class="subTit_category">Alimentos</h3>
+                        </button>
+                    <!-- </a>-->
+                   <!-- <a href="/produtos/Alimentos">-->
+                        <button class="box_category" id="boxCategory">
+                            <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-acessorios.png" alt="">
+                            <h3 class="subTit_category">Acessórios</h3>
+                        </button>
+                     <!--</a>-->
+                    <!-- <a href="/produtos/Alimentos">-->
+                        <button class="box_category" id="boxCategory">
+                            <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-medicamentos.png" alt="">
+                            <h3 class="subTit_category">Medicamentos</h3>
+                        </button>
+                     <!--</a>-->
+                    <!-- <a href="/produtos/Alimentos">-->
+                        <button class="box_category" id="boxCategory">
+                            <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-estetica.png" alt="">
+                            <h3 class="subTit_category">Estética</h3>
+                        </button>
+                     <!--</a>-->
                 </div>
                 <div class="search">
                     <input type="search" class="input_search" name="" id="" placeholder="Buscar Produto.....">
@@ -68,17 +74,16 @@
                         <option value="" >Peixe</option>
                         <option value="" >Hamster</option>
                     </select>
-                    <!-- @Html.DropDownList("animal", ViewBag.animal as List<SelectListItem>, "Filtrar por animais", new {class = "field-select"}) -->
                 </div>
                 <div class="filter_products">
-                    <div class="box_products">Menor Preço</div>
-                    <div class="box_products">Maior Preço</div>
-                    <div class="box_products active">Populares</div>
+                    <button class="box_products">Menor Preço</button>
+                    <button class="box_products">Maior Preço</button>
+                    <button class="box_products">Populares</button>
                 </div>
             </div>
             <h2 class="tit_product">Todos os Produtos</h2>
             <div class="container_three">
-                <div class="box_container">
+                <div class="box_container ">
                     <div class="box">
                         <div class="img_box" style="background: #FF94A1; border-radius: 30px;"><img src="../Produtos/img-prod-three.png" alt=""></div>
                         <h4>Racão Royal<br/> Canin Cães Satiety</h4>
@@ -137,7 +142,6 @@
                     </div>
                 </div>
             </div>
-        <!--}-->
     </section>
 </body>
 </html>
