@@ -53,13 +53,18 @@ ul li{
 }
 
 .logo{
-    width: 35%;
-    margin-bottom: 9%
+    width: 70px;
+    margin-bottom: 19%
 }
 .car{
-    width: 10%;
-    margin-top: 4%;
-    margin-left: 45%
+    width: 40px;
+    margin: 10% 30px 0 0;
+}
+.user{
+    max-width: 12%;
+    max-height: 3%;
+    border-radius: 8px;
+    margin: 2% 0 0 5px;
 }
 .tit_category, .tit_filter, .tit_product{
     font: bold 1.3em Segoe UI;
@@ -71,6 +76,7 @@ ul li{
     font: normal 1em Segoe UI;
     color: #000;
     margin: auto 5%;
+    padding-top: 5%;
 }
 .container_one, .container_two{
     display: flex;
@@ -85,7 +91,7 @@ ul li{
     position: relative;
     background: var(--white);
     width: 25%;
-    height: 120%;
+    height: 100%;
     border: none;
     padding-top: 2%;
     margin: auto 1%;
@@ -181,7 +187,7 @@ ul li{
     background: var(--white);
     min-width: 80%;
     max-width: 80%;
-    min-height: 120%;
+    min-height: 110%;
     max-height: 170%;
     
 }

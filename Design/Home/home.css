@@ -50,20 +50,17 @@ ul li{
     text-transform: uppercase;
     padding: 25px;
 }
-ul li a{
-    cursor: pointer;
-}
 .logo{
     width: 75%;
     margin-bottom: 19%
 }
+.user{
+    width: 55%;
+    margin: 2% 0 0 35%;
+}
 .car{
     width: 18%;
     margin: 4% 15% 0 0%;
-}
-.user{
-    width: 35%;
-    margin: 2% 0 0 35%;
 }
 #loc {
     background: var(--border-field);
