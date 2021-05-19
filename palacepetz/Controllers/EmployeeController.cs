@@ -78,7 +78,7 @@ namespace palacepetz.Controllers
             }catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error on insert new product: " + ex);
-                ViewBag.statusInsert = "Erro ao inserir um produto";
+                ViewBag.statusInsert = "Erro ao inserir um produto " + ex;
                 List<SelectListItem> categoryList = Dados.Category.actions.GetAllCategorys();
                 ViewBag.category = new SelectList(categoryList);
                 return View();

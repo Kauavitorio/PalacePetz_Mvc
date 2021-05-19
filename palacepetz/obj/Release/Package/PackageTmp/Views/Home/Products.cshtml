@@ -1,0 +1,155 @@
+﻿@model IEnumerable<palacepetz.Models.products.DtoProduct>
+
+@{
+    Layout = null;
+}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" content="https://www.kauavitorio.com/">
+    <meta property="og:title" content="PalacePetz - Login">
+    <meta property="og:site_name" content="PalacePetz">
+    <meta property="og:description" content="PetShop">
+    <meta property="og:image" content="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="800px">
+    <meta property="og:image:height" content="700px">
+    <meta property="og:type" content="website">
+    <title>Produtos - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Produtos/Produtos.css">
+</head>
+<body onload="changeSelect()">
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)"  alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" id="loc" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li><a><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a></li>
+            <li><a><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <h2 onclick="minhaFunc()" class="tit_category">Categorias</h2>
+        <div class="container_one">
+            <div class="category">
+                <a id="btnCatFoods" style="text-decoration: none;" class="box_category" href="/produtos/Alimentos">
+                    <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-racao.png" alt="">
+                    <h3 class="subTit_category">Alimentos</h3>
+                </a>
+                <a id="btnCatTools" style="text-decoration: none;" class="box_category" href="/produtos/Acessorios">
+                    <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-acessorios.png" alt="">
+                    <h3 class="subTit_category">Acessórios</h3>
+                </a>
+                <a id="btnCatMeds" style="text-decoration: none;" class="box_category"  href="/produtos/Medicamentos">
+                    <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-medicamentos.png" alt="">
+                    <h3 class="subTit_category">Medicamentos</h3>
+                </a>
+                <a id="btnCatEstetica" style="text-decoration: none;" class="box_category"href="/produtos/Estetica">
+                    <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-estetica.png" alt="">
+                    <h3 class="subTit_category">Estética</h3>
+                </a>
+            </div>
+            <div class="search">
+                <input type="search" class="input_search" name="" id="inputSearch" placeholder="Buscar Produto...">
+                <input type="button" value="Buscar" onclick="SearchProduct()" class="buttonSearch">
+            </div>
+        </div>
+        <h2 class="tit_filter">Filtrar</h2>
+        <div class="container_two">
+            <div class="filter_animals">
+                <select name="" id="filterspecies" class="field-select">
+                    <option value="default">Filtrar por animais</option>
+                    <option value="/produtos/filtro/especie/Dogs">Cachorro</option>
+                    <option value="/produtos/filtro/especie/Cats">Gato</option>
+                    <option value="/produtos/filtro/especie/Birds">Pássaros</option>
+                    <option value="/produtos/filtro/especie/Rabbit">Coelho</option>
+                    <option value="/produtos/filtro/especie/Fish">Peixe</option>
+                    <option value="/produtos/filtro/especie/Hamster">Hamster</option>
+                </select>
+            </div>
+            <div class="filter_products">
+                <a id="btnLowestPrice" href="/produtos/filtro/menor-preco" style="text-decoration: none; color: var(--text-)" class="box_products">Menor Preço</a>
+                <a id="btnBigestPrice" href="/produtos/filtro/maior-preco" style="text-decoration: none; color: var(--text-)" class="box_products">Maior Preço</a>
+                <a id="btnPopular" href="/produtos/filtro/popular" style="text-decoration: none; color: var(--text-)" class="box_products">Populares</a>
+            </div>
+        </div>
+        <h2 id="demo" class="tit_product">Todos os Produtos</h2>
+        <div class="container_three">
+            @foreach (var item in Model)
+            {
+            <a class="box_container" style="text-decoration: none;" href="/detalhes/@Html.DisplayFor(modelItem => item.nm_product)">
+                <div class="box">
+                    <div class="img_box" style="background: #FF94A1; border-radius: 30px;"><img src="@Html.DisplayFor(modelItem => item.image_prod)" alt=""></div>
+                    <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
+                    <h3>R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
+                </div>
+            </a>
+            }
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+     $(document).ready(function(){
+     $('#filterspecies').on('change', function () {
+         var url = $(this).val();
+         if (url) {
+             window.open(url, '_self');
+          }
+          return false;
+        });
+     });
+    </script>
+
+    <script>
+        function changeSelect() {
+            var x = location.pathname
+            if (x == "/produtos/filtro/especie/Dogs")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Dogs");
+            else if (x == "/produtos/filtro/especie/Cats")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Cats");
+            else if (x == "/produtos/filtro/especie/Birds")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Birds");
+            else if (x == "/produtos/filtro/especie/Rabbit")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Rabbit");
+            else if (x == "/produtos/filtro/especie/Fish")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Fish");
+            else if (x == "/produtos/filtro/especie/Hamster")
+                $("div.filter_animals select").val("/produtos/filtro/especie/Hamster");
+            else
+                $("div.filter_animals select").val("default");
+
+            if (x == "/produtos/filtro/menor-preco")
+                document.getElementById('btnLowestPrice').style.border = "solid 3px var(--button)"
+            else if (x == "/produtos/filtro/maior-preco")
+                document.getElementById('btnBigestPrice').style.border = "solid 3px var(--button)"
+            else if (x == "/produtos/filtro/popular")
+                document.getElementById('btnPopular').style.border = "solid 3px var(--button)"
+
+            if (x == "/produtos/Alimentos")
+                document.getElementById('btnCatFoods').style.border = "solid 3px var(--button)"
+            else if (x == "/produtos/Acessorios")
+                document.getElementById('btnCatTools').style.border = "solid 3px var(--button)"
+            else if (x == "/produtos/Medicamentos")
+                document.getElementById('btnCatMeds').style.border = "solid 3px var(--button)"
+            else if (x == "/produtos/Estetica")
+                document.getElementById('btnCatEstetica').style.border = "solid 3px var(--button)"
+        }
+
+        function SearchProduct() {
+            var input = document.getElementById('inputSearch').value
+            var inputCheck = input.replace(" ", "")
+            if (inputCheck == null || inputCheck == "" || inputCheck == "")
+                alert("Insira o nome do produto!!")
+            else
+                window.open("/produtos/filter/nome/" + input, '_self');
+        }
+    </script>
+</body>
+</html>

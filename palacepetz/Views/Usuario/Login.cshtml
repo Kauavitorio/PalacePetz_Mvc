@@ -42,41 +42,41 @@
     <section id="section">
         @using (Html.BeginForm())
         {
-        <div>
-            <div class="user Func">
-                <div class="imgBox"><img src="https://cdn.discordapp.com/attachments/835238751176753232/839638176133021696/dog1.jpg" alt="" id="img"></div>
-                <div class="formBox">
-                    <form>
-                        <h2 id="text-title">LOGIN</h2>
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group" style="margin-bottom: 5%">
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de email", @class = "field", @onclick = "hiddenTextDanger()" } })
-                                @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" })
+            <div>
+                <div class="user Func">
+                    <div class="imgBox"><img src="https://cdn.discordapp.com/attachments/835238751176753232/839638176133021696/dog1.jpg" alt="" id="img"></div>
+                    <div class="formBox">
+                        <form>
+                            <h2 id="text-title">LOGIN</h2>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group" style="margin-bottom: 5%">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de email", @class = "field", @onclick = "hiddenTextDanger()" } })
+                                    @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom: 0%">
-                            <div class="col-md-10">
-                                @Html.PasswordFor(model => model.password, new { placeholder = "Senha de Usuário", @class = "field", @onclick = "hiddenTextDanger()" })
-                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                            <div class="form-group" style="margin-bottom: 0%">
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(model => model.password, new { placeholder = "Senha de Usuário", @class = "field", @onclick = "hiddenTextDanger()" })
+                                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                        <div style="display: flex;">
-                            @Html.CheckBoxFor(model => model.rememberPassword, new { @id="checkbox", @class="checkbox" })
-                            <label for="checkbox" id="label">Lembrar de mim</label>
-                        </div>
-                        <div class="form-group" style="justify-content: center; display:flex;">
-                            <div class="col-md-offset-2 col-md-10">
-                                <h3 class="text-danger" id="alert">@ViewBag.statusLogin</h3>
-                                <input type="submit" value="Entrar" class="btn" onclick="EntrarUser()" />
+                            <div style="display: flex;">
+                                @Html.CheckBoxFor(model => model.rememberPassword, new { @id = "checkbox", @class = "checkbox" })
+                                <label for="checkbox" id="label">Lembrar de mim</label>
                             </div>
-                        </div>
-                        <p class="signup"><a href="/recuperarsenha" onclick=""> Esqueceu a senha? Recupere.</a></p>
-                        <p class="signup"><a href="/criarconta" onclick="toggleFormCriaConta();"> Criar Conta.</a></p>
-                    </form>
+                            <div class="form-group" style="justify-content: center; display:flex;">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <h3 class="text-danger" id="alert">@ViewBag.statusLogin</h3>
+                                    <input type="submit" value="Entrar" class="btn" onclick="EntrarUser()" />
+                                </div>
+                            </div>
+                            <p class="signup"><a href="/recuperarsenha" onclick=""> Esqueceu a senha? Recupere.</a></p>
+                            <p class="signup"><a href="/criarconta" onclick="toggleFormCriaConta();"> Criar Conta.</a></p>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         }
     </section>
     <div class="container_loading">
@@ -87,10 +87,10 @@
     <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
     <script>
         $(window).on('load', function () {
-        $(".container_loading").fadeOut("slow");
+            $(".container_loading").fadeOut("slow");
         });
         $(window).on('beforeunload', function () {
-        $(".container_loading").fadeIn(50);
+            $(".container_loading").fadeIn(50);
         });
     </script>
     <script>

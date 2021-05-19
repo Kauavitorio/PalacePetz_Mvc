@@ -7,6 +7,7 @@ using palacepetz.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,7 @@ namespace palacepetz.Dados.Product
             string nm_product = prodInfo.nm_product;
             string amount = prodInfo.amount;
             string species = prodInfo.species;
-            string product_price = prodInfo.product_price;
+            float product_price = (float)Convert.ToDouble(prodInfo.product_price);
             string description = prodInfo.description;
             string shelf_life = prodInfo.shelf_life;
             string image_prod = prodInfo.image_prod;

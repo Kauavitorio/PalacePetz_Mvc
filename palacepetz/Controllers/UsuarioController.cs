@@ -14,18 +14,32 @@ namespace palacepetz.Controllers
     public class UsuarioController : Controller
     {
         DtoUser dto = new DtoUser();
-        public async Task<ActionResult> Login()
+        public ActionResult Login(int logoutid = 0)
         {
-            string email_user = string.Empty;
-            string password = string.Empty;
-            HttpCookie reqCookies = Request.Cookies["userInfo"];
-            if (reqCookies != null)
+            if(logoutid != 0)
             {
-                email_user = reqCookies["User_email"].ToString();
-                Session["email_user"] = email_user;
-                return RedirectToAction("Index", "Home");
+                RemoveCookie();
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+                Response.Cache.SetNoStore();
+                Session["email_user"] = null;
+                return View();
             }
-            return View();
+            else
+            {
+                string email_user = string.Empty;
+                string password = string.Empty;
+                HttpCookie reqCookies = Request.Cookies["userInfo"];
+                if (reqCookies != null)
+                {
+                    email_user = reqCookies["User_email"].ToString();
+                    Session["email_user"] = email_user;
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
+            }
+
+            
         }
 
         [HttpPost]
@@ -63,6 +77,7 @@ namespace palacepetz.Controllers
                     Response.Cookies.Add(userInfo);
                 }
                 Session["email_user"] = email_user;
+                Session["password_user"] = password;
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -83,10 +98,6 @@ namespace palacepetz.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateAccount(DtoUser userinfo)
         {
-            //return Content("<script language='javascript' type='text/javascript'>alert('Olá, seu usuário foi cadastrado com sucesso :). Mandamos um email de verificação para o email cadastrado, por favor confirmar no email antes de se logar');</script>");
-
-            ViewBag.StatusCreateAccount = "Olá, seu usuário foi cadastrado com sucesso :). Mandamos um email de verificação para o email cadastrado, por favor confirmar no email antes de se logar";
-
             if (!ModelState.IsValid)
             {
                 return View(userinfo);
@@ -104,7 +115,7 @@ namespace palacepetz.Controllers
                 }
                 else
                 {
-                    ViewBag.StatusCreateAccount = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
+                    return RedirectToAction("Login");
                 }
             }
             return View();
