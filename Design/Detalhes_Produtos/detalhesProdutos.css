@@ -1,0 +1,106 @@
+@import url("https://fontawesome.com/v4.7.0/icon/chevron-circle-down");
+
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--background-details);
+    position: relative;
+    min-height: 100vh;
+}
+
+section{
+    margin-top: 8%;
+}
+
+.back {
+    display: flex;
+    position: absolute;
+    padding: 20px;
+    padding-left: 40px;
+}
+.back img{
+    width: 10%;
+}
+.container_main{
+    display: block;
+}
+.container_prod{
+    background-color: none;
+    border: solid 4px var(--border-food);
+    border-radius: 25px;
+    display: flex;
+    padding: 80px;
+    margin: 0 15% 0 15%;
+}
+.img_prod{
+    min-width: 30%;
+    max-width: 100%;
+    min-height: 60%;
+    width: 40%;
+}
+.info_prod{
+    display: block;
+    margin-left: 20%;
+}
+.info_prod h2{
+    color: var(--white);
+    font: bold 21pt Segoe UI;
+    margin-bottom: 10%;
+}
+.info_prod h3{
+    color: var(--white);
+    font: bold 16pt Segoe UI;
+    font-weight: 500;
+}
+#input_qntd{
+    margin-left: 8%;
+    width: 15%;
+    border: solid 3px var(--border-field);
+    outline: none;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    font: bold 12pt Segoe UI;
+    margin-bottom: 20%;
+}
+.btn_carrinho{
+    margin-top: 30%;
+    padding:20px 40px 20px 40px;
+    text-decoration: none;
+    font: bold 14pt Segoe UI;
+    color: var(--white);
+    border-radius: 15px;
+    text-transform: uppercase;
+    background: var(--button);
+    text-align: center;
+}
+.container_infoProd{
+    padding-left: 230px;
+    padding-top: 20px;
+}
+.container_infoProd > h2{
+    font: bold 18pt Segoe UI;
+    color: var(--white);
+    margin-bottom: 1%;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+.container_infoProd > h3{
+    font: bold 16pt Segoe UI;
+    color: var(--white);
+    margin-bottom: 1%;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+}
