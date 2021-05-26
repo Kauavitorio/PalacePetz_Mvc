@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --background-box: #C9ECFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--main-background);
+    position: relative;
+    min-height: 83vh;
+}
+section{
+    margin-top: 8%;
+}
+.back{
+    position: absolute;
+    background: var(--background-details);
+    margin: 3%;
+    padding: 10px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+.img_back{
+    width: 2rem;
+    min-width: 2rem;
+    max-width: 3rem;
+}
+.title{
+    font: bold 1.5rem Segoe UI;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2%;
+}
+.box{
+    margin-left: 18%;
+    background: var(--background-box);
+    width: 60%;
+    height: 60vh;
+    min-width: 30%;
+    max-width: 70%;
+    border-radius: 20px;
+    padding: 25px;
+}
+.container_img{
+    justify-content: center;
+    text-align: center;
+}
+.form{
+    display: flex;
+    justify-content: space-between;
+    margin: 3% 8%;
+}
+.field{
+    display: block;
+    position: relative;
+    padding: 10px;
+    width: 300px;
+    background: transparent;
+    border: none;
+    border-bottom: solid 7px var(--border-field);
+    color: var(--text);
+    font: normal 12pt Segoe UI;
+    letter-spacing: 1px;
+    outline: none;
+    transition: 0.5s;
+}
+.container_button{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.btnEdit{
+    text-align: center;
+    color: #fff;
+    background: var(--button);
+    border-radius: 50px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    padding: 15px 10px 15px 10px;  /* top, right, bottom, left */
+    margin: 5% 0 ;
+    width: 30%;
+    max-width: 100%;
+    transition: 0.5s;
+    cursor: pointer;
+}
