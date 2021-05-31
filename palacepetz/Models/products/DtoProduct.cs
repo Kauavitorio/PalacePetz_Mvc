@@ -12,6 +12,8 @@ namespace palacepetz.Models.products
         [DisplayName("Código")]
         public long cd_prod { get; set; }
 
+        public int id_user { get; set; }
+
         [DisplayName("Código Categoria")]
         public string cd_category { get; set; }
 
@@ -25,7 +27,7 @@ namespace palacepetz.Models.products
         public string species { get; set; }
 
         [DisplayName("Preço")]
-        public string product_price { get; set; }
+        public float product_price { get; set; }
 
         [DisplayName("Descrição")]
         public string description { get; set; }

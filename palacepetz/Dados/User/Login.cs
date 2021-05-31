@@ -19,7 +19,7 @@ namespace palacepetz.Dados.Auth
         private static string BASE_URL = "https://palacepetzapi.herokuapp.com/";
 
 
-        public static async Task<string> Authlogin(string email, string password)
+        public static string Authlogin(string email, string password)
         {
             //  Variable to storing Api Response
 
@@ -41,8 +41,6 @@ namespace palacepetz.Dados.Auth
             }
             /**** End Creating request body ****/
 
-            //  Creating list of categoria
-            userinfo = new List<DtoUser>();
             try
             {
                 //  Sending request to api
@@ -115,7 +113,7 @@ namespace palacepetz.Dados.Auth
 
         }
 
-        public static async Task<int> RecoverPassword(string email)
+        public static int RecoverPassword(string email)
         {
             try
             {
@@ -180,7 +178,7 @@ namespace palacepetz.Dados.Auth
                 return statusCode;
             }
         }
-        public static async Task<int> ChangePassword(string verify_id,int id_user, string newpassword)
+        public static int ChangePassword(string verify_id, int id_user, string newpassword)
         {
             try
             {
@@ -235,7 +233,7 @@ namespace palacepetz.Dados.Auth
                 }
                 catch (WebException ex)
                 {
-
+                    System.Diagnostics.Debug.WriteLine("" + ex.ToString());
                     return statusCode;
                 }
             }
