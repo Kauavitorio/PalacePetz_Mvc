@@ -48,6 +48,8 @@ namespace palacepetz.Models.User
         [DisplayName("Imagem")]
         public string img_user { get; set; }
 
+        public string number { get; set; }
+
         [DisplayName("Senha")]
         [Required]
         public string password { get; set; }
@@ -57,5 +59,9 @@ namespace palacepetz.Models.User
         public string confirmpassword { get; set; }
 
         public bool rememberPassword { get; set; }
+
+        [DataType(DataType.Upload)]
+        [Display(Name = "Upload File")]
+        public string file { get; set; }
     }
 }

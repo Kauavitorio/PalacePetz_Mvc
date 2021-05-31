@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group" style="margin-bottom: 3%">
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { placeholder = "CPF", @class = "field", @id = "txtCPF" } })
+                                    @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @onclick = "hiddenTextDanger()", placeholder = "CPF", @class = "field", @id = "txtCPF" } })
                                     @Html.ValidationMessageFor(model => model.cpf_user, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                     @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            @ViewBag.StatusCreateAccount
+                            <h3 id="txt_warning_cpf">@ViewBag.StatusCreateAccount</h3>
                             <div class="form-group" style="justify-content: center; display:flex;">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" value="Criar Conta" class="btn" onclick="EntrarUser()" />
@@ -109,6 +109,11 @@
             var $seuCampoCpf = $("#txtCPF");
             $seuCampoCpf.mask('000.000.000-00', { reverse: true });
         });
+    </script>
+    <script>
+        function hiddenTextDanger() {
+            document.getElementById("txt_warning_cpf").style.display = "none";
+        }
     </script>
     <script>
         $(window).on('load', function () {

@@ -19,19 +19,25 @@
     <meta property="og:type" content="website">
     <title>Produtos - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Main CSS -->
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Produtos/Produtos.css">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
 </head>
-<body onload="changeSelect()">
+<body onload="changeSelect(), cart()">
     <header id="menu">
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
-            <li><a href="/" style="text-decoration: none; color: var(--white)"  alt="">home</a></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
             <li><a href="/produtos" style="text-decoration: none; color: var(--white)" id="loc" alt="">produtos</a></li>
             <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
             <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
             <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
-            <li><a><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a></li>
-            <li><a><img src="@ViewBag.img_user" class="user"></a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
         </ul>
     </header>
     <section>
@@ -46,11 +52,11 @@
                     <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-acessorios.png" alt="">
                     <h3 class="subTit_category">Acessórios</h3>
                 </a>
-                <a id="btnCatMeds" style="text-decoration: none;" class="box_category"  href="/produtos/Medicamentos">
+                <a id="btnCatMeds" style="text-decoration: none;" class="box_category" href="/produtos/Medicamentos">
                     <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-medicamentos.png" alt="">
                     <h3 class="subTit_category">Medicamentos</h3>
                 </a>
-                <a id="btnCatEstetica" style="text-decoration: none;" class="box_category"href="/produtos/Estetica">
+                <a id="btnCatEstetica" style="text-decoration: none;" class="box_category" href="/produtos/Estetica">
                     <img class="img_category" src="https://www.kauavitorio.com/palacepetz/Produtos/Categoria/icon-category-estetica.png" alt="">
                     <h3 class="subTit_category">Estética</h3>
                 </a>
@@ -63,7 +69,7 @@
         <h2 class="tit_filter">Filtrar</h2>
         <div class="container_two">
             <div class="filter_animals">
-                <select name="" id="filterspecies" class="field-select">
+                <select style="outline: none;" name="" id="filterspecies" class="field-select">
                     <option value="default">Filtrar por animais</option>
                     <option value="/produtos/filtro/especie/Dogs">Cachorro</option>
                     <option value="/produtos/filtro/especie/Cats">Gato</option>
@@ -83,28 +89,28 @@
         <div class="container_three">
             @foreach (var item in Model)
             {
-            <a class="box_container" style="text-decoration: none;" href="/detalhes/@Html.DisplayFor(modelItem => item.nm_product)">
-                <div class="box">
-                    <div class="img_box" style="background: #FF94A1; border-radius: 30px;"><img src="@Html.DisplayFor(modelItem => item.image_prod)" alt=""></div>
-                    <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
-                    <h3>R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
-                </div>
-            </a>
+                <a class="box_container" style="text-decoration: none;" href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)">
+                    <div class="box">
+                        <div class="img_box" style="background: #FF94A1; border-radius: 30px;"><img src="@Html.DisplayFor(modelItem => item.image_prod)" alt=""></div>
+                        <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
+                        <h3>R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
+                    </div>
+                </a>
             }
         </div>
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script>
-     $(document).ready(function(){
-     $('#filterspecies').on('change', function () {
-         var url = $(this).val();
-         if (url) {
-             window.open(url, '_self');
-          }
-          return false;
+        $(document).ready(function () {
+            $('#filterspecies').on('change', function () {
+                var url = $(this).val();
+                if (url) {
+                    window.open(url, '_self');
+                }
+                return false;
+            });
         });
-     });
     </script>
 
     <script>
@@ -140,7 +146,18 @@
                 document.getElementById('btnCatMeds').style.border = "solid 3px var(--button)"
             else if (x == "/produtos/Estetica")
                 document.getElementById('btnCatEstetica').style.border = "solid 3px var(--button)"
+
+
         }
+
+        function cat() {
+            var spanCountCart = document.getElementById('lblCartCount').innerHTML
+            if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ") {
+
+                document.getElementById('lblCartCount').style.display = "none"
+            }
+        }
+
 
         function SearchProduct() {
             var input = document.getElementById('inputSearch').value

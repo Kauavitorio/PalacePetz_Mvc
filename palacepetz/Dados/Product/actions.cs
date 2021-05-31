@@ -29,11 +29,11 @@ namespace palacepetz.Dados.Product
 
         public static async Task<int> InsertNewProduct(DtoProduct prodInfo)
         {
-            string cd_category = prodInfo.cd_category;
+            string cd_category = prodInfo.cd_category + "";
             string nm_product = prodInfo.nm_product;
             string amount = prodInfo.amount;
             string species = prodInfo.species;
-            float product_price = (float)Convert.ToDouble(prodInfo.product_price);
+            float product_price = prodInfo.product_price;
             string description = prodInfo.description;
             string shelf_life = prodInfo.shelf_life;
             string image_prod = prodInfo.image_prod;

@@ -3,6 +3,7 @@ using palacepetz.Dados.Auth;
 using palacepetz.Models.User;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,6 +14,9 @@ namespace palacepetz.Controllers
 {
     public class UsuarioController : Controller
     {
+        int id_user, user_type;
+        private string name_user, email_user, cpf_user, address_user, complement, zipcode, phone_user, birth_date, img_user, password;
+
         DtoUser dto = new DtoUser();
         public ActionResult Login(int logoutid = 0)
         {
@@ -101,6 +105,10 @@ namespace palacepetz.Controllers
             if (!ModelState.IsValid)
             {
                 return View(userinfo);
+            }else if (!Dados.User.Cpf_actions.IsValid(userinfo.cpf_user.ToString()))
+            {
+                ViewBag.StatusCreateAccount = "CPF informado é invalido!!";
+                return View();
             }
             else
             {
@@ -118,7 +126,6 @@ namespace palacepetz.Controllers
                     return RedirectToAction("Login");
                 }
             }
-            return View();
         }
 
         public ActionResult RecuperarSenha()
@@ -127,7 +134,7 @@ namespace palacepetz.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RecuperarSenha(string email)
+        public ActionResult RecuperarSenha(string email)
         {
             if (email == null || email == " " || email == "")
             {
@@ -136,8 +143,8 @@ namespace palacepetz.Controllers
             }
             else
             {
-                int resultRequest = await Dados.Auth.Login.RecoverPassword(email);
-                if(resultRequest == 200)
+                int resultRequest = Dados.Auth.Login.RecoverPassword(email);
+                if (resultRequest == 200)
                 {
                     ViewBag.statusRecoverPassowrd = "Enviamos um e-mail para você redefinir sua senha";
                     return View();
@@ -163,7 +170,7 @@ namespace palacepetz.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SetNewPassword(DtoUser userinfo)
+        public ActionResult SetNewPassword(DtoUser userinfo)
         {
             if (!ModelState.IsValid)
             {
@@ -173,14 +180,16 @@ namespace palacepetz.Controllers
             {
                 int idUserRequest = (int)Session["userId_password"];
                 string verify_id = (string)Session["verify_id"];
-                int resultChange = await Dados.Auth.Login.ChangePassword(verify_id, idUserRequest, userinfo.password);
-                if(resultChange == 200)
+                int resultChange = Dados.Auth.Login.ChangePassword(verify_id, idUserRequest, userinfo.password);
+                if (resultChange == 200)
                 {
                     ViewBag.statusRecoverPassowrd = "Sua senha foi alterada, volte a aplicaçao e faça login";
-                }else if(resultChange == 405)
+                }
+                else if (resultChange == 405)
                 {
                     ViewBag.statusRecoverPassowrd = "Você não está autorizado a alterar sua senha, entre em contato com um funcionário!";
-                }else if(resultChange == 401)
+                }
+                else if (resultChange == 401)
                 {
                     ViewBag.statusRecoverPassowrd = "Seu e-mail não foi verificado";
                 }
@@ -191,6 +200,356 @@ namespace palacepetz.Controllers
             }
 
             return View();
+        }
+
+        public async Task<ActionResult> AddressRegistration()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddressRegistration(DtoUser userinfoRegister)
+        {
+            string zipcode_register = userinfoRegister.zipcode;
+            string street = userinfoRegister.address_user;
+            string number = userinfoRegister.number;
+            string complement = userinfoRegister.complement;
+            string userinfo;
+            if (zipcode_register == null || zipcode_register.Replace("\\s", "").Length <= 0)
+                return RedirectToAction("AddressRegistration", "Usuario");
+            else
+            {
+                HttpCookie reqCookies = Request.Cookies["userInfo"];
+                if (reqCookies != null)
+                {
+                    email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                    password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+                }
+                else
+                {
+                    email_user = (string)Session["email_user"];
+                    password = (string)Session["password_user"];
+                }
+                if (email_user != null && email_user != "")
+                {
+                    userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    {
+                        RemoveCookie();
+                        return RedirectToAction("Login", "Usuario");
+                    }
+                    else
+                    {
+                        JObject obj = JObject.Parse(userinfo);
+                        int id_userRegister = (int)obj["id_user"];
+
+
+                        string address = street + ", " + number;
+                        int result = Dados.User.Profile.updateAddress(address, complement, zipcode_register, id_userRegister);
+                        if (result == 202)
+                            return RedirectToAction("Index", "Home");
+                        else if (result == 400)
+                            return RedirectToAction("Login", "Usuario");
+                        else
+                            return RedirectToAction("Index", "Home");
+
+                    }
+                }
+                else
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+            }
+        }
+
+        public new async Task<ActionResult> Profile()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500") {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    } else
+                        ViewBag.cartsize = 0;
+
+                    string[] FullNameUser = name_user.Split(' ');
+                    ViewBag.Firstname_user = FullNameUser[0];
+                    ViewBag.Lastname_user = FullNameUser[1];
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.address_user = address_user;
+                    ViewBag.complement = complement;
+                    ViewBag.zipcode = zipcode;
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        public async Task<ActionResult> EditProfile()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    string[] FullNameUser = name_user.Split(' ');
+                    DtoUser userinfoSet = new DtoUser();
+                    userinfoSet.Firstname_user = FullNameUser[0];
+                    userinfoSet.Lastname_user = FullNameUser[1];
+                    userinfoSet.cpf_user = cpf_user;
+                    userinfoSet.address_user = address_user;
+                    userinfoSet.phone_user = phone_user;
+                    userinfoSet.birth_date = birth_date;
+
+                    return View(userinfoSet);
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditProfile(HttpPostedFileBase file, DtoUser userinformation)
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    userinformation.address_user = address_user;
+                    userinformation.complement = complement;
+                    userinformation.zipcode = zipcode;
+
+                    try
+                    {
+                        if (file != null)
+                        {
+                            FileStream stream;
+                            if (file.ContentLength > 0)
+                            {
+                                string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
+                                file.SaveAs(path);
+                                stream = new FileStream(Path.Combine(path), FileMode.Open);
+                                int updateUserResult = await Task.Run(() => Dados.User.Profile.UpdateUserProfileWithImage(stream, id_user, userinformation));
+                                if (updateUserResult == 200)
+                                {
+                                    return RedirectToAction("Profile", "Usuario");
+                                }
+                                else
+                                {
+                                    return RedirectToAction("Index", "Home");
+                                }
+
+                            }
+                            return View();
+                        }
+                        else
+                        {
+                            int updateUserResult = await Task.Run(() => Dados.User.Profile.UpdateUserProfile(userinformation, id_user));
+                            if(updateUserResult == 200)
+                            {
+                                return RedirectToAction("Profile", "Usuario");
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                        }
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine("" + ex);
+                        return View();
+                    }
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         public void RemoveCookie()

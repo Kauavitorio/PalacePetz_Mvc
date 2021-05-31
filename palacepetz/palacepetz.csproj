@@ -271,16 +271,20 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="Dados\Auth\Cryption.cs" />
-    <Compile Include="Dados\Auth\Login.cs" />
+    <Compile Include="Dados\User\Cpf_actions.cs" />
+    <Compile Include="Dados\User\Cryption.cs" />
+    <Compile Include="Dados\User\Login.cs" />
     <Compile Include="Dados\Category\actions.cs" />
     <Compile Include="Dados\Product\AcProducts.cs" />
     <Compile Include="Dados\Product\actions.cs" />
+    <Compile Include="Dados\ShoppingCart\CartActions.cs" />
+    <Compile Include="Dados\User\Profile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\category\DtoCategory.cs" />
     <Compile Include="Models\products\DtoProduct.cs" />
+    <Compile Include="Models\shoppingcart\DtoShoppingCart.cs" />
     <Compile Include="Models\User\DtoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -365,6 +369,12 @@
     <Content Include="Views\Employee\RegisterProduct.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\ShoppingCart.cshtml" />
+    <Content Include="Views\Home\FinishPurchase.cshtml" />
+    <Content Include="Views\Usuario\AddressRegistration.cshtml" />
+    <Content Include="Views\Usuario\Profile.cshtml" />
+    <Content Include="Views\Usuario\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
