@@ -62,6 +62,27 @@ namespace palacepetz
                 defaults: new { controller = "Employee", action = "RegisterProduct", id = UrlParameter.Optional }
             );
 
+            //  Route to register address
+            routes.MapRoute(
+                name: "registeraddress",
+                url: "registrar-endereco",
+                defaults: new { controller = "Usuario", action = "AddressRegistration", id = UrlParameter.Optional }
+            );
+
+            //  Route to user profile
+            routes.MapRoute(
+                name: "profile",
+                url: "perfil",
+                defaults: new { controller = "Usuario", action = "Profile", id = UrlParameter.Optional }
+            );
+
+            //  Route to edit user profile
+            routes.MapRoute(
+                name: "editprofile",
+                url: "editar-perfil",
+                defaults: new { controller = "Usuario", action = "EditProfile", id = UrlParameter.Optional }
+            );
+
             /***************** Products Routes *******************/
             routes.MapRoute(//  Route to see all products
                 name: "products",
@@ -79,6 +100,31 @@ namespace palacepetz
                 defaults: new { controller = "Home", action = "Products", filter = UrlParameter.Optional }
             );
 
+
+            routes.MapRoute(//  Route to see products details
+                name: "details",
+                url: "detalhes/{cd_prod}",
+                defaults: new { controller = "Home", action = "Details", cd_prod = UrlParameter.Optional }
+            );
+
+
+            routes.MapRoute(//  Route to go to the cart
+                name: "shoppingcart",
+                url: "meu-carrinho",
+                defaults: new { controller = "Home", action = "ShoppingCart" }
+            );
+
+            routes.MapRoute(//  Route to remove item from cart
+                name: "removeitemfromcart",
+                url: "meu-carrinho/remover/{cd_cart}/{id_user}",
+                defaults: new { controller = "Home", action = "ShoppingCart" }
+            );
+
+            routes.MapRoute(//  Route to finish purchase
+                name: "finishpurchase",
+                url: "finalizar-compra",
+                defaults: new { controller = "Home", action = "FinishPurchase" }
+            );
 
 
             //  Default Route

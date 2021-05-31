@@ -64,9 +64,9 @@ namespace palacepetz.Dados.Product
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
                                         nm_product = itens_response.nm_product,
-                                        amount = itens_response.amount + "",
+                                        amount =  itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = itens_response.product_price + "",
+                                        product_price = (float) itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -143,7 +143,7 @@ namespace palacepetz.Dados.Product
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = itens_response.product_price + "",
+                                        product_price = (float)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -170,7 +170,7 @@ namespace palacepetz.Dados.Product
             }
         }
 
-        public List<DtoProduct> GetAllProductsWithCategory(int cd_category)
+        public List<DtoProduct> Get_AllProducts_With_Category(int cd_category)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -219,7 +219,7 @@ namespace palacepetz.Dados.Product
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = itens_response.product_price + "",
+                                        product_price = (float)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -246,7 +246,7 @@ namespace palacepetz.Dados.Product
             }
         }
 
-        public List<DtoProduct> GetAllProductsWithPriceFilter(string filter)
+        public List<DtoProduct> Get_AllProducts_With_PriceFilter(string filter)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -295,7 +295,7 @@ namespace palacepetz.Dados.Product
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = itens_response.product_price + "",
+                                        product_price = (float)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -321,7 +321,7 @@ namespace palacepetz.Dados.Product
                 return productlist;
             }
         }
-        public List<DtoProduct> GetAllProductsWithSpeciesFilter(string filter)
+        public List<DtoProduct> Get_AllProducts_With_SpeciesFilter(string filter)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -370,7 +370,7 @@ namespace palacepetz.Dados.Product
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = itens_response.product_price + "",
+                                        product_price = (float)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -394,6 +394,61 @@ namespace palacepetz.Dados.Product
                                     }
                                    );
                 return productlist;
+            }
+        }
+
+        public string Get_Product_Details(int cd_prod)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+            int statusCode;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "products/details/" + cd_prod;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+
+            /**** End Creating request body ****/
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return "500";
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                System.Diagnostics.Debug.WriteLine("" + responseBody);
+                                return responseBody;
+                            }
+                        }
+                    }
+                    else if (statusCode == 404)
+                        return "404";
+                    else
+                        return statusCode + "";
+                }
+            }
+            catch (WebException ex)
+            {
+                if (ex.Message.Contains("(405)"))
+                    return "405";
+                else
+                    return "500";
             }
         }
     }

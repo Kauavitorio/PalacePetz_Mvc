@@ -7,18 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace palacepetz.Dados.Category
 {
     public class actions
     {
-        int statusCode;
         //  Declaring base API URL
         const string BASE_URL = "https://palacepetzapi.herokuapp.com/";
 
@@ -78,7 +73,7 @@ namespace palacepetz.Dados.Category
             }
             catch (WebException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Erro on category request: " + ex);
+                System.Diagnostics.Debug.WriteLine("" + ex);
                 categoriaslist.Add(
                                     new SelectListItem
                                     {

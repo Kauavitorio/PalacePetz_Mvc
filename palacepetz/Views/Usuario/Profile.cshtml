@@ -1,14 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Perfil - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
     <!-- Header CSS -->
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
-    <link rel="stylesheet" href="Profile.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Editar_Perfil/Profile.css">
 </head>
 <body>
     <header id="menu">
@@ -21,40 +26,43 @@
             <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
             <li>
                 <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
-                <!--<span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>-->
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
             </li>
             <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
         </ul>
-    </header>  
+    </header>
     <section>
-        <a href=""><div class="back"><img src="./back.png" alt="" class="img_back"></div></a>
-        <h2 class="title">Editar Perfil</h2>
+        <a href="/"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Perfil</h2>
         <div class="box">
             <div class="container_img">
-                <img src="@ViewBag.img_user" class="user">
+                <img src="@ViewBag.img_user" class="user" style="width: 500px; height:100px">
             </div>
             <div class="form">
                 <div class="colunm_one">
-                    <!--@ViewBag.first-name_user-->
-                    <input type="text" class="field" value="Matheus"/><br>
-                        <!--@ViewBag.last-name_user-->
-                    <input type="text" class="field" value="Leite"/><br>
-                        <!--@ViewBag.cpf_user-->
-                    <input type="text" class="field" value="258.698.521-87"/>
+
+                    <input type="text" class="field" disabled value="@ViewBag.Firstname_user" /><br>
+
+                    <input type="text" class="field" disabled value="@ViewBag.Lastname_user" /><br>
+
+                    <input type="text" class="field" disabled value="@ViewBag.cpf_user" />
+
                 </div>
                 <div class="colunm_two">
-                    <!--@ViewBag.first-name_user-->
-                    <input type="text" class="field" value="06160-020"/><br>
-                        <!--@ViewBag.last-name_user-->
-                    <input type="text" class="field" value="Rua Gabriel Soares de Souza, 493"/><br>
-                        <!--@ViewBag.cpf_user-->
-                    <input type="text" class="field" value="Casa"/>
+
+                    <input type="text" class="field" disabled value="@ViewBag.zipcode" /><br>
+
+                    <input type="text" class="field" disabled value="@ViewBag.address_user" /><br>
+
+                    <input type="text" class="field" disabled value="@ViewBag.complement" />
+
                 </div>
             </div>
             <div class="container_button">
-                <input type="submit" value="Concluir Edição" class="btnEdit">
-            </div> 
+                <a href="/editar-perfil" style="text-decoration:none; color: #fff;" class="btnEdit">Editar Perfil</a>
+            </div>
         </div>
     </section>
+    <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
 </body>
 </html>
