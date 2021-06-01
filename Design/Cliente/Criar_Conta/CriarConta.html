@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:url" content="https://www.kauavitorio.com/">
+    <meta property="og:title" content="PalacePetz - Criar Conta">
+    <meta property="og:site_name" content="PalacePetz">
+    <meta property="og:description" content="PetShop">
+    <meta property="og:image" content="./dog2.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="800px">
+    <meta property="og:image:height" content="700px">
+    <meta property="og:type" content="website">
+    <title>Criar Conta - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="CriarConta.css">
+</head>
+<body>
+    <section>
+        <!--@using (Html.BeginForm()){
+            @Html.AntiForegyToken()-->
+            <div>
+                <div class="user Func">
+                    <div class="formBox">
+                        <form>
+                            <h2 id="text-title">CRIAR CONTA</h2>
+                            <!-- @Html.ValidationSummary(true, "", new { @class = "text-danger" }) -->
+                                <div class="form-group" style="margin-bottom: 5%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.EditorFor(model => model.name_user, new { htmlAttributes = new { placeholder = "Primeiro Nome", @class = "editor" } })                            
+                                        @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" }) -->
+                                        <input type="text" name="" id="" class="field" placeholder="Primeiro Nome">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 5%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.EditorFor(model => model.name_user, new { htmlAttributes = new { placeholder = "Último Nome", @class = "editor"} })                            
+                                        @Html.ValidationMessageFor(model => model.name_user, "", new { @class = "text-danger" }) -->
+                                        <input type="text" name="" id="" class="field" placeholder="Último Nome">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 5%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Email", @class = "editor"} })                            
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" }) -->
+                                        <input type="email" name="" id="" class="field" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 5%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { placeholder = "CPF", @class = "editor"} })                            
+                                        @Html.ValidationMessageFor(model => model.cpf_user, "", new { @class = "text-danger" }) -->
+                                        <input type="text" name="" id="" class="field" placeholder="CPF">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 5%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.PasswordFor(model => model.password, new { placeholder = "Senha", @class = "editor" } )                                         
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" }) -->
+                                        <input type="password" name="" id="" class="field" placeholder="Senha">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 10%">
+                                    <div class="col-md-10">
+                                        <!-- @Html.PasswordFor(model => model.conf_password, new { placeholder = "Confirmar Senha", @class = "editor" } )                                         
+                                        @Html.ValidationMessageFor(model => model.conf_password, "", new { @class = "text-danger" }) -->
+                                        <input type="password" name="" id="" class="field" placeholder="Confirmar Senha">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="justify-content: center; display:flex;">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Criar Conta" class="btn" onclick="EntrarUser()" />
+                                    </div>
+                                </div>
+                                <p class="signup"><a href="" style="text-decoration: none; cursor: auto;" onclick="toggleFormCriaConta(); "> Já tem uma conta?</a> <a style="text-decoration: underline; cursor: pointer;" href="../Login/Login.html">Entre.</a> </p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="imgBox"><img src="./dog2.jpg" alt="" id="img"></div>
+                </div>
+            </div>  
+        <!--}-->
+    </section>
+</body>
+</html>
