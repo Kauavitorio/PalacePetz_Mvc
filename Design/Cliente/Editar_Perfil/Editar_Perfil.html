@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="Editar_Perfil.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>2</span>
+            </li>
+            <li><a href="/perfil"><img src="./profile-user.png" class="user"></a></li>
+        </ul>
+    </header>  
+    <section>
+        <a href=""><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Editar Perfil</h2>
+        <div class="box">
+            <div class="container_img">
+                <img src="./profile-user.png" class="user">
+            </div>
+            <div class="form">
+                <div class="colunm_one">
+                    <!--@ViewBag.first-name_user-->
+                    <input type="text" class="field" value="Matheus"/><br>
+                        <!--@ViewBag.last-name_user-->
+                    <input type="text" class="field" value="Leite"/><br>
+                        <!--@ViewBag.cpf_user-->
+                    <input type="text" class="field" value="258.698.521-87"/><br>
+                        <!--@ViewBag.date_user-->
+                    <input type="text" class="field" value="22/08/1999"/>
+                </div>
+                <div class="colunm_two">
+                    <!--@ViewBag.first-name_user-->
+                    <input type="text" class="field" value="06160-020"/><br>
+                        <!--@ViewBag.last-name_user-->
+                    <input type="text" class="field" value="Rua Gabriel Soares de Souza, 493"/><br>
+                        <!--@ViewBag.cpf_user-->
+                    <input type="text" class="field" value="Casa"/><br>
+                    <!--BOTÃO-->
+                    
+                </div>
+            </div>
+            <div class="container_button">
+                <input type="submit" value="Editar Perfil" class="btnEdit">
+            </div> 
+        </div>
+    </section>
+</body>
+</html>
