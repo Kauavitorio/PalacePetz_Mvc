@@ -69,6 +69,13 @@ namespace palacepetz
                 defaults: new { controller = "Usuario", action = "AddressRegistration", id = UrlParameter.Optional }
             );
 
+            //  Route to register address
+            routes.MapRoute(
+                name: "registercard",
+                url: "registrar-cartao",
+                defaults: new { controller = "Usuario", action = "RegisterCard", id = UrlParameter.Optional }
+            );
+
             //  Route to user profile
             routes.MapRoute(
                 name: "profile",

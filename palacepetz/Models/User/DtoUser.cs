@@ -47,6 +47,7 @@ namespace palacepetz.Models.User
 
         [DisplayName("Imagem")]
         public string img_user { get; set; }
+        public string card_flag { get; set; }
 
         public string number { get; set; }
 
