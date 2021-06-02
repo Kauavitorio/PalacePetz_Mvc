@@ -1,0 +1,85 @@
+#menu{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    z-index: 1000;
+    background: var(--text);
+}
+#menu2{
+    display: flex;
+    margin-left: 15%; 
+    align-items: center;
+    list-style: none;
+    z-index: 10000;
+}
+ul li{
+    font-family: 'Segoe UI';
+    font-size: 1.2em;
+    color: var(--white);
+    text-transform: uppercase;
+    padding: 35px;
+}
+ul li a{
+    cursor: pointer;
+}
+.logo{
+    width: 70px;
+    margin-bottom: 19%
+}
+.car{
+    width: 40px;
+    margin: 10% 30px 0 0;
+}
+.user{
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 8px;
+    margin: 2% 0 0 5px;
+}
+#loc {
+    background: var(--border-field);
+    padding: 5px 20px 5px 20px;
+    border-radius: 300px;
+}
+
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    z-index: 100;
+  }
+  
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #c67605;
+  }
+  #lblCartCount {
+    font-family: 'Segoe UI';
+    font-size: 0.7em;
+    color: var(--white);
+    background: var(--border-field);
+    padding: 2px 8px;
+    vertical-align: top;
+    margin-left: -40px; 
+  }
+
+  /********* Responsivo *********/
+  @media screen and (max-width: 1956px) {
+    #menu2{
+        margin-left: 12%; 
+    }
+  }
+
+  @media screen and (max-width: 1836px) {
+    #menu2{
+        margin-left: 10%; 
+    }
+  }

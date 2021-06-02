@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --background-box: #C9ECFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--main-background);
+    position: relative;
+    min-height: 100vh;
+}
+section{
+    margin-top: 8%;
+}
+.container_one{
+    display: flex;
+    justify-content: space-between;
+    margin: auto 5%;
+}
+.title{
+    font: bold 1.5rem Segoe UI;
+    text-transform: uppercase;
+    color: var(--text);
+    font-weight: 700;
+} 
+.subtitle{
+    text-decoration: underline;
+    font: bold 1rem Segoe UI;
+    color: var(--text);
+    font-weight: 600;
+    cursor: pointer;
+}
+main{
+    justify-content: center;
+}
+.box_one, .box_two{
+    background: var(--background-box);
+    display: flex;
+    width: 80%;
+    min-width: 40%;
+    max-width: 70%;
+    border-radius: 20px;
+    margin: 3%;
+    margin-left: 12%;
+    justify-content: space-between;
+    padding: 25px;
+}
+.img_map, .img_card{
+    width: 12%;
+    min-width: 10%;
+    max-width: 30%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+table{
+    margin-top: 3%;
+    margin-right: 10%;
+}
+td{
+    font: bold 1.2rem Segoe UI;
+    font-weight: 500;
+}
+.field-select{
+    padding: 10px 5px 10px 5px;
+    border-radius: 0px 10px 10px 10px;
+    border: solid 3px var(--border-field);
+    width: 170%;
+    min-width: 100%;
+    max-width: 190%;
+    margin-bottom: 2%;
+    font: bold 14pt Segoe UI;
+    color: rgba(0, 0, 0, 0.39);
+    cursor: pointer;
+    outline: none;
+}
+.select_card{
+    margin-left: 15%;
+    margin-top: 2%;
+}
+footer{
+    bottom: 0;
+    min-height: 110px;
+    width: 100%;
+    max-width: 100%;
+    background: var(--background-details);
+    border: solid 3px var(--border-field);
+    border-bottom: none;
+    border-radius: 37px 37px 0 0;
+    position: fixed;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+}
+.footer_sub{
+    display: flex;
+    color: var(--white);
+    font: bold 10pt Segoe UI; 
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    width: 60%;
+    margin-left: 8%;
+}
+.title_price{
+    margin: auto 10%;
+    font: bold 21pt Segoe UI;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--white);
+    font-weight: 600;
+}
+.text_price{
+    margin: auto 0%;
+    font: bold 21pt Segoe UI;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.btn_confirmBuy{
+    cursor: pointer;
+    text-decoration: none;
+    font: bold 1.3rem Segoe UI;
+    color: var(--white);
+    border-radius: 25px;
+    width: 25%;
+    height: 70px;
+    margin: auto;
+    margin-right: 15%;
+    border: none;
+    text-transform: uppercase;
+    background: var(--button);
+    text-align: center;
+}
