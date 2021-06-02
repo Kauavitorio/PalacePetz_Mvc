@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using palacepetz.Dados.Auth;
+using palacepetz.Models.Cards;
 using palacepetz.Models.User;
 using System;
 using System.Collections.Generic;
+
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -541,6 +543,174 @@ namespace palacepetz.Controllers
                     {
                         System.Diagnostics.Debug.WriteLine("" + ex);
                         return View();
+                    }
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        public async Task<ActionResult> RegisterCard()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RegisterCard(DtoCards cardInfo)
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+                    string number_card = cardInfo.number_card;
+                    int cvv_card = cardInfo.cvv_card;
+                    string nmUser_card = cardInfo.nmUser_card;
+                    string shelflife_card = cardInfo.shelflife_card;
+                    string flag_card = cardInfo.flag_card;
+
+                    if (number_card == null || number_card.Replace(" ", "") == "" || number_card == " " || number_card.Length < 18 || cvv_card == 0 || nmUser_card == null || nmUser_card.Replace(" ", "") == "" || shelflife_card.Replace(" ", "") == "" || shelflife_card.Length < 7 || shelflife_card == null || flag_card == null)
+                    {
+                        ViewBag.errorregisterCard = "Verifique se os campos estão preenchidos corretamente.";
+                        return View();
+                    }
+                    else
+                    {
+                        int result = Dados.Cards.CardAction.registerCard(id_user, number_card, cvv_card, nmUser_card, shelflife_card, flag_card);
+                        if(result == 409)
+                        {
+                            ViewBag.errorregisterCard = "Cartão já cadastrado.";
+                            return View();
+                        }
+                        else if(result == 406)
+                        {
+                            ViewBag.errorregisterCard = "O nome informado no cartão não é permitido.";
+                            return View();
+                        }
+                        else if(result == 201)
+                            return RedirectToAction("Index", "Home");
+                        else
+                        {
+                            ViewBag.errorregisterCard = "Estamos com problemas em nossos servidores, tente novamente mais tarde.";
+                            return View();
+                        }
                     }
 
                 }

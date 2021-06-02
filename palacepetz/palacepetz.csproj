@@ -271,6 +271,8 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Dados\Cards\CardAction.cs" />
+    <Compile Include="Models\Cards\DtoCards.cs" />
     <Compile Include="Dados\User\Cpf_actions.cs" />
     <Compile Include="Dados\User\Cryption.cs" />
     <Compile Include="Dados\User\Login.cs" />
@@ -375,6 +377,7 @@
     <Content Include="Views\Usuario\AddressRegistration.cshtml" />
     <Content Include="Views\Usuario\Profile.cshtml" />
     <Content Include="Views\Usuario\EditProfile.cshtml" />
+    <Content Include="Views\Usuario\RegisterCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
