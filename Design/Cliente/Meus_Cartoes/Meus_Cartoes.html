@@ -36,7 +36,7 @@
                 </div>
                 
                 <div class="container_card" style="display: flex;">
-                    <div class="box_card" style="background-color: #1B304B;">
+                    <div class="box_card " style="background-color: #1B304B;" onclick="Deletar()">
                         <div class="row_one">
                             <img src="./mastercard.png" alt="" class="img_flag">
                             <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
@@ -45,7 +45,7 @@
                             <h2 class="text">Matheus Souza Santos Leite</h2>
                         </div>
                     </div>
-                    <div class="box_card" style="background-color: #A3831C;">
+                    <div class="box_card" style="background-color: #A3831C;" onclick="Deletar()">
                         <div class="row_one">
                             <img src="./visa.png" alt="" class="img_flag">
                             <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
@@ -54,7 +54,7 @@
                             <h2 class="text">Matheus Souza Santos Leite</h2>
                         </div>
                     </div>
-                    <div class="box_card" style="background-color: #0A3A44;">
+                    <div class="box_card" style="background-color: #0A3A44;" onclick="Deletar()">
                         <div class="row_one">
                             <img src="maestro.png" alt="" class="img_flag">
                             <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
@@ -69,5 +69,18 @@
         </main>
     </section>
     <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
+    <script>
+        function Deletar(){
+            var deleteCard = confirm("Quer mesmo Excluir?")
+            var card = document.querySelector('.box_card');
+            if(deleteCard){
+                alert("Você Excluiu")
+                card.remove();
+            }
+            else{
+                alert("OK")
+            }
+        }
+    </script>
 </body>
 </html>

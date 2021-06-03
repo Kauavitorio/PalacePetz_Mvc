@@ -61,11 +61,12 @@ main{
     background-color: var(--background-details);
     width: 90%;
     min-width: 50%;
-    max-width: 110%;
+    max-width: 100%;
     height: 250px;
     margin: 8% 5%;
     text-align: center;
     border-radius: 25px;
+    box-shadow: 5px 10px 15px #88D6FF;
 }
 .title{
     color: var(--white);
@@ -74,14 +75,21 @@ main{
 }
 .img_flag{
     min-width: 4rem;
-    width: 4rem;
-    max-width: 6rem;
+    width: 5rem;
+    max-width: 10rem;
 }
 .box_card{
-    width: 110%;
+    width: 30%;
     margin: 3%;
     padding: 40px;
     border-radius: 20px;
+    box-shadow: 10px 15px 20px #424242;
+    transition: 0.5s;
+    cursor: auto;
+}
+.box_card:hover{
+    transform: translate(5%, -5%);
+    box-shadow: rgba(6, 25, 43, 0.075) -5px 5px, rgba(16, 39, 49, 0.3) -10px 10px, rgba(18, 46, 83, 0.2) -15px 15px, rgba(18, 48, 87, 0.1) -20px 20px, rgba(6, 36, 53, 0.05) -25px 25px;
 }
 .row_one{
     display: flex;
