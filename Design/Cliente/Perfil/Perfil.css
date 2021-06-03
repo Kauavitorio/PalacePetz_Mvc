@@ -19,7 +19,7 @@ body{
     min-height: 83vh;
 }
 section{
-    margin-top: 8%;
+    margin-top: 7%;
 }
 .back{
     position: absolute;
@@ -50,6 +50,8 @@ section{
 .box{
     margin-left: 18%;
     background: var(--background-box);
+    border: solid 5px var(--border-field);
+    box-shadow: 5px 10px 15px var(--border-field);
     width: 60%;
     height: 65vh;
     min-width: 30%;

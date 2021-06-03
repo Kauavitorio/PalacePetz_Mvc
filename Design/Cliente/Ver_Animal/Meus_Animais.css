@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --background-box: #C9ECFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--main-background);
+    position: relative;
+    min-height: 100vh;
+}
+section{
+    padding-top: 8%;
+}
+
+.text_title{
+    font: bold 1.3rem Segoe UI;
+    color: var(--text);
+    font-weight: 700;
+    text-align: center;
+}
+
+main{
+    justify-content: center;
+}
+table{
+    min-width: 70%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.box{
+    background: var(--background-box);
+    border: solid 4px var(--border-field);
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.349);
+    display: flex;
+    width: 90%;
+    min-width: 40%;
+    max-width: 70%;
+    border-radius: 20px;
+    margin: 3%;
+    margin-left: 10%;
+    justify-content: center;
+    padding: 30px;
+    margin-bottom: 6%;
+}
+.img_user{
+    width: 9%;
+    max-width: 15%;
+    max-height: 150px;
+    margin: 2% 3% 0 3%;
+}
+
+.text{
+    font: bold 14pt Segoe UI;
+    color: var(--text);
+    text-align: center;
+    margin: 0 0 0 16%;
+    white-space: nowrap;
+}
+
+.subtext{
+    font: normal 1rem Segoe UI;
+    color: var(--text);
+    font-weight: 600;
+    margin-left: 8%;
+    text-align: center;
+}
+
+.btn_remove{
+    color: var(--white);
+    font: bold 11pt Segoe UI;
+    text-align: center;
+    background: red;
+    border-radius: 10px;
+    border: none;
+    margin-left: 22%;
+    margin-top: 5%;
+    padding: 10px 40px 10px 40px;
+    cursor: pointer;
+    max-height: 20%;
+    height: 20%;
+}
+.btn_edit{
+    color: var(--white);
+    font: bold 11pt Segoe UI;
+    text-align: center;
+    background: var(--border-field);
+    border-radius: 10px;
+    border: none;
+    margin-left: 22%;
+    padding: 10px 50px 10px 50px;
+    cursor: pointer;
+    max-height: 20%;
+    height: 20%;
+}
