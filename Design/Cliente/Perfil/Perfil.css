@@ -53,7 +53,7 @@ section{
     border: solid 5px var(--border-field);
     box-shadow: 5px 10px 15px var(--border-field);
     width: 60%;
-    height: 65vh;
+    height: 67vh;
     min-width: 30%;
     max-width: 70%;
     border-radius: 20px;
@@ -66,7 +66,7 @@ section{
 .form{
     display: flex;
     justify-content: space-between;
-    margin: 3% 8%;
+    margin: 2% 8%;
 }
 .field{
     display: block;
@@ -86,6 +86,7 @@ section{
     display: flex;
     justify-content: center;
     text-align: center;
+    margin-bottom: 5%;
 }
 .btnEdit{
     text-align: center;

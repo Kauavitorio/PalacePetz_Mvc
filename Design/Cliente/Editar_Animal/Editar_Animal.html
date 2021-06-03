@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil - PalacePetz</title>
+    <title>Editar Animal - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
     <!-- Header CSS -->
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
-    <link rel="stylesheet" href="Perfil.css">
+    <link rel="stylesheet" href="Editar_Animal.css">
 </head>
 <body>
     <header id="menu">
@@ -27,38 +27,35 @@
         </ul>
     </header>  
     <section>
-        <a href=""><div class="back"><img src="icon-back.png" alt="" class="img_back"></div></a>
-        <h2 class="title">Perfil</h2>
+        <a href=""><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Editar Animal</h2>
         <div class="box">
             <div class="container_img">
                 <img src="./profile-user.png" class="user">
             </div>
             <div class="form">
                 <div class="colunm_one">
-                    <!--@ViewBag.first-name_user-->
-                    <input type="text" disabled class="field" value="Matheus"/><br>
-                        <!--@ViewBag.last-name_user-->
-                    <input type="text" disabled class="field" value="Leite"/><br>
-                        <!--@ViewBag.cpf_user-->
-                    <input type="text" disabled class="field" value="258.698.521-87"/><br>
-                        <!--@ViewBag.date_user-->
-                    <input type="text" disabled class="field" value="22/08/1999"/>
+                    <!--@ViewBag.name-->
+                    <input type="text" class="field" style="text-align: center;" value="José"/><br>
                 </div>
-                <div class="colunm_two">
-                    <!--@ViewBag.first-name_user-->
-                    <input type="text" disabled class="field" value="06160-020"/><br>
-                        <!--@ViewBag.last-name_user-->
-                    <input type="text" disabled class="field" value="Rua Gabriel Soares de Souza, 493"/><br>
-                        <!--@ViewBag.cpf_user-->
-                    <input type="text" disabled class="field" value="11995516416"/><br>
-                    <!--@ViewBag.cpf_user-->
-                    <input type="text" disabled class="field" value="Casa"/>
+                <div class="sub_container">
+                    <div class="colunm_two">
+                        <!--@ViewBag.idade-->
+                        <input type="text" class="field" value="4"/><br>
+                            <!--@ViewBag.peso-->
+                        <input type="text" class="field" value="44kg"/><br>
+                    </div>
+                    <div class="colunm_three">
+                        <!--@ViewBag.animal-->
+                        <input type="text" class="field" value="Cachorro"/><br>
+                            <!--@ViewBag.raça-->
+                        <input type="text" class="field" value="Salsicha"/><br>
+                    </div>
                 </div>
             </div>
-            <div class="container_button"> 
-                <a href="" class="btnEdit" style="background-color: var(--border-field); text-decoration: none; font-family: Segoe UI;">Ver meus animais</a>
-                <a href="" class="btnEdit" style="text-decoration: none; font-family: Segoe UI;">Editar Perfil</a>
-                <a href="" class="btnEdit" style="background-color: var(--border-field); text-decoration: none; font-family: Segoe UI;">Meus cartões</a>
+            <div class="container_button">
+                <input type="submit" value="Ver meus animais" class="btnAnimais">
+                <input type="submit" value="Editar" class="btnEdit">
             </div> 
         </div>
     </section>

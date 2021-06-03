@@ -24,7 +24,6 @@ section{
 .back{
     position: absolute;
     background: var(--background-details);
-    
     margin: 3%;
     padding: 10px;
     border-radius: 50%;
@@ -51,8 +50,6 @@ section{
 .box{
     margin-left: 18%;
     background: var(--background-box);
-    border: solid 5px var(--border-field);
-    box-shadow: 5px 10px 15px var(--border-field);
     width: 60%;
     height: 65vh;
     min-width: 30%;
@@ -65,9 +62,21 @@ section{
     text-align: center;
 }
 .form{
-    display: flex;
     justify-content: space-between;
     margin: 3% 8%;
+}
+.sub_container{
+    display: flex;
+}
+.colunm_one{
+    justify-content: center;
+    margin-left: 26%;
+}
+.colunm_two{
+    margin-left: 1%;
+}
+.colunm_three{
+    margin-left: 4%;
 }
 .field{
     display: block;
@@ -88,12 +97,6 @@ section{
     justify-content: center;
     text-align: center;
 }
-.container_button2{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-right: 6%;
-}
 .btnEdit{
     text-align: center;
     color: #fff;
@@ -103,13 +106,13 @@ section{
     text-transform: uppercase;
     font-size: 1.3rem;
     padding: 15px 10px 15px 10px;  /* top, right, bottom, left */
-    margin: 3% 3% ;
+    margin: 5% 3%;
     width: 30%;
     max-width: 100%;
     transition: 0.5s;
     cursor: pointer;
 }
-.btnCad{
+.btnAnimais{
     text-align: center;
     color: #fff;
     background: #44BFFF;
@@ -118,10 +121,9 @@ section{
     text-transform: uppercase;
     font-size: 1.3rem;
     padding: 15px 10px 15px 10px;  /* top, right, bottom, left */
-    margin: 10% 15%;
-    width: 111%;
-    max-width: 111%;
+    margin: 5% 3%;
+    width: 30%;
+    max-width: 100%;
     transition: 0.5s;
     cursor: pointer;
-    justify-content: center;
 }
