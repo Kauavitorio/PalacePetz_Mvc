@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --background-box: #C9ECFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+body{
+    background: var(--main-background);
+    position: relative;
+    min-height: 87vh;
+}
+section{
+    margin-top: 6%;
+    display: flex;
+}
+
+.back{
+    position: absolute;
+    background: var(--background-details);
+    margin: 0.5% 3%;
+    padding: 10px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+.back_img{
+    background-color:#88D6FF;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px; 
+    justify-content: center; 
+    align-items: center; 
+    display: flex;
+}
+.img_back{
+    width: 2rem;
+    min-width: 2rem;
+    max-width: 3rem;
+}
+.img_user{
+    width: 3rem;
+    min-width: 2rem;
+    max-width: 5rem;
+}
+main{
+    background-color: red;
+}
+.container{
+    position: absolute;
+    background-color: var(--background-details);
+    width: 90%;
+    min-width: 50%;
+    max-width: 110%;
+    height: 250px;
+    margin: 8% 5%;
+    text-align: center;
+    border-radius: 25px;
+}
+.title{
+    color: var(--white);
+    font: bold 1.8rem Segoe UI;
+    font-weight: 700;
+}
+.img_flag{
+    min-width: 4rem;
+    width: 4rem;
+    max-width: 6rem;
+}
+.box_card{
+    width: 110%;
+    margin: 3%;
+    padding: 40px;
+    border-radius: 20px;
+}
+.row_one{
+    display: flex;
+    justify-content: space-between;
+}
+.text{
+    color: var(--white);
+    font: bold 1rem Segoe UI;
+    font-weight: 600;
+    text-align: left;
+}

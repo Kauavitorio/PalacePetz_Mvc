@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Conulta - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="Cadastrar_cartao.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" id="loc" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <!--<span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>-->
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>  
+    <section>
+        <a href=""><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+        <main>
+            <div class="box_profile">
+                <div class="back_img">
+                    <img src="./profile-user.png" alt="" class="img_user">
+                </div>
+                <h2 class="title_name">Danilo Oliveira</h2>
+                <h3 class="sub_title"><b>CPF:</b> 111.111.111-87</h3>
+                <h3 class="sub_title"><b>E-mail:</b> danilo@gmail.com</h3>
+                <h3 class="sub_title"><b>CEP:</b> 01111130</h3>
+                <h3 class="sub_title"><b>Rua:</b> Avenida Santos Amaral, 1111 </h3>
+                <h3 class="sub_title"><b>Complemento:</b> Casa </h3>
+                <a href="" class="btn_profile">Editar Perfil</a>
+            </div>
+            <div class="box_cadastro">
+                <h2 class="title_service">Cadastrar Cartão</h2><br>
+                <div class="container">
+                    <div class="colunm_one">
+                        <h1 class="sub_title"><b>SELECIONE A BANDEIRA DO SEU CARTÃO</b></h1>
+                        <div class="cards">
+                            <a href="#" id="mastercard" style="text-decoration: none;" class="box_card">
+                                <img class="img_card" src="mastercard.png" alt="">
+                            </a>
+                            <a href="#" id="elo" style="text-decoration: none;" class="box_card">
+                                <img class="img_card" src="elo.png" style="margin-top: 9%;" alt="">
+                            </a>
+                            <a href="#" id="maestro" style="text-decoration: none;" class="box_card">
+                                <img class="img_card" src="maestro.png" alt="">
+                            </a>
+                            <a href="#" id="visa" style="text-decoration: none;" class="box_card">
+                                <img class="img_card" src="visa.png" alt="">
+                            </a>
+                            <a href="#" id="hipercard" style="text-decoration: none;" class="box_card">
+                                <img class="img_card" src="hipercard.png" style="margin-top: 9%;" alt="">
+                            </a>
+                        </div>
+                    </div>
+                   <div class="colunm_two">
+                        <h1 class="sub_title"><b>INFORMAÇÕES DO SEU CARTÃO</b></h1>
+                        <div style="display: flex;">
+                            <input type="text" class="field-select" placeholder="Número do cartão">
+                            <input type="month" min="2023-01" class="field-select" style="width: 34%; padding-right: 30px;" placeholder="MM">
+                        </div>
+                        <div style="display: flex;">
+                            <input type="text" class="field-select" placeholder="Nome impresso no cartão">
+                            <input type="text" class="field-select" style="width: 6%;" placeholder="CVV">
+                        </div>
+                   </div>
+                </div>
+               <input type="submit" value="ADICIONAR CARTÃO" class="btn_cadastrar">
+            </div>
+        </main>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js%22%3E"></script>
+    <script>
+        $(document).ready(function(){
+        $('#filterspecies').on('change', function () {
+            var url = $(this).val();
+            if (url) {
+                window.open(url, '_self');
+             }
+             return false;
+           });
+        });
+    </script>
+    <script>
+        function changeSelect() {
+            var x = location.pathname
+            if (x == "Cadastrar_Cartao/Cadastrar_cartao.html"){
+                document.getElementById('mastercard').style.border = "solid 3px #3F3F3F"
+                document.getElementById('mastercard').style.opacity = "100%"
+            }
+                
+            else if (x == "Cadastrar_Cartao/Cadastrar_cartao.html"){
+                document.getElementById('elo').style.border = "solid 3px #3F3F3F"
+                document.getElementById('elo').style.opacity = "100%"
+            }
+            
+            else if (x == "Cadastrar_Cartao/Cadastrar_cartao.html"){
+                document.getElementById('maestro').style.border = "solid 3px #3F3F3F"
+                document.getElementById('maestro').style.opacity = "100%"
+            }
+                
+            else if (x == "Cadastrar_Cartao/Cadastrar_cartao.html"){
+                document.getElementById('visa').style.border = "solid 3px #3F3F3F"
+                document.getElementById('visa').style.opacity = "100%"
+            }
+                
+            else if (x == "Cadastrar_Cartao/Cadastrar_cartao.html"){
+                document.getElementById('hipercard').style.border = "solid 3px #3F3F3F"
+                document.getElementById('hipercard').style.opacity = "100%"
+            }
+                
+        }       
+    </script>
+    
+</body>
+</html>
