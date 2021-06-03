@@ -102,3 +102,18 @@ section{
     transition: 0.5s;
     cursor: pointer;
 }
+.btnCad{
+    text-align: center;
+    color: #fff;
+    background: #44BFFF;
+    border-radius: 50px;
+    border: none;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    padding: 15px 10px 15px 10px;  /* top, right, bottom, left */
+    margin: 5% 3% ;
+    width: 95%;
+    max-width: 100%;
+    transition: 0.5s;
+    cursor: pointer;
+}
