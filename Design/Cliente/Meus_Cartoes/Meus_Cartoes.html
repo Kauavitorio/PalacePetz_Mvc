@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Cartões - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="Meus_Cartoes.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" id="loc" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>  
+    <section>
+        <a href=""><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+        <main>
+            <div class="container">
+                <div style="display:  flex; justify-content: space-between; margin: 2% 5%;">
+                    <h2 class="title">Meus cartões cadastrados</h2>
+                    <a href="" id="LinkRegisterCard" style="font: bold 1.5rem Segoe UI; color: var(--white);">Cadastrar Cartão</a>
+                </div>
+                
+                <div class="container_card" style="display: flex;">
+                    <div class="box_card " style="background-color: #1B304B;" onclick="Deletar()">
+                        <div class="row_one">
+                            <img src="./mastercard.png" alt="" class="img_flag">
+                            <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
+                        </div><br>
+                        <div class="row_two">
+                            <h2 class="text">Matheus Souza Santos Leite</h2>
+                        </div>
+                    </div>
+                    <div class="box_card" style="background-color: #A3831C;" onclick="Deletar()">
+                        <div class="row_one">
+                            <img src="./visa.png" alt="" class="img_flag">
+                            <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
+                        </div><br>
+                        <div class="row_two">
+                            <h2 class="text">Matheus Souza Santos Leite</h2>
+                        </div>
+                    </div>
+                    <div class="box_card" style="background-color: #0A3A44;" onclick="Deletar()">
+                        <div class="row_one">
+                            <img src="maestro.png" alt="" class="img_flag">
+                            <h3 class="text" style="padding-top: 6%;">•••• 5124</h3>
+                        </div><br>
+                        <div class="row_two">
+                            <h2 class="text">Matheus Souza Santos Leite</h2>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </main>
+    </section>
+    <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
+    <script>
+        function Deletar(){
+            var deleteCard = confirm("Quer mesmo Excluir?")
+            var card = document.querySelector('.box_card');
+            if(deleteCard){
+                alert("Você Excluiu")
+                card.remove();
+            }
+            else{
+                alert("OK")
+            }
+        }
+    </script>
+</body>
+</html>
