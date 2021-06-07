@@ -102,14 +102,51 @@ section .container .user .imgBox{
     opacity: 50%;
 }
 
-
 .checkbox{
-    border-radius: 10px;
-    border: solid 5px var(--border-field);
+    position: relative;
+    cursor: pointer;
+    margin-top: 2.5%;
+}
+.checkbox:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color:#8b9092;
+}
+.checkbox:checked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color:#1ed0ef;
+}
+.checkbox:checked:after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid rgb(255, 255, 255);
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 2px;
+    left: 6px;
 }
 #label{
-    font: regular 1rem Segoe UI;
+    font: normal 1rem Segoe UI;
+    margin-left: 3%;
     color: var(--text);
+    margin-top: 2%;
+    cursor: pointer;
 }
 
 .btn {
