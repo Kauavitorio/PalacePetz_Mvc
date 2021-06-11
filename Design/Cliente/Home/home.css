@@ -147,3 +147,26 @@ ul li{
     color: var(--text); 
     font-size: 17px; 
 }
+footer{
+    text-align: center;
+    background-color: #737373;
+    bottom: 0;
+    height: 150px;
+}
+.support_title{
+    margin: 2rem auto;
+    padding-top: 1%;
+    font: bold 2rem Segoe UI;
+    font-weight: 700;
+    color: var(--white);
+}
+.container_support{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15%;
+}
+.support_text{
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    color: var(--white);
+}
