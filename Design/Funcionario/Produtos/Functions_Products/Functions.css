@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --back-main: #444B54;
+    --section-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --color-text: #F5FBFF;
+    --color-button: #44BFFF;
+    --color-button2: #F89B28;
+    --color-button3: #FF4444;
+}
+body{
+    background: var(--back-main);
+    display: flex;
+}
+ul li{    
+    list-style: none;
+    display: flex;
+    margin-top: 5%;
+    padding: 10px 30px 10px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+ul li > img{
+    width: 2.5rem;
+}
+ul li > a{
+    font: bold 1rem Segoe UI;
+    font-weight: 600;
+    margin-top: 7%;
+    margin-left: 15%;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-align: left;
+}
+.logo{
+    width: 10rem;
+}
+#loc{
+    background: var(--color-button);
+}
+section{
+    margin: 1%;
+    margin-left: 2%;
+    background: var(--section-background);
+    display: flex;
+    border-radius: 15px;
+    width: 100%;
+    height: 95vh;
+}
+.column_one{
+    display: flex;
+    flex-direction: column;
+}
+.container_one{
+    display: flex;
+    background: var(--back-main);
+    width: 85%;
+    height: 24.5%; 
+    padding-right: 70px;
+    margin: 4% 0 0 94px;
+    border-radius: 15px;
+    box-shadow: rgba(68, 75, 84, 0.4) 5px 5px, rgba(68, 75, 84, 0.3) 10px 10px, rgba(68, 75, 84, 0.2) 15px 15px, rgba(68, 75, 84, 0.1) 20px 20px, rgba(68, 75, 84, 0.05) 25px 25px;
+}
+.img_Product{
+    max-width: 30rem;
+    min-width: 16rem;
+    width: 20rem;
+    max-height: 18em;
+    min-height: 8em;
+    height: 9.6em;
+    border-radius: 15px;
+}
+.container_text{
+    margin: 5px 0 0 7%;
+    width: 32rem;
+}
+.title_box{
+    font-family: Segoe UI;
+    font-style: bold;
+    font-weight: 600;
+    color: var(--color-text);
+}
+.text_box{
+    font-family: Segoe UI;
+    font-style: bold;
+    font-weight: 600;
+    color: var(--color-text);
+}
+.button_product{
+    position: absolute;
+    max-width: 20%;
+    min-width: 10%;
+    width: 14%;
+    padding: 15px;
+    background: var(--color-button2);
+    text-decoration: none;
+    color: var(--color-text);
+    font: bold 1rem Segoe UI;
+    text-align: center;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
