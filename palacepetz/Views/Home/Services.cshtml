@@ -1,0 +1,113 @@
+﻿
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Servicos/Servicos.css">
+</head>
+<body onload="LogoutOrLoginTexts()">
+    <h4 id="checkUserId" style="display: none;">@ViewBag.id_user</h4>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)" id="loc">serviços</a></li>
+            <li><a onclick="SeeMyOrders()" id="SeeMyOrders" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a onclick="LogoutOrLogin()" id="LogoutOrLogin" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+
+                <a onclick="SeeMyCart()" id="SeeMyCart"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a onclick="SeeMyProfile()" id="SeeMyProfile"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <h2 class="title">Selecione um Serviço</h2>
+        <main>
+            <div class="box_one">
+                <img src="https://www.kauavitorio.com/palacepetz/Servicos/icon-consulta.png" class="img_service" alt="">
+                <h3 class="title_service">Consulta Veterinária</h3>
+                <h4 class="price_service">Preço Fixo: R$ 90,00</h4>
+                <a onclick="Shedule_Appointment()" style="cursor: pointer;" id="btn_appointment" class="btn_service">Agendar Consulta</a>
+            </div>
+            <div class="box_two">
+                <img src="https://www.kauavitorio.com/palacepetz/Servicos/icon-banho-tosa.png" class="img_service" alt="">
+                <h3 class="title_service">Banho e Tosa</h3>
+                <h4 class="price_service">Preço Fixo: R$ 60,00</h4>
+                <a onclick="Shedule_Bath_Grooming()" style ="cursor: pointer" id="btn_bathGrooming" class="btn_service">Agendar Banho e Tosa</a>
+            </div>
+        </main>
+    </section>
+    <script lang="javascript" type="text/javascript">
+        var id_user = document.getElementById("checkUserId");
+        var buttonAppointment = document.getElementById("btn_appointment")
+        var buttonBathGrooming = document.getElementById("btn_bathGrooming")
+
+        function Shedule_Appointment() {
+            if (id_user != 0) 
+                buttonAppointment.href = "/agendar-consulta"
+            else 
+                alert("É necessário se logar para agendar uma consulta.")
+        }
+        function Shedule_Bath_Grooming() {
+            if (id_user != 0)
+                buttonBathGrooming.href = "/agendar-banho-tosa"
+            else
+                alert("É necessário se logar para agendar Banho e Tosa.")
+        }
+    </script>
+
+    <script lang="javascript" type="text/javascript">
+        function LogoutOrLoginTexts() {
+            var spanCountCart = document.getElementById('lblCartCount').innerHTML
+            if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ")
+                document.getElementById('lblCartCount').style.display = "none"
+
+            var txt_login_or_logout = document.getElementById('LogoutOrLogin')
+            if (id_user != 0) {
+                txt_login_or_logout.innerHTML = "SAIR";
+                txt_login_or_logout.href = "/logout/1";
+            }
+            else {
+                txt_login_or_logout.innerHTML = "ENTRAR";
+                txt_login_or_logout.href = "/login";
+            }
+        }
+
+        var id_user = document.getElementById("checkUserId").innerHTML;
+        function SeeMyOrders() {
+            var txt_orders = document.getElementById('SeeMyOrders')
+            if (id_user != 0)
+                txt_orders.href = "/meus-pedidos";
+            else
+                alert("Para acessar os pedidos é necessário estar logado.")
+        }
+        function SeeMyCart() {
+            var txt_cart = document.getElementById('SeeMyCart')
+            if (id_user != 0)
+                txt_cart.href = "/meu-carrinho"
+            else
+                alert("Para acessar o carrinho é necessário estar logado.")
+        }
+        function SeeMyProfile() {
+            var txt_profile = document.getElementById('SeeMyProfile')
+            if (id_user != 0) {
+                txt_profile.href = "/perfil"
+            } else
+                alert("Para acessar seu perfil é necessário estar logado.")
+        }
+    </script>
+</body>
+</html>

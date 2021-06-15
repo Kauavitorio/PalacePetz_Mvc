@@ -15,9 +15,10 @@ namespace palacepetz.Dados.Product
     public class AcProducts
     {
         private static string BASE_URL = "https://palacepetzapi.herokuapp.com/";
+        private static int statusCode;
 
         //  Metohd to get All Popular Products
-        public List<DtoProduct> GetAllPopularProducts()
+        public List<DtoProduct> GetAllPopularProducts(int id_user)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -61,12 +62,13 @@ namespace palacepetz.Dados.Product
                                     new DtoProduct
                                     {
                                         cd_prod = itens_response.cd_prod,
+                                        id_user = id_user,
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
                                         nm_product = itens_response.nm_product,
                                         amount =  itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = (float) itens_response.product_price,
+                                        product_price = (double) itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -83,18 +85,13 @@ namespace palacepetz.Dados.Product
             catch (WebException ex)
             {
                 System.Diagnostics.Debug.WriteLine("Erro on category request: " + ex);
-                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        nm_category = ex.ToString()
-                                    }
-                                   );
+                productlist.Add(null);
                 return productlist;
             }
         }
 
         //  Metohd to get All Products
-        public List<DtoProduct> GetAllProducts()
+        public List<DtoProduct> GetAllProducts(int id_user)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -138,12 +135,13 @@ namespace palacepetz.Dados.Product
                                     new DtoProduct
                                     {
                                         cd_prod = itens_response.cd_prod,
+                                        id_user = id_user,
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = (float)itens_response.product_price,
+                                        product_price = (double)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -160,17 +158,12 @@ namespace palacepetz.Dados.Product
             catch (WebException ex)
             {
                 System.Diagnostics.Debug.WriteLine("Erro on category request: " + ex);
-                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        nm_category = ex.ToString()
-                                    }
-                                   );
+                productlist.Add(null);
                 return productlist;
             }
         }
 
-        public List<DtoProduct> Get_AllProducts_With_Category(int cd_category)
+        public List<DtoProduct> Get_AllProducts_With_Category(int cd_category, int id_user)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -214,12 +207,13 @@ namespace palacepetz.Dados.Product
                                     new DtoProduct
                                     {
                                         cd_prod = itens_response.cd_prod,
+                                        id_user = id_user,
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = (float)itens_response.product_price,
+                                        product_price = (double)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -236,17 +230,12 @@ namespace palacepetz.Dados.Product
             catch (WebException ex)
             {
                 System.Diagnostics.Debug.WriteLine("" + ex);
-                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        nm_category = ex.ToString()
-                                    }
-                                   );
+                productlist.Add(null);
                 return productlist;
             }
         }
 
-        public List<DtoProduct> Get_AllProducts_With_PriceFilter(string filter)
+        public List<DtoProduct> Get_AllProducts_With_PriceFilter(string filter, int id_user)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -292,10 +281,11 @@ namespace palacepetz.Dados.Product
                                         cd_prod = itens_response.cd_prod,
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
+                                        id_user = id_user,
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = (float)itens_response.product_price,
+                                        product_price = (double)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -312,16 +302,12 @@ namespace palacepetz.Dados.Product
             catch (WebException ex)
             {
                 System.Diagnostics.Debug.WriteLine("" + ex);
-                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        nm_category = ex.ToString()
-                                    }
-                                   );
+                productlist.Add(null);
                 return productlist;
             }
         }
-        public List<DtoProduct> Get_AllProducts_With_SpeciesFilter(string filter)
+
+        public List<DtoProduct> Get_AllProducts_With_SpeciesFilter(string filter, int id_user)
         {
             //  Variable to storing Api Response
             string responseBody;
@@ -365,12 +351,13 @@ namespace palacepetz.Dados.Product
                                     new DtoProduct
                                     {
                                         cd_prod = itens_response.cd_prod,
+                                        id_user = id_user,
                                         cd_category = itens_response.cd_category + "",
                                         nm_category = itens_response.nm_category + "",
                                         nm_product = itens_response.nm_product,
                                         amount = itens_response.amount + "",
                                         species = itens_response.species + "",
-                                        product_price = (float)itens_response.product_price,
+                                        product_price = (double)itens_response.product_price,
                                         description = itens_response.description + "",
                                         date_prod = itens_response.date_prod + "",
                                         shelf_life = itens_response.shelf_life + "",
@@ -387,12 +374,87 @@ namespace palacepetz.Dados.Product
             catch (WebException ex)
             {
                 System.Diagnostics.Debug.WriteLine("" + ex);
-                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        nm_category = ex.ToString()
-                                    }
-                                   );
+                productlist.Add(null);
+                return productlist;
+            }
+        }
+
+        public List<DtoProduct> Get_AllProducts_With_NameFilter(string filter, int id_user)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "products/list/filter/name/" + filter;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            List<DtoProduct> productlist = new List<DtoProduct>();
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+                {
+
+                    statusCode = (int)response.StatusCode;
+                    if(statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return null;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+
+                                //  System created to be able to read individual items from the api response
+                                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                                //  Selecting everything within the json "Search" list and putting where i want
+                                foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                                {
+                                    productlist.Add(
+                                        new DtoProduct
+                                        {
+                                            cd_prod = itens_response.cd_prod,
+                                            cd_category = itens_response.cd_category + "",
+                                            nm_category = itens_response.nm_category + "",
+                                            nm_product = itens_response.nm_product,
+                                            id_user = id_user,
+                                            amount = itens_response.amount + "",
+                                            species = itens_response.species + "",
+                                            product_price = (double)itens_response.product_price,
+                                            description = itens_response.description + "",
+                                            date_prod = itens_response.date_prod + "",
+                                            shelf_life = itens_response.shelf_life + "",
+                                            image_prod = itens_response.image_prod + "",
+                                            popular = itens_response.popular + ""
+                                        }
+                                       );
+                                }
+                            }
+                        }
+                    }else
+                    {
+                        productlist.Add(null);
+                    }
+                }
+                return productlist;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                productlist.Add(null);
                 return productlist;
             }
         }
@@ -437,8 +499,6 @@ namespace palacepetz.Dados.Product
                             }
                         }
                     }
-                    else if (statusCode == 404)
-                        return "404";
                     else
                         return statusCode + "";
                 }

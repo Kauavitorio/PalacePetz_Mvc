@@ -1,0 +1,94 @@
+﻿@model palacepetz.Models.Schedule.DtoSchedule
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Consulta - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/Agenda_consulta.css">
+</head>
+<body onload="cat()">
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" id="loc" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+
+    @using (Html.BeginForm())
+    {
+        <section>
+            <a href="/"><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+            <main>
+                <div class="box_profile">
+                    <div class="back_img">
+                        <img src="@ViewBag.img_user" alt="" class="img_user">
+                    </div>
+                    <h2 class="title_name"> @ViewBag.name_user</h2>
+                    <h3 class="sub_title"><b>CPF:</b> @ViewBag.cpf_user</h3>
+                    <h3 class="sub_title"><b>E-mail:</b> @ViewBag.email_user</h3>
+                    <h3 class="sub_title"><b>CEP:</b> @ViewBag.cep_user</h3>
+                    <h3 class="sub_title"><b>Rua:</b> @ViewBag.street_user</h3>
+                    <h3 class="sub_title"><b>Complemento:</b> @ViewBag.complement_user</h3>
+                    <a href="/editar-perfil" class="btn_profile">Editar Perfil</a>
+                </div>
+                <div class="box_consulta">
+                    <h2 class="title_service">Agendar Consulta</h2><br>
+                    <div class="container">
+                        <div class="colunm_one">
+                                            @Html.DropDownList("user_pet",
+                             (IEnumerable<SelectListItem>)ViewBag.user_pet,
+                             "Selecione seu animal", new { @class = "field-select" })
+                            <br>
+                                            @Html.DropDownList("veterinary",
+                             (IEnumerable<SelectListItem>)ViewBag.veterinary,
+                             "Selecione um Veterinário", new { @class = "field-select" })
+                            <br>
+                            @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "field-time", @type = "time" } })
+                            <br>
+                            @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "field-date", @type = "date" } })
+                        </div>
+                        <div class="colunm_two">
+                            @Html.EditorFor(model => model.description, new { htmlAttributes = new { cols = "30", rows = "10", @placeholder = "Descrição...", @class = "field-descriptio" } })
+                            <select name="" id="" class="field-select">
+                                <option value="">Forma de Pagamento</option>
+                                <option value="0">Débito</option>
+                                <option value="1">Crédito</option>
+                            </select>
+                            <a href="/registrar-cartao" class="link_card">Não tem cartão cadastrado? Cadastrar Cartão.</a>
+                        </div>
+                    </div>
+                    <input type="submit" value="Agendar" class="btn_agendar">
+                </div>
+            </main>
+        </section>
+    }
+        <script>
+            function cat() {
+                var spanCountCart = document.getElementById('lblCartCount').innerHTML
+                if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ") {
+
+                    document.getElementById('lblCartCount').style.display = "none"
+                }
+            }
+        </script>
+    </body>
+</html>

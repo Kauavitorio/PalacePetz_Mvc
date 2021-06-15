@@ -33,7 +33,7 @@ namespace palacepetz.Dados.Product
             string nm_product = prodInfo.nm_product;
             string amount = prodInfo.amount;
             string species = prodInfo.species;
-            float product_price = prodInfo.product_price;
+            double product_price = prodInfo.product_price;
             string description = prodInfo.description;
             string shelf_life = prodInfo.shelf_life;
             string image_prod = prodInfo.image_prod;
@@ -88,7 +88,7 @@ namespace palacepetz.Dados.Product
             }
             catch (WebException ex)
             {
-
+                System.Diagnostics.Debug.WriteLine("" + ex);
                 return statusCode;
             }
         }
