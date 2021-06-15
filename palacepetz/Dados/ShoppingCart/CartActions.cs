@@ -73,12 +73,12 @@ namespace palacepetz.Dados.ShoppingCart
         }
 
 
-        public static int Insert_New_Product_OnUserCart(DtoProduct prodInfo, float totalPrice, float sub_total)
+        public static int Insert_New_Product_OnUserCart(DtoProduct prodInfo, string totalPrice, string sub_total)
         {
             long cd_prod = prodInfo.cd_prod;
             int id_user = prodInfo.id_user;
             string amount = prodInfo.amount;
-            float product_price = prodInfo.product_price;
+            double product_price = prodInfo.product_price;
 
             //  Variable set for storing api responses
             var url = BASE_URL + "shoppingcart/insert";
@@ -255,7 +255,7 @@ namespace palacepetz.Dados.ShoppingCart
                             foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
                             {
                                 string getPrice = itens_response.totalPrice + "";
-                                var val = double.Parse(getPrice.Replace(".", ","),
+                                var val = double.Parse(getPrice,
                                     NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint | NumberStyles.AllowCurrencySymbol);
                                 fullprice += val;
                             };

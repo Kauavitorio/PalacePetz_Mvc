@@ -18,13 +18,6 @@
 <meta property="og:description" content="Tudo de melhor para seu pet está aquí!!">
 <meta property="og:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="http://palacepetz.azurewebsites.net/">
-<meta property="twitter:title" content="PalacePetz">
-<meta property="twitter:description" content="Tudo de melhor para seu pet está aquí!!">
-<meta property="twitter:image" content="https://media.discordapp.net/attachments/756546249901211749/839678946462662656/imgtestembed-removebg-preview.png?width=455&height=467">
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,8 +25,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PalacePetz</title>
+
+    @Styles.Render("~/Content/css")
     <!-- Main CSS -->
-    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/home/home.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Home/home.css">
     <!-- ICON -->
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon" />
     <!-- Header CSS -->
@@ -42,17 +37,17 @@
 <body>
     <header id="menu">
         <ul id="menu2">
-            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
             <li><a href="/" style="text-decoration: none; color: var(--white)" id="loc" alt="">home</a></li>
             <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
             <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
-            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
-            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li><a onclick="SeeMyOrders()" id="SeeMyOrders" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a onclick="LogoutOrLogin()" id="LogoutOrLogin" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
             <li>
-                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <a onclick="SeeMyCart()" id="SeeMyCart"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
                 <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
             </li>
-            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+            <li><a onclick="SeeMyProfile()" id="SeeMyProfile"><img src="@ViewBag.img_user" class="user"></a></li>
         </ul>
     </header>
     <section class="a">
@@ -68,7 +63,7 @@
                     cuide do seu pet<br />
                     com carinho.
                 </h1>
-                <h2 style="font-size: 25px; margin-top: 8%;">Venha encontrar o medicamente para seu Pet.</h2>
+                <h2 style="font-size: 25px; margin-top: 8%;">Venha encontrar o medicamento para seu Pet.</h2>
 
                 <h1 style="font-size: 38px; text-transform: uppercase; margin-top: -1%;">
                     seu pet com o máximo de<br />
@@ -84,10 +79,10 @@
             </div>
             <input onclick="GoToProducts()" type="submit" value="ver produtos" style="cursor: pointer;" class="prod_button">
             <div class="sliders">
-                <img class="selected" src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-one.png" style="width: 39%; margin: -4% 0 0 34%; /* topo | direita | inferior | esquerda */">
-                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-two.png" style="width: 32%; margin: -6% 0 0 33%; /* topo | direita | inferior | esquerda */">
-                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-tree.png" style="width: 33%; margin: -3% 0 0 34%; /* topo | direita | inferior | esquerda */">
-                <img src="https://www.kauavitorio.com/palacepetz/home/Banner/img-banner-four.png" style="width: 42%; margin: -3% 0 0 33%; /* topo | direita | inferior | esquerda */">
+                <img class="selected" src="https://www.kauavitorio.com/palacepetz/Home/Banner/img-banner-one.png" style="width: 39%; margin: -4% 0 0 34%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/Home/Banner/img-banner-two.png" style="width: 32%; margin: -6% 0 0 33%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/Home/Banner/img-banner-tree.png" style="width: 33%; margin: -3% 0 0 34%; /* topo | direita | inferior | esquerda */">
+                <img src="https://www.kauavitorio.com/palacepetz/Home/Banner/img-banner-four.png" style="width: 42%; margin: -3% 0 0 33%; /* topo | direita | inferior | esquerda */">
             </div>
             <div style="background: linear-gradient(120deg, #FF94A1 0%, #FACCD6 100%)" class="circle circleFirst"></div>
             <div style="background: linear-gradient(120deg, #FFF098 0%, #FFF098 100%)" class="circle"></div>
@@ -96,20 +91,59 @@
         </div>
         <div class="destaque">
             <h2 style="font-family: 'Segoe UI'; color: var(--text); font-size: 25px; text-transform: uppercase; margin: 10% 0 0 6%;">Produtos em destaque</h2>
-            <div class="box-destaque">
-                @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+        <h4 id="checkUserId" style="display: none;">@Html.DisplayFor(modelItem => item.id_user)</h4>
+        <div class="box-destaque col-lg-3 col-md-6 mb-4" style="margin: 2% 3%">
+            @{
+                switch (item.nm_category)
                 {
-                    <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" class="section_item" style="text-align: center; text-decoration: none; background: linear-gradient(120deg, #FF94A1 0%, #FACCD6 100%)">
-                        <div class="itens">
-                            <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
-                            <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
-                            <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
-                        </div>
-                    </a>
+                    case "Alimentos":
+                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #FF94A1 0%, #FACCD6 100%);">
+                            <div class="itens">
+                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                            </div>
+                        </a>
 
+                        break;
+                    case "Acessórios":
+                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #88D6FF 0%, #44BFFF 100%);">
+                            <div class="itens">
+                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                            </div>
+                        </a>
+
+                        break;
+                    case "Medicamentos":
+
+                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #F0DD76 0%, #FFF098 100%);)">
+                            <div class="itens">
+                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                            </div>
+                        </a>
+
+                        break;
+                    case "Estética":
+                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #6ADFD6 0%, #51E6B7 100%);">
+                            <div class="itens">
+                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                            </div>
+                        </a>
+                        break;
                 }
-                <div class="border-destaque"></div>
-            </div>
+                <div class="border-destaque" style="height: 160px;"></div>
+            }
+        </div>
+
+            }
         </div>
     </section>
     <script language="javascript" type="text/javascript">
@@ -120,7 +154,7 @@
             window.open("/produtos", '_self');
         }
     </script>
-    <script src="https://www.kauavitorio.com/palacepetz/home/script.js"></script>
-    <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
+    <!---<script src="http://127.0.0.1:5501/public/palacepetz/Home/script.js"></script>-->
+    <script src="https://www.kauavitorio.com/palacepetz/Home/script.js"></script>
 </body>
 </html>

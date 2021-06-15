@@ -27,7 +27,9 @@ namespace palacepetz.Models.products
         public string species { get; set; }
 
         [DisplayName("Preço")]
-        public float product_price { get; set; }
+        public double product_price { get; set; }
+
+        public int product_amount { get; set; }
 
         [DisplayName("Descrição")]
         public string description { get; set; }

@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento de Conulta - PalacePetz</title>
+    <title>Registrar Cartão - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
     <!-- Header CSS -->
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
@@ -19,14 +19,14 @@
 <body onload=" cat()">
     <header id="menu">
         <ul id="menu2">
-            <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
             <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
             <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
             <li><a href="/servicos" id="loc" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
             <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
             <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
             <li>
-                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
                 <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
             </li>
             <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
@@ -34,6 +34,7 @@
     </header>
     <section>
         <a href="/"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/icon-back.png" alt="" class="img_back"></div></a>
+        <h3 id="cardlistsize" style="display: none;">@ViewBag.cardListSize</h3>
 
 
         @using (Html.BeginForm())
@@ -78,7 +79,7 @@
                             <h1 class="sub_title"><b>INFORMAÇÕES DO SEU CARTÃO</b></h1>
                             <div style="display: flex;">
                                 @Html.EditorFor(model => model.number_card, new { htmlAttributes = new { @class = "field-select", @placeholder = "Número do cartão", @style = "outline: none;", @id = "numbercard" } })
-                                @Html.EditorFor(model => model.shelflife_card, new { htmlAttributes = new { @class = "field-select", @style = "width: 34%; padding-right: 30px; outline: none;", max = 7, @placeholder = "MM/YYYY", @id = "shelflife" } })
+                                @Html.EditorFor(model => model.shelflife_card, new { htmlAttributes = new { @class = "field-select", @style = "width: 34%; padding-right: 30px; outline: none;", max = 7, @placeholder = "MM/YY", @id = "shelflife" } })
                             </div>
                             <div style="display: flex;">
                                 @Html.EditorFor(model => model.nmUser_card, new { htmlAttributes = new { @class = "field-select", @placeholder = "Nome impresso no cartão", @style = "outline: none; text-transform: uppercase;" } })
@@ -101,9 +102,9 @@
             var $seuCampoValid = $("#shelflife");
             var $cvv = $("#cvv");
             var numbercard = $("#numbercard");
-            $seuCampoValid.mask('00/0000', { reverse: true });
-            $cvv.mask('000', { reverse: true });
-            numbercard.mask('0000 0000 0000 0000', { reverse: true });
+            $seuCampoValid.mask('00/00', { reverse: false });
+            $cvv.mask('000', { reverse: false });
+            numbercard.mask('0000 0000 0000 0000', { reverse: false });
         });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js%22%3E"></script>
@@ -142,9 +143,13 @@
 
         function cat() {
             var spanCountCart = document.getElementById('lblCartCount').innerHTML
-            if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ") {
-
+            if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ")
                 document.getElementById('lblCartCount').style.display = "none"
+
+            var sizeCard = document.getElementById('cardlistsize').innerHTML
+            if (sizeCard >= "3") {
+                alert('Desculpe, mas você só pode ter 3 cartões cadastrados!!')
+                document.location = '/meus-cartoes';
             }
         }
     </script>

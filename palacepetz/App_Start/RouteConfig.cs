@@ -90,6 +90,34 @@ namespace palacepetz
                 defaults: new { controller = "Usuario", action = "EditProfile", id = UrlParameter.Optional }
             );
 
+            //  Route to Shedule Appointment
+            routes.MapRoute(
+                name: "sheduleappointment",
+                url: "agendar-consulta",
+                defaults: new { controller = "Home", action = "Schedule_Appointment", id = UrlParameter.Optional }
+            );
+
+            //  Route to My Cards
+            routes.MapRoute(
+                name: "mycards",
+                url: "meus-cartoes",
+                defaults: new { controller = "Usuario", action = "MyCards", id = UrlParameter.Optional }
+            );
+
+            //  Route to Remove User Card
+            routes.MapRoute(
+                name: "removecard",
+                url: "remover-cartao/{cd_card}",
+                defaults: new { controller = "Usuario", action = "RemoveCard", cd_card = UrlParameter.Optional }
+            );
+
+            //  Route to See Services
+            routes.MapRoute(
+                name: "services",
+                url: "servicos",
+                defaults: new { controller = "Home", action = "Services", id_user = UrlParameter.Optional }
+            );
+
             /***************** Products Routes *******************/
             routes.MapRoute(//  Route to see all products
                 name: "products",
@@ -101,9 +129,14 @@ namespace palacepetz
                 url: "produtos/filtro/{filter}",
                 defaults: new { controller = "Home", action = "Products", filter = UrlParameter.Optional }
             );
-            routes.MapRoute(//  Route to see all products
+            routes.MapRoute(//  Route to see all products with same especie
                 name: "productswithspecies",
                 url: "produtos/filtro/especie/{filter}",
+                defaults: new { controller = "Home", action = "Products", filter = UrlParameter.Optional }
+            );
+            routes.MapRoute(//  Route to see all products
+                name: "productswithname",
+                url: "produtos/filter/nome/{filter}",
                 defaults: new { controller = "Home", action = "Products", filter = UrlParameter.Optional }
             );
 
@@ -133,6 +166,17 @@ namespace palacepetz
                 defaults: new { controller = "Home", action = "FinishPurchase" }
             );
 
+            routes.MapRoute(//  Route to see user orders
+                name: "myorders",
+                url: "meus-pedidos",
+                defaults: new { controller = "Usuario", action = "UserOrders" }
+            );
+
+            routes.MapRoute(//  Route to follow Order
+                name: "followorder",
+                url: "pedido/{cd_order}",
+                defaults: new { controller = "Usuario", action = "FollowOrder" }
+            );
 
             //  Default Route
             routes.MapRoute(
