@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --back-main: #444B54;
+    --section-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --color-text: #F5FBFF;
+    --color-button: #44BFFF;
+    --color-button2: #F89B28;
+    --color-button3: #FF4444;
+}
+body{
+    background: var(--back-main);
+    display: flex;
+}
+ul li{    
+    list-style: none;
+    display: flex;
+    margin-top: 5%;
+    padding: 10px 30px 10px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+ul li > img{
+    width: 2.5rem;
+}
+ul li > a{
+    font: bold 1rem Segoe UI;
+    font-weight: 600;
+    margin-top: 7%;
+    margin-left: 15%;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-align: left;
+}
+.logo{
+    width: 10rem;
+}
+#loc{
+    background: var(--color-button);
+}
+section{
+    margin: 1%;
+    margin-left: 2%;
+    background: var(--section-background);
+    display: flex;
+    border-radius: 15px;
+    width: 100%;
+    height: 95vh;
+}
+.container{
+    margin: 3% 0 0 15%;
+    width: 71%;
+}
+.container_text{
+    display: flex;
+}
+.text_title{
+    font: bold 1.5rem Segoe UI;
+    color: var(--back-main);
+    letter-spacing: 0.3px;
+}
+.text_link{
+    font: normal 15px Segoe UI;
+    color: var(--back-main);
+    margin: 1% 0 0 47%;
+}
+.container_box{
+    display: flex;
+    margin-top: 1%;
+}
+.column_one{
+    display: flex;
+    flex-direction: column;
+}
+.column_two{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7%;
+}
+.field{
+    margin-top: 11%;
+    width: 350px;
+    padding: 15px;
+    border: solid 3px var(--border-field);
+    border-radius: 10px;
+    box-shadow: 3px 6px 9px #44BFFF;
+    outline: none;
+    transition: 0.4s;
+    font: normal 16px Segoe UI;
+    color: var(--back-main);
+}
+.field.area{
+    height: 142px;
+    resize: none;
+}
+.field:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.field:focus{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.column_button{
+    display: flex;
+    margin-top: 6%;
+}
+.button_prod{
+    padding: 13px;
+    width: 350px;
+    border-radius: 10px;
+    border: none;
+    background: var(--color-button2);
+    color: var(--color-text);
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.button_img{
+    padding: 13px;
+    width: 350px;
+    border-radius: 10px;
+    border: solid 3px var(--color-button);
+    background: none;
+    color: var(--back-main);
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
