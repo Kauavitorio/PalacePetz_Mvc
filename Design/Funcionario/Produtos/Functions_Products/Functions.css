@@ -63,7 +63,7 @@ section{
     border-radius: 15px;
     box-shadow: rgba(68, 75, 84, 0.4) 5px 5px, rgba(68, 75, 84, 0.3) 10px 10px, rgba(68, 75, 84, 0.2) 15px 15px, rgba(68, 75, 84, 0.1) 20px 20px, rgba(68, 75, 84, 0.05) 25px 25px;
 }
-.img_Product{
+.img_box{
     max-width: 30rem;
     min-width: 16rem;
     width: 20rem;
@@ -88,7 +88,7 @@ section{
     font-weight: 600;
     color: var(--color-text);
 }
-.button_product{
+.button_box{
     position: absolute;
     max-width: 20%;
     min-width: 10%;
