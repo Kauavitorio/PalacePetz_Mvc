@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionário - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="Editar_Funcionario.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="/Funcionario/Home/navbar/logo.png" class="logo"></li>
+            <li><img src="/Funcionario/Home/navbar/home.png" alt=""><a alt="">home</a></li>
+            <li id="loc" ><img src="/Funcionario/Home/navbar/employee.png" alt=""><a alt="">Funcionários</a></li>
+            <li><img src="/Funcionario/Home/navbar/products.png" alt=""><a alt="">produtos</a></li>
+            <li><img src="/Funcionario/Home/navbar/stats.png" alt=""><a alt="">relatório</a></li>
+            <li><img src="/Funcionario/Home/navbar/pedidos.png" alt=""><a alt="">pedidos</a></li>
+            <li><img src="/Funcionario/Home/navbar/info.png" alt=""><a alt="">informações</a></li>
+            <li><img src="/Funcionario/Home/navbar/logout.png" alt=""><a alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <a href=""><div class="back"><img src="/Funcionario/Pedidos/Controle_Pedidos/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Editar Funcionário</h2>
+        <h1 class="text" style="font: normal 15pt Segoe UI; text-decoration: underline; margin: -5% 0 0 80%; cursor: pointer;">
+            <a>Consultar Funcionários</a>
+        </h1>
+        <div class="container">
+            <div class="column_one">
+                <label for="name">Nome do Funcionário</label>
+                <input type="text" id="name" class="field" placeholder="Nome do Funcionário">
+                <label for="cpf">CPF do Funcionário</label>
+                <input type="text" id="cpf" class="field" placeholder="CPF do Funcionário">
+                <label for="phone">Telefone do Funcionário</label>
+                <input type="text" id="phone" class="field" placeholder="Telefone do Funcionário">
+                <label for="ctps">Número do CTPS</label>
+                <input type="text" id="ctps" class="field" placeholder="Número do CTPS">
+            </div>
+            <div class="column_two">
+                <label for="cargo">Cargo</label>
+                <input id="cargo" type="text" class="field" placeholder="Cargo">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" class="field" placeholder="E-mail">
+                <label for="senha">Senha</label>
+                <input type="text" id="senha" class="field" placeholder="Senha">
+                <label for="tipo_user">Tipo de Usuário</label>
+                <select name="" id="tipo_user" class="field">
+                    <option value="" >Tipo de Usuário</option>
+                    <option value="" >1 - Funcionário</option>
+                    <option value="" >2 - Veterinário</option>
+                    <option value="" >3 - Gerente</option>
+                </select>
+            </div>
+        </div>
+        <div class="container_btn">
+            <input type="text" class="btn_editar" value="Editar Funcionário">
+        </div>
+    </section>
+</body>
+</html>
