@@ -93,59 +93,168 @@
             <h2 style="font-family: 'Segoe UI'; color: var(--text); font-size: 25px; text-transform: uppercase; margin: 10% 0 0 6%;">Produtos em destaque</h2>
             @foreach (var item in Model)
             {
-        <h4 id="checkUserId" style="display: none;">@Html.DisplayFor(modelItem => item.id_user)</h4>
-        <div class="box-destaque col-lg-3 col-md-6 mb-4" style="margin: 2% 3%">
-            @{
-                switch (item.nm_category)
-                {
-                    case "Alimentos":
-                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #FF94A1 0%, #FACCD6 100%);">
-                            <div class="itens">
-                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
-                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
-                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
-                            </div>
-                        </a>
+                <h4 id="checkUserId" style="display: none;">@Html.DisplayFor(modelItem => item.id_user)</h4>
+                <div class="box-destaque col-lg-3 col-md-6 mb-4" style="margin: 2% 3%">
+                    @{
+                        switch (item.nm_category)
+                        {
+                            case "Alimentos":
+                                <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #FF94A1 0%, #FACCD6 100%);">
+                                    <div class="itens">
+                                        <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                        <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                        <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                                    </div>
+                                </a>
 
-                        break;
-                    case "Acessórios":
-                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #88D6FF 0%, #44BFFF 100%);">
-                            <div class="itens">
-                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
-                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
-                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
-                            </div>
-                        </a>
+                                break;
+                            case "Acessórios":
+                                <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #88D6FF 0%, #44BFFF 100%);">
+                                    <div class="itens">
+                                        <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                        <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                        <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                                    </div>
+                                </a>
 
-                        break;
-                    case "Medicamentos":
+                                break;
+                            case "Medicamentos":
 
-                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #F0DD76 0%, #FFF098 100%);)">
-                            <div class="itens">
-                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
-                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
-                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
-                            </div>
-                        </a>
+                                <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #F0DD76 0%, #FFF098 100%);)">
+                                    <div class="itens">
+                                        <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                        <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                        <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                                    </div>
+                                </a>
 
-                        break;
-                    case "Estética":
-                        <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #6ADFD6 0%, #51E6B7 100%);">
-                            <div class="itens">
-                                <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
-                                <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
-                                <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
-                            </div>
-                        </a>
-                        break;
-                }
-                <div class="border-destaque" style="height: 160px;"></div>
-            }
-        </div>
+                                break;
+                            case "Estética":
+                                <a href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)" title="@Html.DisplayFor(modelItem => item.nm_product)" class="section_item" style="text-align: center; text-decoration: none; background-image: linear-gradient(45deg, #6ADFD6 0%, #51E6B7 100%);">
+                                    <div class="itens">
+                                        <img style="width: 130px; height: 130px;" src="@Html.DisplayFor(modelItem => item.image_prod)">
+                                        <h3 style="margin-bottom: 20%; margin-top: 15%; font-weight: 600;">@Html.DisplayFor(modelItem => item.nm_product)</h3>
+                                        <h4 style="align-items: center; font: bold 16pt Segoe UI; font-weight: 700; color: var(--text);">R$ @Html.DisplayFor(modelItem => item.product_price)</h4>
+                                    </div>
+                                </a>
+                                break;
+                        }
+                        <div class="border-destaque" style="height: 160px;"></div>
+                    }
+                </div>
 
             }
         </div>
     </section>
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>PalacePetz
+                        </h6>
+                        <p>
+                            Aqui você encontra as categorias dos produtos e poderá entrar em contato conosco. 
+                        </p>
+                        <a href="/suporte">Central de Atendimento</a>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Produtos
+                        </h6>
+                        <p>
+                            <a href="/produtos/Alimentos" class="text-reset">Alimentos</a>
+                        </p>
+                        <p>
+                            <a href="/produtos/Acessorios" class="text-reset">Acessórios</a>
+                        </p>
+                        <p>
+                            <a href="/produtos/Medicamentos" class="text-reset">Medicamentos</a>
+                        </p>
+                        <p>
+                            <a href="/produtos/Estetica" class="text-reset">Estética</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Atalhos
+                        </h6>
+                        <p>
+                            <a href="/servicos" class="text-reset">Serviços</a>
+                        </p>
+                        <p>
+                            <a href="/perfil" class="text-reset">Perfil</a>
+                        </p>
+                        <p>
+                            <a href="/produtos" class="text-reset">Produtos</a>
+                        </p>
+                        <p>
+                            <a href="/suporte" class="text-reset">Ajuda</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contato
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> Avenida Paulista - 612 São Paulo/SP</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            palacepetz.shop@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> +55 (11) 0401-9039</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            &copy; @DateTime.Now.Year Copyright:
+            <a class="text-reset fw-bold" href="https://palacepetz.azurewebsites.net">Palacepetz.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
     <script language="javascript" type="text/javascript">
         function fireServerButtonEvent() {
             document.getElementById("btnSubmit").click();

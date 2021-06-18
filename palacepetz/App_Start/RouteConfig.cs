@@ -178,6 +178,36 @@ namespace palacepetz
                 defaults: new { controller = "Usuario", action = "FollowOrder" }
             );
 
+            routes.MapRoute(//  Route to see user pets
+                name: "mypets",
+                url: "meus-pets",
+                defaults: new { controller = "Usuario", action = "MyPets" }
+            );
+
+            routes.MapRoute(//  Route to edit pet
+                name: "editpet",
+                url: "perfil/pet/{cd_animal}",
+                defaults: new { controller = "Usuario", action = "EditMyPets" }
+            );
+
+            routes.MapRoute(//  Route to register aniaml
+                name: "registermyanimal",
+                url: "perfil/meus-pets/registrar-pet",
+                defaults: new { controller = "Usuario", action = "RegisterMyPet" }
+            );
+
+            routes.MapRoute(//  Route to remove aniaml
+                name: "removepet",
+                url: "perfil/meus-pet/remover/{cd_animal}",
+                defaults: new { controller = "Usuario", action = "RemovePet" }
+            );
+
+            routes.MapRoute(//  Route to Help Center
+                name: "helpcenter",
+                url: "suporte",
+                defaults: new { controller = "Home", action = "HelpCenter" }
+            );
+
             //  Default Route
             routes.MapRoute(
                 name: "Default",

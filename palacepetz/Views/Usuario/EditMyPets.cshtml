@@ -1,0 +1,71 @@
+﻿@model palacepetz.Models.User.DtoPet
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Animal - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://kauavitorio.com/palacepetz/Editar_Animal/Editar_Animal.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <h3>@ViewBag.status_edit_pet</h3>
+        <a href="/meus-pets"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Editar Animal</h2>
+
+        <div class="box">
+            @using (Html.BeginForm("EditMyPets", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div class="container_img">
+                <img src="@Html.DisplayFor(model => model.image_animal)" alt="" class="img_user" style="max-width: 20%" />
+                <label for="files" style="cursor: pointer; background: #88d6ff; color: #444b54; font: bold 14pt Segoe UI; padding:15px; border-radius: 25px;" class="btn">Alterar imagem do animal</label>
+                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @id = "files", @class = "img_user", @style = "width: 10px; visibility:hidden;", @type = "file" } })
+            </div>
+                <div class="form">
+                    <div class="colunm_one">
+                        @Html.EditorFor(model => model.nm_animal, new { htmlAttributes = new { @class = "field", @style = "text-align: center;" } })
+                    </div>
+                    <div class="sub_container">
+                        <div class="colunm_two">
+                            @Html.EditorFor(model => model.age_animal, new { htmlAttributes = new { @class = "field" } })
+                            @Html.EditorFor(model => model.weight_animal, new { htmlAttributes = new { @class = "field" } })
+                        </div>
+                        <div class="colunm_three">
+                            @Html.EditorFor(model => model.species_animal, new { htmlAttributes = new { @class = "field" } })
+                            @Html.EditorFor(model => model.breed_animal, new { htmlAttributes = new { @class = "field" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="container_button">
+                    <a href="/meus-pets" class="btnAnimais">Ver meus animais</a>
+                    <input type="submit" value="Editar" class="btnEdit">
+                </div>
+            }
+            </div>
+    </section>
+</body>
+</html>
