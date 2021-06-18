@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Editar produto - PalacePetz</title>
         <title>Cadastrar Produtos - PalacePetz</title>
         <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
         <link rel="stylesheet" href="Editar_Produto.css">
@@ -13,6 +14,7 @@
             <ul id="menu2">
                 <li><img src="./navbar/logo.png" class="logo"></li>
                 <li><img src="./navbar/home.png" alt=""><a alt="">home</a></li>
+                <li><img src="./navbar/veterinario.png" alt=""><a alt="">Serviços</a></li>
                 <li id="loc"><img src="./navbar/products.png" alt=""><a alt="">produtos</a></li>
                 <li><img src="./navbar/stats.png" alt=""><a alt="">relatório</a></li>
                 <li><img src="./navbar/pedidos.png" alt=""><a alt="">pedidos</a></li>
@@ -22,39 +24,44 @@
         </nav>
         <section>
             <div class="container">
-                <div class="container_text">
-                    <h1 class="text_title">CADASTRAR PRODUTO</h1>
-                    <a href="" class="text_link">Consultar Produtos</a>
-                </div>
-                <div class="container_box">
-                    <div class="column_one">  
-                        <select id="" class="field">
-                            <option value="">Selecione a categoria</option>
-                            <option value="">Alimentos</option>
-                            <option value="">Acessórios</option>
-                            <option value="">Medicamentos</option>
-                            <option value="">Estética</option>
-                        </select>
-                        <input type="text" id="" class="field" placeholder="Nome do produto">
-                        <input type="number" min=1 id="" class="field" placeholder="Quantidade">
-                        <select id="" class="field">
-                            <option value="">Selecione uma espécie</option>
-                            <option value="">Cachorro</option>
-                            <option value="">Gato</option>
-                            <option value="">Coelho</option>
-                            <option value="">Peixe</option>
-                            <option value="">Hamster</option>
-                        </select>         
+                <div class="column_one">
+                    <h1 class="text_box">EDITAR PRODUTO</h1>
+                    <div class="img_box">                       
+                        <img src="img-prod.png" class="img_prod">
                     </div>
-                    <div class="column_two">
-                        <input type="text" id="" class="field" placeholder="Preço do produto">
+                    <input type="submit" value="TROCAR IMAGEM" class="button_img">
+                    <div class="desc_box">
+                        <h4 class="text_edit">Descrição do produto...</h4>
                         <textarea name="" id="" cols="30" rows="10" class="field area" placeholder="Descrição do produto..."></textarea>
-                        <input type="text" class="field" placeholder="Data de validade" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
                     </div>
-                </div>
-                <div class="column_button">
-                    <input type="submit" value="CADASTRAR PRODUTO" class="button_prod">
-                    <input type="submit" value="FAZER UPLOAD DA IMAGEM" class="button_img" style="margin-left: 7.4%;">
+                </div> 
+                <div class="column_two">
+                    <h4 class="text_edit">Categoria</h4>
+                    <select id="" class="field">
+                        <option value="">Selecione a categoria</option>
+                        <option value="">Alimentos</option>
+                        <option value="">Acessórios</option>
+                        <option value="">Medicamentos</option>
+                        <option value="">Estética</option>
+                    </select>
+                    <h4 class="text_edit">Nome do Produto</h4>
+                    <input type="text" id="" class="field" placeholder="Nome do produto">
+                    <h4 class="text_edit">Quantidade</h4>                 
+                    <input type="number" min=1 id="" class="field" placeholder="Quantidade">
+                    <h4 class="text_edit">Preço do Produto</h4>
+                    <input type="text" id="" class="field" placeholder="Preço do produto">
+                    <h4 class="text_edit">Espécie</h4>
+                    <select id="" class="field">
+                        <option value="">Selecione uma espécie</option>
+                        <option value="">Cachorro</option>
+                        <option value="">Gato</option>
+                        <option value="">Coelho</option>
+                        <option value="">Peixe</option>
+                        <option value="">Hamster</option>
+                    </select>   
+                    <h4 class="text_edit">Data de Validade</h4>
+                    <input type="text" class="field" placeholder="Data de validade" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+                    <input type="submit" value="EDITAR PRODUTO" class="button_prod">
                 </div>
             </div>
         </section>
