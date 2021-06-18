@@ -23,12 +23,12 @@ ul li{
     cursor: pointer;
 }
 ul li > img{
-    width: 2rem;
+    width: 2.5rem;
 }
 ul li > a{
     font: bold 1rem Segoe UI;
     font-weight: 600;
-    margin-top: 6%;
+    margin-top: 7%;
     margin-left: 15%;
     text-transform: uppercase;
     color: var(--color-text);
@@ -50,55 +50,39 @@ section{
     height: 95vh;
 }
 .container{
+    margin: 3% 0 0 15%;
+    width: 71%;
+}
+.container_text{
     display: flex;
-    margin-left: 6%;
 }
-.column_one{
-    margin: 3% 0 0 7%;
-}
-.text_box{
+.text_title{
     font: bold 1.5rem Segoe UI;
     color: var(--back-main);
     letter-spacing: 0.3px;
 }
-.img_box{
-    margin: 5% 0 0 3%;
-    height: 28%;
-    width: 39%;
-    background: #FACCD6;
-    display: flex;
-    justify-content: center;
-    border-radius: 15px;
-}
-.img_prod{
-    margin-top: 5%;
-    height: 92%;
-    width: 90%;
-}
-.button_img{
-    padding: 9px;
-    width: 182px;
-    border-radius: 10px;
-    border: none;
-    background: var(--color-button);
-    color: var(--color-text);
-    font: bold 1.2rem Segoe UI;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.4s;
-}
-.desc_box{
-    margin-top: 9%;
-    width: 87%;
-}
-.text_edit{
-    font: bold 1rem Segoe UI;
+.text_link{
+    font: normal 15px Segoe UI;
     color: var(--back-main);
-    margin: 3% 0 1% 1%;
+    margin: 1% 0 0 47%;
+}
+.container_box{
+    display: flex;
+    margin-top: 1%;
+}
+.column_one{
+    display: flex;
+    flex-direction: column;
+}
+.column_two{
+    display: flex;
+    flex-direction: column;
+    margin-left: 7%;
 }
 .field{
-    width: 330px;
-    padding: 10px;
+    margin-top: 11%;
+    width: 350px;
+    padding: 15px;
     border: solid 3px var(--border-field);
     border-radius: 10px;
     box-shadow: 3px 6px 9px #44BFFF;
@@ -108,7 +92,7 @@ section{
     color: var(--back-main);
 }
 .field.area{
-    height: 180px;
+    height: 142px;
     resize: none;
 }
 .field:hover{
@@ -117,17 +101,29 @@ section{
 .field:focus{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.column_two{
-    margin: 2% 0 0 5%;
+.column_button{
+    display: flex;
+    margin-top: 6%;
 }
 .button_prod{
-    margin: 5% 0 0 7%;
-    padding: 11px;
-    width: 265px;
+    padding: 13px;
+    width: 350px;
     border-radius: 10px;
     border: none;
-    background: var(--color-button);
+    background: var(--color-button2);
     color: var(--color-text);
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.button_img{
+    padding: 13px;
+    width: 350px;
+    border-radius: 10px;
+    border: solid 3px var(--color-button);
+    background: none;
+    color: var(--back-main);
     font: bold 1.2rem Segoe UI;
     font-weight: 600;
     cursor: pointer;
