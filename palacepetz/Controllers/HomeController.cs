@@ -58,6 +58,9 @@ namespace palacepetz.Controllers
                     else
                         ViewBag.img_user = img_user;
 
+                    if(!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
                     string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                     if (resultCart != "404" && resultCart != "500")
                     {
@@ -121,6 +124,9 @@ namespace palacepetz.Controllers
                         ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
                     else
                         ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
 
                     string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                     if (resultCart != "404" && resultCart != "500")
@@ -284,6 +290,9 @@ namespace palacepetz.Controllers
                         else
                             ViewBag.img_user = img_user;
 
+                        if (!CheckEmployee(user_type))
+                            return RedirectToAction("Index", "Employee");
+
                         string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                         if (resultCart != "404" && resultCart != "500")
                         {
@@ -412,6 +421,9 @@ namespace palacepetz.Controllers
                     else
                         ViewBag.img_user = img_user;
 
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
                     if (cd_cart == 0)
                     {
                         string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
@@ -492,6 +504,9 @@ namespace palacepetz.Controllers
                         ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
                     else
                         ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
 
                     string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                     if (resultCart != "404" && resultCart != "500")
@@ -654,6 +669,9 @@ namespace palacepetz.Controllers
                     else
                         ViewBag.img_user = img_user;
 
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
                     string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                     if (resultCart != "404" && resultCart != "500")
                     {
@@ -679,6 +697,11 @@ namespace palacepetz.Controllers
                 ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
                 return View();
             }
+        }
+
+        public async Task<ActionResult> HelpCenter()
+        {
+            return View();
         }
 
         public async Task<ActionResult> Schedule_Appointment()
@@ -721,6 +744,9 @@ namespace palacepetz.Controllers
                     else
                         ViewBag.img_user = img_user;
 
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
                     string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
                     if (resultCart != "404" && resultCart != "500")
                     {
@@ -759,6 +785,11 @@ namespace palacepetz.Controllers
             }
         }
 
+        public bool CheckEmployee(int user_type)
+        {
+            if (user_type == 0) return true;
+            else return false;
+        }
     }
 
 }

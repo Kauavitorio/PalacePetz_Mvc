@@ -1,0 +1,68 @@
+﻿@model IEnumerable<palacepetz.Models.User.DtoPet>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Ver_Animal/Meus_Animais.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header> 
+    <section>
+        <div class="container" style="display: flex;">
+            <h1 class="text_title" style="font: 17pt; text-transform: uppercase; margin: 0% 0 0 10%;">Meus Animais</h1><h1 class="text" style="font-size: 15pt; text-decoration: underline; margin: 0% 0 0 51%; cursor: pointer;"><a href="perfil/meus-pets/registrar-pet" style="text-decoration: none; color: black;">Cadastrar Animal</a></h1>
+        </div>
+        <main>
+            @foreach (var item in Model) {
+                <div class="box">
+                    <img src="@Html.DisplayFor(modelItem => item.image_animal)" alt="" class="img_user">
+                    <table>
+                        <tr>
+                            <td class="text">Nome do Animal</td>
+                            <td class="text">Idade</td>
+                            <td class="text">Peso</td>
+                            <td class="text">Espécie</td>
+                            <td class="text">Raça</td>
+                        </tr>
+                        <tr>
+                            <td class="subtext" style="width: 1vw;">@Html.DisplayFor(modelItem => item.nm_animal)</td>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.age_animal)</td>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.weight_animal)</td>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.species_animal)</td>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.breed_animal)</td>
+                            <td style="display: flex; flex-direction: column; padding-left: 5%;">
+                                <a href="/perfil/pet/@Html.DisplayFor(modelItem => item.cd_animal)" class="btn_edit">Editar</a>
+                                <a href="/perfil/meus-pet/remover/@Html.DisplayFor(modelItem => item.cd_animal)" class="btn_remove">Remover</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        </main>
+    </section>
+</body>
+</html>
