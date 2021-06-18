@@ -23,12 +23,12 @@ ul li{
     cursor: pointer;
 }
 ul li > img{
-    width: 2.5rem;
+    width: 2rem;
 }
 ul li > a{
     font: bold 1rem Segoe UI;
     font-weight: 600;
-    margin-top: 7%;
+    margin-top: 6%;
     margin-left: 15%;
     text-transform: uppercase;
     color: var(--color-text);

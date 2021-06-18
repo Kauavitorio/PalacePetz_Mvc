@@ -23,7 +23,7 @@ ul li{
     cursor: pointer;
 }
 ul li > img{
-    width: 2.5rem;
+    width: 2rem;
 }
 ul li > a{
     font: bold 1rem Segoe UI;
