@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido ao Fornecedor - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="Pedido_Fornecedor.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="/Funcionario/Home/navbar/logo.png" class="logo"></li>
+            <li><img src="/Funcionario/Home/navbar/home.png" alt=""><a alt="">home</a></li>
+            <li><img src="/Funcionario/Home/navbar/veterinario.png" alt=""><a alt="">Serviços</a></li>
+            <li><img src="/Funcionario/Home/navbar/employee.png" alt=""><a alt="">Funcionários</a></li>
+            <li><img src="/Funcionario/Home/navbar/products.png" alt=""><a alt="">produtos</a></li>
+            <li><img src="/Funcionario/Home/navbar/stats.png" alt=""><a alt="">relatório</a></li>
+            <li id="loc"><img src="/Funcionario/Home/navbar/pedidos.png" alt=""><a alt="">pedidos</a></li>
+            <li><img src="/Funcionario/Home/navbar/info.png" alt=""><a alt="">informações</a></li>
+            <li><img src="/Funcionario/Home/navbar/logout.png" alt=""><a alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2 class="title">Pedido ao Fornecedor</h2>
+        <div class="column">
+            <label for="forn">Selecione um Fornecedor</label>
+            <select name="" id="forn" class="field">
+                <option value="" >Pedigree</option>
+                <option value="" >Royal Canin</option>
+                <option value="" >Whiskas</option>
+                <option value="" >PremieRpet</option>
+                <option value="" >Petz</option>
+                <option value="" >Bayer</option>
+            </select>
+            <label for="cat">Selecione uma Categoria</label>
+            <select name="" id="cat" class="field">
+                <option value="" >Alimento</option>
+                <option value="" >Acessórios</option>
+                <option value="" >Estética</option>
+                <option value="" >Medicamentos</option>
+            </select>
+            <label for="nome_prod">Nome do Produto</label>
+            <input type="text" id="nome_prod" class="field" placeholder="Nome do Produto">
+            <label for="qtd">Quantidade</label>
+            <input type="number" id="qtd" class="field" placeholder="Quantidade">
+        </div>
+        <input type="button" value="Realizar Pedido" class="button_order">
+    </section>
+</body>
+</html>
