@@ -92,7 +92,7 @@ section{
     margin-left:5%;
     margin-top:1%;
 }
-label {
+.label {
     font: bold 1rem Segoe UI;
     color: var(--back-main);
     font-weight: 500;
