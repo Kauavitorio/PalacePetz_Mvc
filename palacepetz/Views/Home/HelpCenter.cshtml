@@ -1,0 +1,54 @@
+﻿
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Ajuda - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="http://127.0.0.1:5500/palacepetz/Central_Ajuda/Help_Center.css">
+    <!--<link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Central_Ajuda/Help_Center.css">-->
+</head>
+<body>
+    <section>
+        <a href="/"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.png" alt="" class="img_back"></div></a>
+        <h1 class="help_title">Central de Atendimento</h1>
+        <h3 class="help_text">Seja bem-vindo a nossa central de atendimento.</h3>
+        <form action="https://formspree.io/f/mnqlvgvj" method="POST">
+            <div class="container">
+                <div class="column_one">
+                    <input type="text" name="name" id="" class="field" placeholder="Digite seu nome">
+                    <input type="text" name="cpf" id="cpf_help" class="field" placeholder="CPF">
+                    <input type="email" name="_replyto" id="" class="field" placeholder="E-mail">
+                    <input type="text" name="phone" id="phone_help" class="field" placeholder="Telefone">
+                </div>
+                <div class="column_two">
+                    <textarea name="message" id="" cols="30" rows="10" class="field area" placeholder="Nos conte o que está acontecendo..."></textarea>
+                </div>
+            </div>
+            <div class="container_button">
+                <button type="submit" class="button_send">Enviar</button>
+            </div>
+        </form>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $seuCampoCpf = $("#cpf_help");
+            $seuCampoCpf.mask('000.000.000-00', { reverse: false });
+            var $phone_help = $("#phone_help");
+            $phone_help.mask('(00) 00000-0000', { reverse: false });
+        });
+    </script>
+</body>
+</html>
+

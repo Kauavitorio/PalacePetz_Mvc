@@ -272,7 +272,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Dados\Cards\CardAction.cs" />
-    <Compile Include="Models\Cards\DtoCards.cs" />
+    <Compile Include="Dados\Order\ActionOrder.cs" />
+    <Compile Include="Dados\User\Pets\ActionPets.cs" />
+    <Compile Include="Models\User\DtoCards.cs" />
     <Compile Include="Dados\User\Cpf_actions.cs" />
     <Compile Include="Dados\User\Cryption.cs" />
     <Compile Include="Dados\User\Login.cs" />
@@ -286,7 +288,10 @@
     </Compile>
     <Compile Include="Models\category\DtoCategory.cs" />
     <Compile Include="Models\products\DtoProduct.cs" />
+    <Compile Include="Models\Schedule\DtoSchedule.cs" />
     <Compile Include="Models\shoppingcart\DtoShoppingCart.cs" />
+    <Compile Include="Models\User\DtoOrders.cs" />
+    <Compile Include="Models\User\DtoPet.cs" />
     <Compile Include="Models\User\DtoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -378,6 +383,15 @@
     <Content Include="Views\Usuario\Profile.cshtml" />
     <Content Include="Views\Usuario\EditProfile.cshtml" />
     <Content Include="Views\Usuario\RegisterCard.cshtml" />
+    <Content Include="Views\Home\Schedule_Appointment.cshtml" />
+    <Content Include="Views\Usuario\MyCards.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
+    <Content Include="Views\Usuario\UserOrders.cshtml" />
+    <Content Include="Views\Usuario\FollowOrder.cshtml" />
+    <Content Include="Views\Home\HelpCenter.cshtml" />
+    <Content Include="Views\Usuario\RegisterMyPet.cshtml" />
+    <Content Include="Views\Usuario\MyPets.cshtml" />
+    <Content Include="Views\Usuario\EditMyPets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

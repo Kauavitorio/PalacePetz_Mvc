@@ -1,0 +1,135 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --back-main: #444B54;
+    --section-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --color-text: #F5FBFF;
+    --color-button: #44BFFF;
+    --color-button2: #F89B28;
+    --color-button3: #FF4444;
+}
+body{
+    background: var(--back-main);
+    display: flex;
+}
+ul li{    
+    list-style: none;
+    display: flex;
+    margin-top: 5%;
+    padding: 10px 30px 10px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+ul li > img{
+    width: 2rem;
+}
+ul li > a{
+    font: bold 1rem Segoe UI;
+    font-weight: 600;
+    margin-top: 6%;
+    margin-left: 15%;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-align: left;
+}
+.logo{
+    width: 10rem;
+}
+#loc{
+    background: var(--color-button);
+}
+section{
+    margin: 1%;
+    margin-left: 2%;
+    background: var(--section-background);
+    display: flex;
+    border-radius: 15px;
+    width: 100%;
+    height: 95vh;
+}
+.container{
+    display: flex;
+    margin-left: 6%;
+}
+.column_one{
+    margin: 3% 0 0 7%;
+}
+.text_box{
+    font: bold 1.5rem Segoe UI;
+    color: var(--back-main);
+    letter-spacing: 0.3px;
+}
+.img_box{
+    margin: 5% 0 0 3%;
+    height: 28%;
+    width: 39%;
+    background: #FACCD6;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+}
+.img_prod{
+    margin-top: 5%;
+    height: 92%;
+    width: 90%;
+}
+.button_img{
+    padding: 9px;
+    width: 182px;
+    border-radius: 10px;
+    border: none;
+    background: var(--color-button);
+    color: var(--color-text);
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.desc_box{
+    margin-top: 9%;
+    width: 87%;
+}
+.text_edit{
+    font: bold 1rem Segoe UI;
+    color: var(--back-main);
+    margin: 3% 0 1% 1%;
+}
+.field{
+    width: 330px;
+    padding: 10px;
+    border: solid 3px var(--border-field);
+    border-radius: 10px;
+    box-shadow: 3px 6px 9px #44BFFF;
+    outline: none;
+    transition: 0.4s;
+    font: normal 16px Segoe UI;
+    color: var(--back-main);
+}
+.field.area{
+    height: 180px;
+    resize: none;
+}
+.field:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.field:focus{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.column_two{
+    margin: 2% 0 0 5%;
+}
+.button_prod{
+    margin: 5% 0 0 7%;
+    padding: 11px;
+    width: 265px;
+    border-radius: 10px;
+    border: none;
+    background: var(--color-button);
+    color: var(--color-text);
+    font: bold 1.2rem Segoe UI;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+}

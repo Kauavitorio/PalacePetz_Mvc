@@ -1,0 +1,102 @@
+﻿@model IEnumerable<palacepetz.Models.Cards.DtoCards>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Cartões - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Meus_Cartoes/Meus_Cartoes.css">
+</head>
+<body onload="TryListCard()">
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <a href="/"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
+        <main>
+            <div class="container">
+                <div style="display:  flex; justify-content: space-between; margin: 2% 5%;">
+                    <h2 class="title">Meus cartões cadastrados</h2>
+                    <a href="/registrar-cartao" id="LinkRegisterCard" style="font: bold 1.5rem Segoe UI; color: var(--white);">Cadastrar Cartão</a>
+                </div>
+
+                <div class="container_card" style="display: flex;">
+                    <h3 id="cardlistsize" style="display: none;">@ViewBag.cardListSize</h3>
+
+                    @foreach (var item in Model)
+                    {
+                            <div class="box_card" style="background-color: #1B304B;" onclick="DeleteSelectCard(@Html.DisplayFor(modelItem => item.cd_card))">
+                                <div class="row_one">
+                                    @{
+                                        switch (item.flag_card)
+                                        {
+                                            case "MasterCard":
+                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmastercard.png?alt=media&token=79df43fd-494c-4160-93f1-7194266f76b9" alt="" class="img_flag">
+                                                break;
+                                            case "Visa":
+                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fvisa.png?alt=media&token=e9dd2e2b-dd30-444e-b745-2a1dd2273db9" alt="" class="img_flag">
+                                                break;
+                                            case "Maestro":
+                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmaestro.png?alt=media&token=28fd5789-f277-4027-8b0f-9ff1f38b2d5d" alt="" class="img_flag">
+                                                break;
+                                            case "Elo":
+                                                    <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/elo.png" alt="" class="img_flag">
+                                                break;
+                                            case "Hipercard":
+                                                    <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/hipercard.png" alt="" class="img_flag">
+                                                break;
+                                        }
+                                    }
+                                    <h3 class="text" style="padding-top: 6%;">@Html.DisplayFor(modelItem => item.number_card)</h3>
+                                </div><br>
+                            <div class="row_two">
+                                <h2 class="text">@Html.DisplayFor(modelItem => item.nmUser_card)</h2>
+                            </div>
+                        </div>
+                    }
+                    </div>
+
+            </div>
+        </main>
+    </section>
+    <script>
+        function DeleteSelectCard(cd_card){
+            var deleteCard = confirm("Tem certeza de que deseja excluir este cartão?")
+            if (deleteCard) {
+                window.open(`/remover-cartao/${cd_card}`, '_self');
+            }
+        }
+
+        function TryListCard() {
+            var sizeCard = document.getElementById('cardlistsize').innerHTML
+            var btnRegisterCard = document.getElementById('LinkRegisterCard')
+            if (sizeCard >= "3")
+                btnRegisterCard.style.display = "none"
+
+            var spanCountCart = document.getElementById('lblCartCount').innerHTML
+            if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ")
+                document.getElementById('lblCartCount').style.display = "none"
+        }
+    </script>
+</body>
+</html>

@@ -21,8 +21,6 @@ namespace palacepetz.Dados.Auth
 
         public static string Authlogin(string email, string password)
         {
-            //  Variable to storing Api Response
-
             //  Variable set for storing api responses
             var url = BASE_URL + "user/login/";
             var request = (HttpWebRequest)WebRequest.Create(url);
@@ -91,25 +89,8 @@ namespace palacepetz.Dados.Auth
             string cpf_user = user.cpf_user;
             string password = user.password;
 
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             int resultInsertApi = RegisterUserApi(email, name_user, cpf_user, password);
-            if (resultInsertApi == 201)
-            {
-                try
-                {
-                    var registerUser = await auth.CreateUserWithEmailAndPasswordAsync(email, password, name_user, false);
-                    return resultInsertApi;
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Exception was thrown: " + ex.ToString());
-                    return 500;
-                }
-            }
-            else
-            {
-                return resultInsertApi;
-            }
+            return resultInsertApi;
 
         }
 
@@ -168,7 +149,7 @@ namespace palacepetz.Dados.Auth
                 }
                 catch (WebException ex)
                 {
-
+                    System.Diagnostics.Debug.WriteLine("" + ex);
                     return statusCode;
                 }
             }
@@ -299,7 +280,7 @@ namespace palacepetz.Dados.Auth
             }
             catch (WebException ex)
             {
-
+                System.Diagnostics.Debug.WriteLine("" + ex);
                 return statusCode;
             }
         }

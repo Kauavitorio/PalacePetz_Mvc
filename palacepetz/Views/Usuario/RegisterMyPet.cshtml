@@ -1,0 +1,67 @@
+﻿@model palacepetz.Models.User.DtoPet
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Animal - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://kauavitorio.com/palacepetz/Cadastrar_Animal/CadastraAnimal.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <a href="/meus-pets"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Cadastrar Animal</h2>
+        <div class="box">
+            @using (Html.BeginForm("RegisterMyPet", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="container_img" style="padding-top: 3%">
+
+                    <label for="files" style="cursor: pointer; background: #88d6ff; color: #444b54; font: bold 14pt Segoe UI; padding:15px; border-radius: 25px;" class="btn">Adicionar imagem do animal</label>
+                    @Html.EditorFor(model => model.file, new { htmlAttributes = new { @id = "files", @class = "img_user", @style = "width: 10px; visibility:hidden;", @type = "file" } })
+
+                    @Html.EditorFor(model => model.nm_animal, new { htmlAttributes = new { @class = "field", @placeholder = "Nome do Animal" } })
+                </div>
+                <div class="form">
+                    <div class="colunm_one">
+                        @Html.EditorFor(model => model.age_animal, new { htmlAttributes = new { @class = "field", @placeholder = "Idade", @type = "number" } })
+                        @Html.EditorFor(model => model.weight_animal, new { htmlAttributes = new { @class = "field", @placeholder = "Peso" } })
+                    </div>
+                    <div class="colunm_two">
+                        @Html.EditorFor(model => model.species_animal, new { htmlAttributes = new { @class = "field", @placeholder = "Espécie" } })
+                        @Html.EditorFor(model => model.breed_animal, new { htmlAttributes = new { @class = "field", @placeholder = "Raça" } })
+                    </div>
+                </div>
+                <div class="container_button">
+                    <h3>@ViewBag.status_register_pet</h3>
+                    <a href="/meus-pets" value="" class="btnCad" style="background-color: var(--border-field); text-decoration: none; font-family: Segoe UI;">Ver meus animais</a>
+                    <input type="submit" value="Cadastrar" class="btnCad">
+                </div>
+            }
+        </div>
+    </section>
+</body>
+</html>

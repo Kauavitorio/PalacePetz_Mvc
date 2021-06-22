@@ -3,8 +3,6 @@
 @{
     Layout = null;
 }
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,30 +13,31 @@
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
     <!-- Header CSS -->
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
-    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Editar_Perfil/Profile.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Editar_Perfil/Editar_Perfil.css">
 </head>
 <body>
-    @using (Html.BeginForm("EditProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <header id="menu">
-            <ul id="menu2">
-                <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
-                <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
-                <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
-                <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
-                <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
-                <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
-                <li>
-                    <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
-                    <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
-                </li>
-                <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
-            </ul>
-        </header>
-        <section>
-            <a href=""><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/back.png" alt="" class="img_back"></div></a>
-            <h2 class="title">Editar Perfil</h2>
-            <div class="box">
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+
+    <section>
+        <a href="/perfil"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Editar Perfil</h2>
+        <div class="box">
+            @using (Html.BeginForm("EditProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
                 <div class="container_img">
                     <label for="files" style="cursor: pointer;" class="btn">Mudar imagem de perfil</label>
                     @Html.EditorFor(model => model.file, new { htmlAttributes = new { @id = "files", @class = "img_user", @style = "width: 10px; visibility:hidden;", @type = "file" } })
@@ -46,30 +45,47 @@
                 <div class="form">
                     <div class="colunm_one">
 
-                        @Html.EditorFor(model => model.Firstname_user, new { htmlAttributes = new { @class = "field" } })
+                        @Html.EditorFor(model => model.Firstname_user, new { htmlAttributes = new { @class = "field" } })<br />
 
-                        @Html.EditorFor(model => model.Lastname_user, new { htmlAttributes = new { @class = "field" } })
+                        @Html.EditorFor(model => model.Lastname_user, new { htmlAttributes = new { @class = "field" } })<br />
 
-                        @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @class = "field" } })
+                        @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @class = "field", @id = "cpfedit" } })<br />
 
                     </div>
                     <div class="colunm_two">
 
-                        @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @class = "field" } })
+                        @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @placeholder = "Celular", @class = "field", @id = "phone_edit" } })<br />
 
-                        @Html.EditorFor(model => model.birth_date, new { htmlAttributes = new { @class = "field" } })
-
-                        @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @class = "field" } })
+                        @Html.EditorFor(model => model.birth_date, new { htmlAttributes = new { @id = "birth_date", @placeholder = "Data de aniversário", @class = "field" } })<br />
 
                     </div>
+
                 </div>
                 <div class="container_button">
-                    <input type="submit" value="Concluir Edição" class="btnEdit">
+                    <h3>@ViewBag.statusupdate</h3>
+                    <input type="submit" value="Concluir Edição" style="width: 30%;" class="btnEdit">
                 </div>
+            }
+            <div class="container_button2">
+                <!--BOTÃO-->
+                <a href="/registrar-endereco"><input type="submit" value="Editar endereço" class="btnCad" style="margin-left: 8%; margin-top: -200px;"></a>
             </div>
-        </section>
-    }
+        </div>
+    </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script>
+        $(document).ready(function () {
+            var birth_date = $("#birth_date");
+            var cpfedit = $("#cpfedit");
+            var phone_edit = $("#phone_edit");
+            birth_date.mask('00/00/0000', { reverse: false });
+            cpfedit.mask('000.000.000-00', { reverse: false });
+            phone_edit.mask('(00) 00000-0000', { reverse: false });
+        });
+    </script>
 </body>
 </html>

@@ -25,7 +25,7 @@
     <section>
         <a href=""><div class="back"><img src="/Funcionario/Pedidos/Controle_Pedidos/icon-back.png" alt="" class="img_back"></div></a>
         <h2 class="title">Cadastrar Funcionário</h2>
-        <h1 class="text" style="font: normal 15pt Segoe UI; text-decoration: underline; margin: -5% 0 0 80%; cursor: pointer;">
+        <h1 class="text">
             <a>Consultar Funcionários</a>
         </h1>
         <div class="container">
@@ -33,24 +33,32 @@
                 <input type="text" class="field" placeholder="Nome do Funcionário">
                 <input type="text" class="field" placeholder="CPF do Funcionário">
                 <input type="text" class="field" placeholder="Telefone do Funcionário">
-                <input type="text" class="field" placeholder="Número do CTPS">
-                <span class="obs_ctps">?</span>
-                <span class="resul_ctps">A Carteira de Trabalho e Previdência Social – CTPS é um documento que contém informações sobre a vida profissional do trabalhador e sobre sua filiação ao Instituto Nacional de Seguridade Social – INSS. Foi criada pelo Decreto-lei n.º 926/69.</span>
-            </div>
-            <div class="column_two">
+                <input type="text" class="field" placeholder="Data de Aniversário" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
                 <input type="text" class="field" placeholder="Cargo">
-                <input type="text" class="field" placeholder="E-mail">
-                <input type="text" class="field" placeholder="Senha">
                 <select name="" id="" class="field">
                     <option value="" >Tipo de Usuário</option>
                     <option value="" >1 - Funcionário</option>
                     <option value="" >2 - Veterinário</option>
                     <option value="" >3 - Gerente</option>
                 </select>
+                <div style="display: flex; width: 200%; height: 14%;">
+                    <input type="text" class="field" style="width: 60%;" placeholder="Número do CTPS">
+                    <span class="obs_ctps">?</span>
+                    <span class="resul_ctps">A Carteira de Trabalho e Previdência Social – CTPS é um documento que contém informações sobre a vida profissional do trabalhador e sobre sua filiação ao Instituto Nacional de Seguridade Social – INSS. Foi criada pelo Decreto-lei n.º 926/69.</span>
+                </div> 
             </div>
-        </div>
-        <div class="container_btn">
-            <input type="text" class="btn_cadastrar" value="Cadastrar Funcionário">
+            <div class="column_two">
+                <input type="text" class="field" placeholder="CEP">
+                <input type="text" class="field" placeholder="Endereço">
+                <input type="text" class="field" placeholder="Complemento">
+                
+                <input type="text" class="field" placeholder="E-mail">
+                <input type="text" class="field" placeholder="Senha">
+                
+                <div class="container_btn">
+                    <input type="text" class="btn_cadastrar" value="Cadastrar Funcionário">
+                </div>
+            </div>
         </div>
     </section>
 </body>

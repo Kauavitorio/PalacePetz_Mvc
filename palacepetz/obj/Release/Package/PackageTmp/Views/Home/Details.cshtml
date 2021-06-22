@@ -17,23 +17,23 @@
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/details/details.css">
 </head>
-<body>
-
+<body onload="loadInformation(), Add_Cart()">
+    <h4 id="checkUserId" style="display: none;">@ViewBag.id_user</h4>
     @using (Html.BeginForm())
     {
         <header id="menu">
             <ul id="menu2">
-                <li><img src="https://www.kauavitorio.com/palacepetz/home/Menu/icon_main.png" class="logo"></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
                 <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
                 <li><a href="/produtos" style="text-decoration: none; color: var(--white)" id="loc" alt="">produtos</a></li>
                 <li><a href="/servicos" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
-                <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
-                <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+                <li><a onclick="SeeMyOrders()" id="SeeMyOrders" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+                <li><a onclick="LogoutOrLogin()" id="LogoutOrLogin" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
                 <li>
-                    <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/home/Menu/shopping-cart.png" class="car"></a>
+                    <a onclick="SeeMyCart()" id="SeeMyCart"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
                     <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
                 </li>
-                <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+                <li><a onclick="SeeMyProfile()" id="SeeMyProfile"><img src="@ViewBag.img_user" class="user"></a></li>
             </ul>
         </header>
         <section>
@@ -44,10 +44,11 @@
                     <div class="info_prod">
                         <span style="display: none;">@Html.EditorFor(model => model.cd_prod)</span>
                         <span style="display: none;">@Html.EditorFor(model => model.id_user)</span>
+                        <h2 id="productAmountFilter" style="display: none;">@Html.DisplayFor(model => model.product_amount)</h2>
                         <h2 style="font-weight: 600;">@Html.DisplayFor(model => model.nm_product)</h2>
                         <h2 style="font-weight: 700;">R$ @Html.EditorFor(model => model.product_price, new { htmlAttributes = new { @id = "input_price", @readonly = "true" } })</h2>
                         <div style="display: flex;"><h3>Quantidade:</h3>@Html.TextBoxFor(model => model.amount, new { @type = "number", @class = "input_qntd", @name = "", @min = "1", @max = "20", @value = "1", @id = "input_qntd" })</div>
-                        <input type="submit" value="Adicionar ao Carrinho" class="btn_carrinho" />
+                        <input type="submit" onclick="Add_Cart()" value="Adicionar ao Carrinho" id="buttonAddCart" class="btn_carrinho" />
                     </div>
                 </div>
                 <div class="container_infoProd">
@@ -59,6 +60,66 @@
             </div>
         </section>
     }
-        <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>
-    </body>
+    <script lang="javascript" type="text/javascript">
+        var id_user = document.getElementById("checkUserId").innerHTML;
+            function loadInformation() {
+                var spanCountCart = document.getElementById('lblCartCount').innerHTML
+                if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ")
+                    document.getElementById('lblCartCount').style.display = "none"
+
+                var amount = document.getElementById('productAmountFilter').innerHTML
+                if (amount == "0") {
+                    alert('Desculpa pelo transtorno, mas estamos sem estoque deste produto.')
+                    document.location = '/produtos';
+                }
+
+                var txt_login_or_logout = document.getElementById('LogoutOrLogin')
+                if (id_user != 0) {
+                    txt_login_or_logout.innerHTML = "SAIR";
+                    txt_login_or_logout.href = "/logout/1";
+                }
+                else {
+                    txt_login_or_logout.innerHTML = "ENTRAR";
+                    txt_login_or_logout.href = "/login";
+                }
+
+            }
+            function ShoppingCart(){
+                var spanCountCart = document.getElementById('lblCartCount').innerHTML
+                if (spanCountCart == "0" || spanCountCart == "@ViewBag.cartsize" || spanCountCart == "" || spanCountCart == " ")
+                    document.getElementById('lblCartCount').style.display = "none"
+            }
+
+            function SeeMyOrders(){
+                var txt_orders = document.getElementById('SeeMyOrders')
+                if (id_user != 0)
+                    txt_orders.href = "/meus-pedidos";
+                else
+                    alert("Para acessar os pedidos é necessário estar logado.")
+            }
+            function SeeMyCart(){
+                var txt_cart = document.getElementById('SeeMyCart')
+                if(id_user != 0)
+                    txt_cart.href = "/meu-carrinho"
+                else
+                    alert("Para acessar o carrinho é necessário estar logado.")
+            }
+            function SeeMyProfile(){
+                var txt_profile = document.getElementById('SeeMyProfile')
+                if(id_user != 0)
+                    txt_profile.href = "/perfil"
+                else
+                    alert("Para acessar seu perfil é necessário estar logado.")
+            }
+
+            function Add_Cart(){
+                var buttonAddCart = document.getElementById("buttonAddCart");
+                if(id_user == 0){
+                    buttonAddCart.disabled = true;
+                    buttonAddCart.style.cursor = "not-allowed"
+                    buttonAddCart.title = "Não é possível adicionar um produto ao carrinho sem estar logado."
+                }
+            }
+    </script>
+</body>
 </html>
