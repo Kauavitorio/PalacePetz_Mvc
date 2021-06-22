@@ -104,6 +104,7 @@ section{
     transition: 0.4s;
     font: bold 1rem Segoe UI;
     font-weight: 500;
+    transition: ease-in 0.4s;
 }
 .obs_ctps{
     background: var(--color-button);

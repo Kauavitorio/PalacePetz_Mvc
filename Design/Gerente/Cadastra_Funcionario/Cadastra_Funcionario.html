@@ -35,12 +35,13 @@
                 <input type="text" class="field" placeholder="Telefone do Funcionário">
                 <input type="text" class="field" placeholder="Data de Aniversário" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
                 <input type="text" class="field" placeholder="Cargo">
-                <select name="" id="" class="field">
+                <select name="" id="field"  onclick="Veterinario()"  class="field">
                     <option value="" >Tipo de Usuário</option>
-                    <option value="" >1 - Funcionário</option>
-                    <option value="" >2 - Veterinário</option>
-                    <option value="" >3 - Gerente</option>
+                    <option value="1" >1 - Funcionário</option>
+                    <option value="2">2 - Veterinário</option>
+                    <option value="3" >3 - Gerente</option>
                 </select>
+                <input type="text" style="display: none;" class="field" id="crmv" placeholder="Número de CRMV">
                 <div style="display: flex; width: 200%; height: 14%;">
                     <input type="text" class="field" style="width: 60%;" placeholder="Número do CTPS">
                     <span class="obs_ctps">?</span>
@@ -61,5 +62,17 @@
             </div>
         </div>
     </section>
+    <script>
+        
+        function Veterinario(){
+            var field_select = document.getElementById("field").value;
+            if(field_select == 2){
+                document.getElementById("crmv").style.display = "flex"
+                document.getElementById("crmv").style.flexDirection = "column"
+            }  else{
+                document.getElementById("crmv").style.display = "none"
+            }
+        }
+    </script>
 </body>
 </html>

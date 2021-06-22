@@ -45,11 +45,15 @@
                 <input type="text" class="field">
 				
 				<label class="label">Tipo de Usuário</label>
-                <select name="" id="" class="field">
-                    <option value="" >1 - Funcionário</option>
-                    <option value="" >2 - Veterinário</option>
-                    <option value="" >3 - Gerente</option>
+                <select name="" id="field"  onclick="Veterinario()"  class="field">
+                    <option value="" >Tipo de Usuário</option>
+                    <option value="1" >1 - Funcionário</option>
+                    <option value="2">2 - Veterinário</option>
+                    <option value="3" >3 - Gerente</option>
                 </select>
+                
+                <label class="label" style="display: none;">CRMV do Veterinário</label>
+                <input type="text" style="display: none;" class="field" id="crmv" placeholder="Número de CRMV">
             </div>
             <div class="column_two">
                 <label class="label">CEP</label>
@@ -73,5 +77,17 @@
             </div>
         </div>
     </section>
+    <script>
+        
+        function Veterinario(){
+            var field_select = document.getElementById("field").value;
+            if(field_select == 2){
+                document.getElementById("crmv").style.display = "flex"
+                document.getElementById("crmv").style.flexDirection = "column"
+            }  else{
+                document.getElementById("crmv").style.display = "none"
+            }
+        }
+    </script>
 </body>
 </html>
