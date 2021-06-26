@@ -59,11 +59,19 @@ namespace palacepetz.Controllers
             } else if (userinfo == "405"){
                 RemoveCookie();
                 ViewBag.statusLogin = "O seu email não foi verificado!";
-            }else if (userinfo == "500"){
+            }
+            else if (userinfo == "500")
+            {
                 RemoveCookie();
                 ViewBag.statusLogin = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
-            }else if(userinfo == "" || userinfo == " " || userinfo == null){
+            }
+            else if (userinfo == "410")
+            {
                 RemoveCookie();
+                ViewBag.statusLogin = "Lamentamos o transtorno, mas sua conta está desativada,\nentre em contato com nosso suporte para entender o porquê.";
+            }
+                else if(userinfo == "" || userinfo == " " || userinfo == null){
+                RemoveCookie(); 
                 ViewBag.statusLogin = "Estamos com um problema em nossos servidores, por favor tente mais tarde.";
             }else{
                 JObject obj = JObject.Parse(userinfo);
@@ -215,7 +223,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -325,7 +333,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -396,7 +404,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -470,7 +478,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -589,7 +597,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -656,7 +664,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -728,7 +736,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -803,7 +811,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -875,7 +883,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -977,7 +985,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -1050,7 +1058,7 @@ namespace palacepetz.Controllers
                 if (email_user != null && email_user != "")
                 {
                     userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                     {
                         RemoveCookie();
                         return RedirectToAction("Login", "Usuario");
@@ -1144,7 +1152,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -1213,7 +1221,7 @@ namespace palacepetz.Controllers
                 if (email_user != null && email_user != "")
                 {
                     userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                     {
                         RemoveCookie();
                         return RedirectToAction("Login", "Usuario");
@@ -1291,7 +1299,7 @@ namespace palacepetz.Controllers
                 if (email_user != null && email_user != "")
                 {
                     userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                     {
                         RemoveCookie();
                         return RedirectToAction("Login", "Usuario");
@@ -1387,7 +1395,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");

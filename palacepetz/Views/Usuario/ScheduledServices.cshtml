@@ -1,0 +1,68 @@
+@model IEnumerable<palacepetz.Models.Schedule.DtoSchedule>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Agendamentos - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <!-- Header CSS -->
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/header/header.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Ver_Agendamentos/Ver_Agendamento.css">
+</head>
+<body>
+    <header id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/icon_main.png" class="logo"></li>
+            <li><a href="/" style="text-decoration: none; color: var(--white)" alt="">home</a></li>
+            <li><a href="/produtos" style="text-decoration: none; color: var(--white)" alt="">produtos</a></li>
+            <li><a href="/servicos" id="loc" alt="" style="text-decoration: none; color: var(--white)">serviços</a></li>
+            <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
+            <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
+            <li>
+                <a href="/carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
+            </li>
+            <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
+        </ul>
+    </header>
+    <section>
+        <main>
+            <div class="box_profile">
+                <div class="back_img">
+                    <img src="@ViewBag.img_user" alt="" class="img_user">
+                </div>
+                <h2 class="title_name"> @ViewBag.name_user</h2>
+                <h3 class="sub_title"><b>CPF:</b> @ViewBag.cpf_user</h3>
+                <h3 class="sub_title"><b>E-mail:</b> @ViewBag.email_user</h3>
+                <h3 class="sub_title"><b>CEP:</b> @ViewBag.cep_user</h3>
+                <h3 class="sub_title"><b>Rua:</b> @ViewBag.street_user</h3>
+                <h3 class="sub_title"><b>Complemento:</b> @ViewBag.complement_user</h3>
+                <a href="/editar-perfil" class="btn_profile">Editar Perfil</a>
+            </div>
+            <div class="box_service">
+                <h2 class="title_service">Serviços Agendados</h2><br>
+                @foreach (var item in Model)
+                {
+                    <div class="container_three col-lg-2 col-md-6 mb-4">
+                        <div class="box">
+                            <h3 class="text_service">@Html.DisplayFor(modelItem => item.cd_shedule)</h3><br>
+                            <h4 class="text_resul">Animal: @Html.DisplayFor(modelItem => item.pet_user)</h4>
+                            <h4 class="text_resul">Veterinário: @Html.DisplayFor(modelItem => item.name_vet)</h4>
+                            <h4 class="text_resul">Hora: @Html.DisplayFor(modelItem => item.time)</h4>
+                            <h4 class="text_resul">Data: @Html.DisplayFor(modelItem => item.date)</h4>
+                            <input type="submit" value="CANCELAR" class="button_cancel">
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+    </section>
+</body>
+</html>

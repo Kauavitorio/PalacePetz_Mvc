@@ -1,0 +1,101 @@
+﻿@model IEnumerable<palacepetz.Models.Schedule.DtoSchedule>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ScheduledServices</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cd_schedule)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.id_user)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_schedule)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.time_schedule)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cd_animal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cd_veterinary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.payment_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.service_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.delivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cd_schedule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_schedule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time_schedule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cd_animal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cd_veterinary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payment_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.service_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.delivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

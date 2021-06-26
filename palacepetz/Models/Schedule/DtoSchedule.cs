@@ -9,27 +9,39 @@ namespace palacepetz.Models.Schedule
     public class DtoSchedule
     {
         [DisplayName("Código da consulta")]
-        public long cd_shedule { get; set; }
+        public int cd_schedule { get; set; }
 
-        [DisplayName("Animal")]
-        public int pet_user { get; set; }
+        [DisplayName("ID Usuário")]
+        public int id_user { get; set; }
 
-        [DisplayName("Nome do veterinário")]
-        public string name_vet { get; set; }
+        [DisplayName("Data do agendamento")]
+        public string date_schedule { get; set; }
 
-        [DisplayName("Data")]
-        public string date { get; set; }
+        [DisplayName("Horário do agendamento")]
+        public string time_schedule { get; set; }
 
-        [DisplayName("Horário")]
-        public string time { get; set; }
+        [DisplayName("Código do animal")]
+        public int cd_animal { get; set; }
 
-        [DisplayName("CPF")]
-        public string cpf { get; set; }
+        [DisplayName("Código do veterinário")]
+        public int cd_veterinary { get; set; }
+
+        [DisplayName("Tipo de pagamento")]
+        public int payment_type { get; set; }
 
         [DisplayName("Descrição")]
         public string description { get; set; }
 
-        [DisplayName("Forma de pagamento")]
-        public string payment { get; set; }
+        public string nm_veterinary { get; set; }
+        public string nm_animal { get; set; }
+
+        [DisplayName("Tipo de serviço")]
+        public int service_type { get; set; }
+
+        [DisplayName("Delivery")]
+        public int delivery { get; set; }
+
+        [DisplayName("Status")]
+        public int status { get; set; }
     }
 }

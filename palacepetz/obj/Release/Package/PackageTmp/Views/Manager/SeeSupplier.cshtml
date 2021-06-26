@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Fornecedores - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/Ver_Fornecedores.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="container" style="display: flex;">
+            <a href=""><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
+            <h2 class="title" style="text-transform: uppercase; margin: 3.5% 0 0 10%;">Nossos Fornecedores</h2>
+            @if(@ViewBag.type_user == 3){
+                <h1 class="text" style="font-size: 13pt; text-decoration: underline; margin: 3.5% 0 0 45%; cursor: pointer;"><a href="/gerente/pedido-fornecedor" style="color: #444b54; font-family:'Segoe UI'" >Fazer Pedido ao Fornecedor</a></h1>
+            }
+        </div>
+        <main>
+            <div class="column_one" style="margin-bottom: -120px;">
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_one.png" alt=""></div>
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_two.png" alt=""></div>
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_three.jpg" alt=""></div>
+            </div>
+            <div class="column_two">
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_four.png" alt=""></div>
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_five.jpg" alt=""></div>
+                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_six.png" alt=""></div>
+            </div>
+        </main>
+    </section>
+</body>
+</html>

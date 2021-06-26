@@ -1,0 +1,63 @@
+﻿@model palacepetz.Models.products.DtoProduct
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido ao Fornecedor - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Pedido_Fornecedor/Pedido_Fornecedor.css">
+</head>
+<body>
+   <nav id="menu">
+        <ul id="menu2">
+           <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
+            <li ><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
+            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="title">Pedido ao Fornecedor</h2>
+            <div class="column">
+                <label for="forn">Selecione um Fornecedor</label>
+                @Html.DropDownList("supplier", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="Selecione um Fornecedor", Value = "999" },
+                    new SelectListItem{ Text="Pedigree", Value = "1" },
+                    new SelectListItem{ Text="Royal Canin", Value = "2" },
+                    new SelectListItem { Text = "Whiskas", Value = "3" },
+                    new SelectListItem { Text = "PremieRpet", Value = "4" },
+                    new SelectListItem { Text = "Petz", Value = "5" },
+                    new SelectListItem { Text = "Bayer", Value = "6" }
+                    }, new { @class = "field", @id="forn"})
+
+                <label for="nome_prod">Nome do Produto</label>
+                @Html.EditorFor(model => model.nm_product, new { htmlAttributes = new { @class = "field", @placeholder="Nome do Produto", @id="nome_prod" } })
+                @Html.ValidationMessageFor(model => model.nm_product, "", new { @class = "text-danger" })
+
+                <label for="qtd">Quantidade</label>
+                @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "field", @placeholder="Quantidade", @id="qtd", @type="number" } })
+                @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Realizar Pedido" class="button_order">
+        }
+    </section>
+</body>
+</html>

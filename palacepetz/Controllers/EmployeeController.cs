@@ -1,9 +1,10 @@
-﻿using palacepetz.Models.category;
+﻿using Newtonsoft.Json.Linq;
+using palacepetz.Dados.Auth;
+using palacepetz.Dados.Product;
 using palacepetz.Models.products;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,24 +13,131 @@ namespace palacepetz.Controllers
 {
     public class EmployeeController : Controller
     {
+        int id_user, user_type;
+        private string name_user, email_user, cpf_user, address_user, complement, zipcode, phone_user, birth_date, img_user, password;
+        private int prodPrice;
+
         // GET: Employee
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        string employeeInfo = Dados.Employees.EmployeeActions.GetEmployeeInformation(id_user);
+
+                        JObject objEmployee = JObject.Parse(employeeInfo);
+                        ViewBag.Name = name_user;
+                        ViewBag.Role = (string)objEmployee["role"];
+                        ViewBag.CPF = cpf_user;
+                        ViewBag.Address = address_user + "\n" + complement;
+                        ViewBag.Phone = phone_user;
+                        ViewBag.type_user = user_type;
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
         }
 
-        public ActionResult RegisterProduct()
+        public async Task<ActionResult> RegisterProduct()
         {
-            try
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
             {
-                List<SelectListItem> categoryList = new List<SelectListItem>(Dados.Category.actions.GetAllCategorys());
-                ViewBag.category = new SelectList(categoryList, "Value", "Text");
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
             }
-            catch(Exception ex)
+            else
             {
-                System.Diagnostics.Debug.WriteLine("Error on load category list: " + ex);
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
             }
-            return View();
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        try
+                        {
+                            List<SelectListItem> categoryList = new List<SelectListItem>(Dados.Category.actions.GetAllCategorys());
+                            ViewBag.category = new SelectList(categoryList, "Value", "Text");
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Error on load category list: " + ex);
+                        }
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
         }
 
         [HttpPost]
@@ -82,6 +190,414 @@ namespace palacepetz.Controllers
                 List<SelectListItem> categoryList = Dados.Category.actions.GetAllCategorys();
                 ViewBag.category = new SelectList(categoryList);
                 return View();
+            }
+        }
+
+        public async Task<ActionResult> Statistics()
+        {
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        string StatisticsInfo = Dados.Employees.EmployeeActions.GetStatistics();
+
+                        JObject objStatistics = JObject.Parse(StatisticsInfo);
+                        ViewBag.user_amount = (int)objStatistics["user_amount"];
+                        ViewBag.products_amount = (int)objStatistics["products_amount"];
+                        ViewBag.food_percentage = (int)objStatistics["food_percentage"];
+                        ViewBag.medicines_percentage = (int)objStatistics["medicines_percentage"];
+                        ViewBag.aesthetics_percentage = (int)objStatistics["aesthetics_percentage"];
+                        ViewBag.accessories_percentage = (int)objStatistics["accessories_percentage"];
+                        ViewBag.totalPrice = objStatistics["totalPrice"];
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        public async Task<ActionResult> ListProducts(string filter)
+        {
+            AcProducts ac = new AcProducts();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        if(filter != null && filter.Replace(" ", "").Length > 0) return View(ac.Get_AllProducts_With_NameFilter(filter, id_user));
+                        else return View(ac.GetAllProducts(id_user));
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        public async Task<ActionResult> FunctionsProducts()
+        {
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        public async Task<ActionResult> DeleteProducts(int cd_prod)
+        {
+            AcProducts ac = new AcProducts();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        int resultDelete = Dados.Employees.EmployeeActions.DeleteProduct(cd_prod);
+                        return View();
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        public async Task<ActionResult> EditProduct(int cd_prod = 0)
+        {
+            AcProducts ac = new AcProducts();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        if (cd_prod != 0)
+                        {
+                            ModelState.Clear();
+                            string resultDetails = ac.Get_Product_Details(cd_prod);
+                            if (resultDetails != "500" || resultDetails != "204")
+                            {
+                                System.Diagnostics.Debug.WriteLine("" + resultDetails);
+                                JObject objProds = JObject.Parse(resultDetails);
+                                DtoProduct infoProd = new DtoProduct();
+                                JObject objUser = JObject.Parse(userinfo);
+                                infoProd.id_user = (int)objUser["id_user"];
+                                infoProd.cd_prod = (int)objProds["cd_prod"];
+                                infoProd.nm_product = (string)objProds["nm_product"];
+                                infoProd.product_price = (double)objProds["product_price"];
+                                infoProd.description = (string)objProds["description"];
+                                infoProd.product_amount = (int)objProds["amount"];
+                                infoProd.image_prod = (string)objProds["image_prod"];
+                                infoProd.shelf_life = (string)objProds["shelf_life"];
+                                infoProd.amount = (string)objProds["amount"];
+                                infoProd.description = (string)objProds["description"];
+
+                                List<SelectListItem> category = new List<SelectListItem>(Dados.Category.actions.GetAllCategorys());
+                                ViewBag.category = new SelectList(category, "Value", "Text", 999);
+                                return View(infoProd);
+                            }
+                            else
+                                return RedirectToAction("ListProducts", "Employee");
+                        }
+                        else
+                            return RedirectToAction("ListProducts", "Employee");
+                    }
+                    else
+                        return RedirectToAction("Index");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditProduct(DtoProduct prodinfo, HttpPostedFileBase image_prod)
+        {
+            AcProducts ac = new AcProducts();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 0)
+                    {
+                        int category = int.Parse(Request["category"]);
+                        string species = Request["species"];
+                        if (species == null || species.Length <= 0)
+                            ViewBag.status_update = "Selecione uma especie!!";
+                        else
+                        {
+                            prodinfo.species = species;
+                            prodinfo.cd_category = category + "";
+                            if (image_prod != null)
+                            {
+                                FileStream stream;
+                                if (image_prod.ContentLength > 0)
+                                {
+                                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(image_prod.FileName));
+                                    image_prod.SaveAs(path);
+                                    stream = new FileStream(Path.Combine(path), FileMode.Open);
+                                    string resultUpload = await Task.Run(() => actions.Upload(stream, prodinfo.nm_product));
+                                    prodinfo.image_prod = resultUpload;
+                                    int resultpload = await Dados.Employees.EmployeeActions.UpdateProduct(prodinfo, (int)prodinfo.cd_prod);
+                                    if (resultpload == 200)
+                                        return RedirectToAction("ListProducts", "Employee");
+                                }
+                            }
+                            else
+                            {
+                                string resultDetails = ac.Get_Product_Details((int)prodinfo.cd_prod);
+                                JObject objProds = JObject.Parse(resultDetails);
+                                prodinfo.image_prod = (string)objProds["image_prod"];
+                                int resultpload = await Dados.Employees.EmployeeActions.UpdateProduct(prodinfo, (int)prodinfo.cd_prod);
+                                if (resultpload == 200)
+                                    return RedirectToAction("ListProducts", "Employee");
+                            }
+                        }
+                        return View();
+                    }
+                    else
+                        return RedirectToAction("Index");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        public async Task<ActionResult> CheckCustommers()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> EditCustommers()
+        {
+            return View();
+        }
+
+        public void RemoveCookie()
+        {
+            if (Request.Cookies["userInfo"] != null)
+            {
+                var c = new HttpCookie("userInfo");
+                c.Expires = DateTime.Now.AddSeconds(1);
+                Response.Cookies.Add(c);
             }
         }
     }

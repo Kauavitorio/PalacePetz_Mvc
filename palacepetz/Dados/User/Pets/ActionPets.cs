@@ -12,6 +12,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace palacepetz.Dados.User.Pets
 {
@@ -362,42 +363,51 @@ namespace palacepetz.Dados.User.Pets
             try
             {
                 //  Sending request to api
-                using (WebResponse response = request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    //  After sending the request to the api, the system was created to handle the data received
-                    using (Stream strReader = response.GetResponseStream())
+                    statusCode = (int)response.StatusCode;
+                    if(statusCode == 200)
                     {
-                        //  Checking if respose is null
-                        if (strReader == null) return null;
-
-                        //  If not null will start to read respose
-                        using (StreamReader objReader = new StreamReader(strReader))
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
                         {
-                            //  Saving everything that was read in the responseBody
-                            responseBody = objReader.ReadToEnd();
+                            //  Checking if respose is null
+                            if (strReader == null) return null;
 
-                            //  System created to be able to read individual items from the api response
-                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
-
-                            //  Selecting everything within the json "Search" list and putting where i want
-                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
                             {
-                                petList.Add(
-                                    new DtoPet
-                                    {
-                                        cd_animal = (long)itens_response.cd_animal,
-                                        id_user = (long)itens_response.id_user,
-                                        breed_animal = (string)itens_response.breed_animal,
-                                        nm_animal = (string)itens_response.nm_animal,
-                                        age_animal = (string)itens_response.age_animal,
-                                        weight_animal = (string)itens_response.weight_animal,
-                                        species_animal = (string)itens_response.species_animal,
-                                        image_animal = (string)itens_response.image_animal
-                                    }
-                                   );
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+
+                                //  System created to be able to read individual items from the api response
+                                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                                //  Selecting everything within the json "Search" list and putting where i want
+                                foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                                {
+                                    petList.Add(
+                                        new DtoPet
+                                        {
+                                            cd_animal = (long)itens_response.cd_animal,
+                                            id_user = (long)itens_response.id_user,
+                                            breed_animal = (string)itens_response.breed_animal,
+                                            nm_animal = (string)itens_response.nm_animal,
+                                            age_animal = (string)itens_response.age_animal,
+                                            weight_animal = (string)itens_response.weight_animal,
+                                            species_animal = (string)itens_response.species_animal,
+                                            image_animal = (string)itens_response.image_animal
+                                        }
+                                       );
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        petList.Add(null);
+                    }
+                    
                 }
                 return petList;
             }
@@ -515,6 +525,81 @@ namespace palacepetz.Dados.User.Pets
             {
                 System.Diagnostics.Debug.WriteLine("" + ex);
                 return statusCode;
+            }
+        }
+
+        public static List<SelectListItem> GetPetListShedule(int id_user)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "user/pet/" + id_user;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            List<SelectListItem> cd_animal = new List<SelectListItem>();
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if(statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return null;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+
+                                //  System created to be able to read individual items from the api response
+                                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                                //  Selecting everything within the json "Search" list and putting where i want
+                                foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                                {
+                                    cd_animal.Add(
+                                        new SelectListItem
+                                        {
+                                            Value = itens_response.cd_animal + "",
+                                            Text = itens_response.nm_animal + ""
+                                        }
+                                       );
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cd_animal.Add(new SelectListItem
+                        {
+                            Value = "999",
+                            Text = ""
+                        }
+                        );
+                    }
+                    
+                }
+                return cd_animal;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                cd_animal.Add(null);
+                return cd_animal;
             }
         }
     }

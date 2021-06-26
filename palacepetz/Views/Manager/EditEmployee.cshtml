@@ -1,0 +1,205 @@
+﻿@model palacepetz.Models.Employee.DtoEmployee
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionário - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Editar_Funcionario/Editar_Funcionario.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
+            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2 class="title">Editar Funcionário</h2>
+        <h1 class="text">
+            <a>Consultar Funcionários</a>
+        </h1>
+
+        @using (Html.BeginForm())
+        {
+        <div class="container">
+            <div class="column_one">
+                <label class="label">Nome do Funcionário</label>
+                @Html.EditorFor(model => model.name_user, new { htmlAttributes = new { @class = "field", @id = "input_name" } })
+
+                <label class="label">CPF do Funcionário</label>
+                @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @class = "field", @id = "input_cpf" } })
+
+                <label class="label">Telefone do Funcionário</label>
+                @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @class = "field", @id = "phone_edit" } })
+
+                <label class="label">Data de Aniversário</label>
+                @Html.EditorFor(model => model.birth_date, new { htmlAttributes = new { @class = "field", @id = "birth_date" } })
+
+                <label class="label">Cargo</label>
+                @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "field" } })
+
+                <label class="label">Tipo de Usuário</label>
+                @Html.DropDownList("employee_type_droplist", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="Tipo do Funcionário", Value = "999" },
+                    new SelectListItem{ Text="Funcionário", Value = "1" },
+                    new SelectListItem{ Text="Veterinário", Value = "2" },
+                    new SelectListItem { Text = "Gerente", Value = "3" }
+                }, new { @class = "field", @id="field", @onclick="Veterinario()" })
+                <label class="label" id="label" style="display: none;">Número de CRMV</label>
+                @Html.EditorFor(model => model.num_crmv, new { htmlAttributes = new { @class = "field", @id = "crmv", @placeholder = "Numero do CRMV", @style="display:none" } })
+                @Html.ValidationMessageFor(model => model.num_crmv, "", new { @class = "text-danger" })
+
+                <label class="label">Numero de CTPS</label>
+                @Html.EditorFor(model => model.number_ctps, new { htmlAttributes = new { @class = "field", @id = "cpts" } })
+            </div>
+            <div class="column_two">
+                <label class="label">CEP</label>
+                @Html.EditorFor(model => model.id_user, new { htmlAttributes = new { @class = "field", @id = "cep", @style = "display:none" } })
+                @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "field", @id = "cep" } })
+
+                <label class="label">Endereço</label>
+                @Html.EditorFor(model => model.address_user, new { htmlAttributes = new { @class = "field" } })
+
+                <label class="label">Complemento</label>
+                @Html.EditorFor(model => model.complement, new { htmlAttributes = new { @class = "field" } })
+
+                <label class="label">E-mail</label>
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "field", @id = "input_email", @disabled = "disabled" } })
+
+                <label class="label">Senha</label>
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "field", id = "input_password", onClick = "Generate_Password()", @placeholder = "Senha" } })
+
+                <div class="container_btn">
+                    <h3>@ViewBag.insert_status</h3>
+                    <input type="submit" value="Editar" class="btn_editar" />
+                </div>
+            </div>
+        </div>
+        }
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+    <script>
+        $(document).ready(function () {
+            var birth_date = $("#birth_date");
+            var input_cpf = $("#input_cpf");
+            var phone_edit = $("#phone_edit");
+            var cep = $("#cep");
+            var ctps = $("#cpts");
+            var crmv = $("#crmv");
+            birth_date.mask('00/00/0000', { reverse: false });
+            input_cpf.mask('000.000.000-00', { reverse: false });
+            phone_edit.mask('(00) 00000-0000', { reverse: false });
+            cep.mask('00000-000', { reverse: false });
+            ctps.mask('00000000', { reverse: false });
+            crmv.mask('00000', { reverse: false });
+        });
+    </script>
+
+    <script>
+
+        function Generate_Password() {
+            var input_password = document.getElementById('input_password')
+            var employee_name = document.getElementById('input_name').value
+            input_password.value = retira_acentos(employee_name.split(" ")[0].replace(" ", "").toLowerCase()) + Generate_verify_id_for_user(6)
+        }
+
+        function Generate_verify_id_for_user(length) {
+            var result = [];
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@@#$%&';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result.push(characters.charAt(Math.floor(Math.random() *
+                    charactersLength)));
+            }
+            var charset = result.join('');
+            var id = charset + Math.floor(Math.random() * 80);
+            return id;
+        }
+
+        function retira_acentos(str) {
+
+            com_acento = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝŔÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿŕ";
+
+            sem_acento = "AAAAAAACEEEEIIIIDNOOOOOOUUUUYRsBaaaaaaaceeeeiiiionoooooouuuuybyr";
+            novastr = "";
+            for (i = 0; i < str.length; i++) {
+                troca = false;
+                for (a = 0; a < com_acento.length; a++) {
+                    if (str.substr(i, 1) == com_acento.substr(a, 1)) {
+                        novastr += sem_acento.substr(a, 1);
+                        troca = true;
+                        break;
+                    }
+                }
+                if (troca == false) {
+                    novastr += str.substr(i, 1);
+                }
+            }
+            return novastr;
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#cep").focusout(function () {
+            //Início do Comando AJAX
+            $.ajax({
+                //O campo URL diz o caminho de onde virá os dados
+                //É importante concatenar o valor digitado no CEP
+                url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
+                //Aqui você deve preencher o tipo de dados que será lido,
+                //no caso, estamos lendo JSON.
+                dataType: 'json',
+                //SUCESS é referente a função que será executada caso
+                //ele consiga ler a fonte de dados com sucesso.
+                //O parâmetro dentro da função se refere ao nome da variável
+                //que você vai dar para ler esse objeto.
+                success: function (resposta) {
+                    //Agora basta definir os valores que você deseja preencher
+                    //automaticamente nos campos acima.
+                    $("#logradouro").val(resposta.logradouro);
+                    $("#complemento").val(resposta.complemento);
+                    $("#bairro").val(resposta.bairro);
+                    $("#cidade").val(resposta.localidade);
+                    $("#uf").val(resposta.uf);
+                    //Vamos incluir para que o Número seja focado automaticamente
+                    //melhorando a experiência do usuário
+                    $("#numero").focus();
+                }
+            });
+        });
+    </script>
+
+    @*Script para Verificar se o Funcionário é um Veterinário.*@
+    <script>
+        function Veterinario() {
+            var field_select = document.getElementById('field').value;
+            if (field_select == 2) {
+                document.getElementById("label").style.dispay = "flex";
+                document.getElementById("crmv").style.display = "flex";
+                document.getElementById("crmv").style.flexDirection = "column";
+            } else {
+                document.getElementById("crmv").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
