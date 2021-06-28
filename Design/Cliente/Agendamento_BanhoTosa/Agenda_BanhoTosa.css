@@ -22,7 +22,6 @@ section{
     margin-top: 6%;
     display: flex;
 }
-
 .back{
     position: absolute;
     background: var(--background-details);
