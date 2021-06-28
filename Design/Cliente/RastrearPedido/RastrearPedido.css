@@ -1,0 +1,58 @@
+:root{
+    --main-background: linear-gradient(120deg, #88D6FF 0%, #CFEDFD 100%);
+    --background-details: #3D444D;
+    --alert-red: #f04c47;
+    --text: #444B54;
+    --border-field: #44BFFF;
+    --border-food:#FF94A1;
+    --background-box: #C9ECFF;
+    --button: #F89B28;
+    --white: #F5FBFF;
+}
+html, body{
+    height: 100%;
+    margin: 0%;
+    padding: 0%;
+}
+#map{
+    height: 100%;
+}
+.back{
+    z-index: 1;
+    position: absolute;
+    background: var(--background-details);
+    margin: 6% 0 0 2%;
+    padding: 10px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+.img_back{
+    cursor: pointer;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.box_informations{
+    background: var(--background-details);
+    border: solid 1px var(--border-field);
+    border-radius: 20px 20px 20px 0;
+    box-shadow: 0px 3px 6px var(--border-field);
+    margin-top: 32%;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 23%;
+    position: absolute;
+}
+.text{
+    font: normal 14pt Segoe UI;
+    color: white;
+    margin: 10% 0 0 5%;
+}
+
