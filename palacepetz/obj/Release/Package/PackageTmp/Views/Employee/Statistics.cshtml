@@ -1,0 +1,195 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Vendas - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Relatorio/Relatorio.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a alt="" href="" style="text-decoration: none;">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a alt="" href="" style="text-decoration: none;">Serviços</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a alt="" href="/funcionario/funcoes/produtos" style="text-decoration: none;">produtos</a></li>
+            <li  id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a alt="/empresas/estatisticas" href="" style="text-decoration: none;">relatório</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a alt="" href="" style="text-decoration: none;">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a alt="" href="" style="text-decoration: none;">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a alt="" href="" style="text-decoration: none;">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2 class="title">Relatório Geral</h2>
+        <div class="container">
+                <div class="card">
+                    <div class="box">
+                        <div class="percent">
+                            <svg id="svg_alimentos">
+                                <circle cx="70" cy="70" r="70" ></circle>
+                                <circle cx="70" cy="70" r="70" id="bar_alimentos"></circle>
+                            </svg>
+                            <div class="number" data-pct="50">
+                                <h2 class="porcentagem_alimentos">@ViewBag.food_percentage<span>%</span></h2>
+                            </div>
+                        </div>
+                        <h2 class="text">Alimentos</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <div class="percent">
+                            <svg id="svg_estetica">
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70" id="bar_estetica"></circle>
+                            </svg>
+                            <div class="number">
+                                <h2 class="porcentagem_estetica">@ViewBag.aesthetics_percentage<span>%</span></h2>
+                            </div>
+                        </div>
+                        <h2 class="text">Estética</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <div class="percent">
+                            <svg id="svg_acessorios">
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70" id="bar_acessorios"></circle>
+                            </svg>
+                            <div class="number">
+                                <h2 class="porcentagem_acessorios">@ViewBag.accessories_percentage<span>%</span></h2>
+                            </div>
+                        </div>
+                        <h2 class="text">Acessórios</h2>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box" style="padding-left: 5%;">
+                        <div class="percent">
+                            <svg id="svg_medicamentos">
+                                <circle cx="70" cy="70" r="70"></circle>
+                                <circle cx="70" cy="70" r="70" id="bar_medicamentos"></circle>
+                            </svg>
+                            <div class="number">
+                                <h2 class="porcentagem_medicamentos">@ViewBag.medicines_percentage<span>%</span></h2>
+                            </div>
+                        </div>
+                        <h2 class="text">Medicamentos</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container_two">
+                <div class="card_box">
+                    <h2 class="result_text">@ViewBag.user_amount</h2>
+                    <h3 class="title_text">Total de Cliente</h3>
+                </div>
+                <div class="card_box">
+                    <h2 class="result_text">@ViewBag.products_amount</h2>
+                    <h3 class="title_text">Total de Produtos</h3>
+                </div>
+                <div class="card_box">
+                    <h2 class="result_text">+R$@ViewBag.totalPrice</h2>
+                    <h3 class="title_text">Lucro Total</h3>
+                </div>
+            </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+
+    <!-- Script para mudar círculo dos alimentos -->
+    <script>
+        $(document).ready(function(){
+            
+            var val = $('h2.porcentagem_alimentos').text().replaceAll('%', '');
+            var $circle = $('#svg_alimentos #bar_alimentos');
+
+            var r = $circle.attr('r');
+            var c = Math.PI*(r*2);
+        
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+            
+            var pct = ((100-val)/100)*c;
+            
+            $circle.css({ strokeDashoffset: pct});
+            
+            $('#cont').attr('data-pct',val);
+    });
+    </script>
+
+
+    <!-- Script para mudar círculo da estética -->
+    <script>
+        $(document).ready(function(){
+            
+            var val = $('h2.porcentagem_estetica').text().replaceAll('%', '');
+            var $circle = $('#svg_estetica #bar_estetica');
+
+            var r = $circle.attr('r');
+            var c = Math.PI*(r*2);
+        
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+            
+            var pct = ((100-val)/100)*c;
+            
+            $circle.css({ strokeDashoffset: pct});
+            
+            $('#cont').attr('data-pct',val);
+    });
+    </script>
+
+     <!-- Script para mudar círculo dos acessórios -->
+    <script>
+        $(document).ready(function(){
+            
+            var val = $('h2.porcentagem_acessorios').text().replaceAll('%', '');
+            var $circle = $('#svg_acessorios #bar_acessorios');
+
+            var r = $circle.attr('r');
+            var c = Math.PI*(r*2);
+        
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+            
+            var pct = ((100-val)/100)*c;
+            
+            $circle.css({ strokeDashoffset: pct});
+            
+            $('#cont').attr('data-pct',val);
+    });
+    </script>
+
+
+    <!-- Script para mudar círculo dos Medicamentos -->
+    <script>
+        $(document).ready(function(){
+            
+            var val = $('h2.porcentagem_medicamentos').text().replaceAll('%', '');
+            var $circle = $('#svg_medicamentos #bar_medicamentos');
+
+            var r = $circle.attr('r');
+            var c = Math.PI*(r*2);
+        
+            if (val < 0) { val = 0;}
+            if (val > 100) { val = 100;}
+            
+            var pct = ((100-val)/100)*c;
+            
+            $circle.css({ strokeDashoffset: pct});
+            
+            $('#cont').attr('data-pct',val);
+    });
+    </script>
+</body>
+</html>

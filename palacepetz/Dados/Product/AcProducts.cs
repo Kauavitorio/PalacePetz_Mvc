@@ -38,47 +38,52 @@ namespace palacepetz.Dados.Product
             try
             {
                 //  Sending request to api
-                using (WebResponse response = request.GetResponse())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    //  After sending the request to the api, the system was created to handle the data received
-                    using (Stream strReader = response.GetResponseStream())
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
                     {
-                        //  Checking if respose is null
-                        if (strReader == null) return null;
-
-                        //  If not null will start to read respose
-                        using (StreamReader objReader = new StreamReader(strReader))
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
                         {
-                            //  Saving everything that was read in the responseBody
-                            responseBody = objReader.ReadToEnd();
+                            //  Checking if respose is null
+                            if (strReader == null) return null;
 
-                            //  System created to be able to read individual items from the api response
-                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
-
-                            //  Selecting everything within the json "Search" list and putting where i want
-                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
                             {
-                                productlist.Add(
-                                    new DtoProduct
-                                    {
-                                        cd_prod = itens_response.cd_prod,
-                                        id_user = id_user,
-                                        cd_category = itens_response.cd_category + "",
-                                        nm_category = itens_response.nm_category + "",
-                                        nm_product = itens_response.nm_product,
-                                        amount =  itens_response.amount + "",
-                                        species = itens_response.species + "",
-                                        product_price = (double) itens_response.product_price,
-                                        description = itens_response.description + "",
-                                        date_prod = itens_response.date_prod + "",
-                                        shelf_life = itens_response.shelf_life + "",
-                                        image_prod = itens_response.image_prod + "",
-                                        popular = itens_response.popular + ""
-                                    }
-                                   );
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+
+                                //  System created to be able to read individual items from the api response
+                                dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                                //  Selecting everything within the json "Search" list and putting where i want
+                                foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                                {
+                                    productlist.Add(
+                                        new DtoProduct
+                                        {
+                                            cd_prod = itens_response.cd_prod,
+                                            id_user = id_user,
+                                            cd_category = itens_response.cd_category + "",
+                                            nm_category = itens_response.nm_category + "",
+                                            nm_product = itens_response.nm_product,
+                                            amount = itens_response.amount + "",
+                                            species = itens_response.species + "",
+                                            product_price = (double)itens_response.product_price,
+                                            description = itens_response.description + "",
+                                            date_prod = itens_response.date_prod + "",
+                                            shelf_life = itens_response.shelf_life + "",
+                                            image_prod = itens_response.image_prod + "",
+                                            popular = itens_response.popular + ""
+                                        }
+                                       );
+                                }
                             }
                         }
                     }
+                    else productlist.Add(null);
                 }
                 return productlist;
             }

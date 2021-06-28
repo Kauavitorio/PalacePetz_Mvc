@@ -36,7 +36,7 @@
     @using (Html.BeginForm())
     {
         <section>
-            <a href="/"><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+            <a href="/"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.png" alt="" class="img_back"></div></a>
             <main>
                 <div class="box_profile">
                     <div class="back_img">
@@ -54,28 +54,27 @@
                     <h2 class="title_service">Agendar Consulta</h2><br>
                     <div class="container">
                         <div class="colunm_one">
-                                            @Html.DropDownList("user_pet",
-                             (IEnumerable<SelectListItem>)ViewBag.user_pet,
+                             @Html.DropDownList("user_pet", (IEnumerable<SelectListItem>)ViewBag.user_pet,
                              "Selecione seu animal", new { @class = "field-select" })
-                            <br>
-                                            @Html.DropDownList("veterinary",
-                             (IEnumerable<SelectListItem>)ViewBag.veterinary,
-                             "Selecione um Veterinário", new { @class = "field-select" })
-                            <br>
-                            @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "field-time", @type = "time" } })
-                            <br>
-                            @Html.EditorFor(model => model.time, new { htmlAttributes = new { @class = "field-date", @type = "date" } })
+                             <br>
+                             @Html.DropDownList("cd_veterinary", (IEnumerable<SelectListItem>)ViewBag.veterinary, new { @class = "field-select" })
+                             <br>
+                             @Html.EditorFor(model => model.date_schedule, new { htmlAttributes = new { @class = "field-time", @type = "time" } })
+                             <br>
+                             @Html.EditorFor(model => model.time_schedule, new { htmlAttributes = new { @class = "field-date", @type = "date" } })
                         </div>
                         <div class="colunm_two">
-                            @Html.EditorFor(model => model.description, new { htmlAttributes = new { cols = "30", rows = "10", @placeholder = "Descrição...", @class = "field-descriptio" } })
-                            <select name="" id="" class="field-select">
-                                <option value="">Forma de Pagamento</option>
-                                <option value="0">Débito</option>
-                                <option value="1">Crédito</option>
-                            </select>
-                            <a href="/registrar-cartao" class="link_card">Não tem cartão cadastrado? Cadastrar Cartão.</a>
+                            @Html.TextAreaFor(model => model.description, new { @cols = "30", @rows = "10", @placeholder = "Descrição...", @class = "field-description" })
+                            @Html.DropDownList("payment_method", new List<SelectListItem>
+                            {
+                                new SelectListItem{ Text="Forma de Pagamento", Value = "999" },
+                                new SelectListItem{ Text="1 - Débito", Value = "1" },
+                                new SelectListItem{ Text="2 - Crédito", Value = "2" },
+                                new SelectListItem{ Text="3 - Dinheiro", Value = "3" }
+                            }, new { @class = "field-select" })
                         </div>
                     </div>
+                    <h3>@ViewBag.status_schedule</h3>
                     <input type="submit" value="Agendar" class="btn_agendar">
                 </div>
             </main>

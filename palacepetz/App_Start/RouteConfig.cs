@@ -55,13 +55,6 @@ namespace palacepetz
                 defaults: new { controller = "Usuario", action = "SetNewPassword", id = UrlParameter.Optional }
             );
 
-            //  Route to register new Product
-            routes.MapRoute(
-                name: "registernewprod",
-                url: "funcionario/registrarnovoproduto",
-                defaults: new { controller = "Employee", action = "RegisterProduct", id = UrlParameter.Optional }
-            );
-
             //  Route to register address
             routes.MapRoute(
                 name: "registeraddress",
@@ -202,11 +195,129 @@ namespace palacepetz
                 defaults: new { controller = "Usuario", action = "RemovePet" }
             );
 
+            routes.MapRoute(//  Route to Scheduled Services
+                name: "schedules",
+                url: "meus-agendamentos",
+                defaults: new { controller = "Home", action = "ScheduledServices" }
+            );
+
+            //  Route to Shedule Bath
+            routes.MapRoute(
+                name: "shedulebath",
+                url: "agendar-banho-tosa",
+                defaults: new { controller = "Home", action = "Schedule_Bath_and_tosa" }
+            );
+
             routes.MapRoute(//  Route to Help Center
                 name: "helpcenter",
                 url: "suporte",
                 defaults: new { controller = "Home", action = "HelpCenter" }
             );
+
+            /* ---------- Employee Routs ---------- */
+
+            routes.MapRoute( // Route to List Users
+                name: "funclistusers",
+                url: "clientes",
+                defaults: new { controller = "Employee", action = "CheckCustommers" }
+            );
+
+            routes.MapRoute(//  Route to edit user
+                name: "edituser",
+                url: "funcionario/editar-cliente/{id_user}",
+                defaults: new { controller = "Employee", action = "EditCustommers" }
+            );
+
+            routes.MapRoute(//  Route to disabled user
+                name: "disableduser",
+                url: "funcionario/desativa/{id_user}",
+                defaults: new { controller = "Employee", action = "DisabledUser" }
+            );
+
+            routes.MapRoute(//  Route to Statistics
+                name: "statistics",
+                url: "empresa/estatisticas",
+                defaults: new { controller = "Employee", action = "Statistics" }
+            );
+
+            routes.MapRoute(//  Route to employee index
+                name: "homeemployee",
+                url: "funcionario",
+                defaults: new { controller = "Employee", action = "Index"}
+            );
+
+            routes.MapRoute(//  Route to See Functions Products
+                name: "seefunctions",
+                url: "funcionario/funcoes/produtos",
+                defaults: new { controller = "Employee", action = "FunctionsProducts" }
+            );
+
+            routes.MapRoute(//  Route to See Products
+                name: "seeproductsfunc",
+                url: "funcionario/produtos/{filter}",
+                defaults: new { controller = "Employee", action = "ListProducts", filter = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(//  Route to register new Product
+                name: "registernewprod",
+                url: "funcionario/registrar/produto",
+                defaults: new { controller = "Employee", action = "RegisterProduct"}
+            );
+
+            routes.MapRoute(//  Route to edit Product
+                name: "editprod",
+                url: "funcionario/editar/{cd_prod}",
+                defaults: new { controller = "Employee", action = "EditProduct" }
+            );
+
+            routes.MapRoute(//  Route to delete Product
+                name: "removeprod",
+                url: "funcionario/remove/{cd_prod}",
+                defaults: new { controller = "Employee", action = "DeleteProduct"}
+            );
+
+            routes.MapRoute(//  Route to edit Users
+                name: "edituserfunc",
+                url: "funcionario/clientes/{cd_prod}",
+                defaults: new { controller = "Employee", action = "Edit" }
+            );
+
+            routes.MapRoute(//  Route to see supplier
+                name: "seesuplier",
+                url: "funcionario/fornecedores",
+                defaults: new { controller = "Manager", action = "SeeSupplier" }
+            );
+
+            /* ---------- Manager Routes ---------- */
+            routes.MapRoute(//  Route to register new employee
+                name: "registeremployee",
+                url: "gerente/registrar-funcionario",
+                defaults: new { controller = "Manager", action = "RegisterEmployee" }
+            );
+
+            routes.MapRoute(//  Route to list employee
+                name: "listemployee",
+                url: "gerente/funcionarios",
+                defaults: new { controller = "Manager", action = "EmployeeList" }
+            );
+
+            routes.MapRoute(//  Route to edit employee
+                name: "editemployee",
+                url: "gerente/editar-funcionario/{id_employee}",
+                defaults: new { controller = "Manager", action = "EditEmployee" }
+            );
+
+            routes.MapRoute(//  Route to delete employee
+                name: "deleteemployee",
+                url: "gerente/funcionario/excluir/{id_employee}",
+                defaults: new { controller = "Manager", action = "RemoveEmployee" }
+            );
+
+            routes.MapRoute(//  Route to order for supplier
+               name: "order-for-supplier",
+               url: "gerente/pedido-fornecedor",
+               defaults: new { controller = "Manager", action = "Order_for_Supplier" }
+           );
 
             //  Default Route
             routes.MapRoute(

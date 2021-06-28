@@ -1,0 +1,94 @@
+﻿@model IEnumerable<palacepetz.Models.products.DtoProduct>
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Listar_Produto/Listar_Produto.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
+            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="main">
+            <div class="container_text">
+                <h1 class="main_text">PRODUTOS CADASTRADOS</h1>
+                <input type="text" id="inputSearch" class="text" style="text-align: left; color: black;" placeholder="Buscar produto...">
+                <a class="btn_buscar" onclick="SearchProduct()">Buscar</a>
+            </div>
+            <a class="sub_text" href="/funcionario/registrar/produto">Cadastrar novo produto</a>
+
+            @foreach (var item in Model)
+            {
+                <div class="container_prod">
+                    <img src="@Html.DisplayFor(modelItem => item.image_prod)" class="img_prod">
+                    <table>
+                        <tr>
+                            <td class="text">Nome do produto</td>
+                            <td class="text">Quantidade</td>
+                            <td class="text">Preço</td>
+                            <td class="text">Data de validade</td>
+                        </tr>
+
+                        <tr>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.nm_product)</td>
+                            @if (item.amount == "0")
+                            {
+                                <td class="subtext">Sem estoque!</td>
+                            }
+                            else
+                            {
+                                <td class="subtext">@Html.DisplayFor(modelItem => item.amount)</td>
+                            }
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.product_price)</td>
+                            <td class="subtext">@Html.DisplayFor(modelItem => item.shelf_life)</td>
+                            <td style="display: flex; flex-direction: column;">
+                                <a style="text-decoration:none" href="/funcionario/editar/@Html.DisplayFor(modelItem => item.cd_prod)" class="btn_edit">Editar</a>
+                                <a style="text-decoration:none" class="btn_remove" onclick="DeleteProduct(@Html.DisplayFor(modelItem => item.cd_prod))">Remover</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        </div>
+    </section>
+
+    <script>
+        function DeleteProduct(cd_prod) {
+            var deleteCard = confirm("Tem certeza de que deseja excluir este produto?")
+            if (deleteCard) {
+                window.open(`/funcionario/remove/${cd_prod}`, '_self');
+            }
+        }
+        function SearchProduct() {
+            var input = document.getElementById('inputSearch').value
+            var inputCheck = input.replace(" ", "")
+            if (inputCheck == null || inputCheck == "" || inputCheck == "")
+                alert("Insira o nome do produto!!")
+            else
+                window.open("/funcionario/produtos/" + input, '_self');
+        }
+    </script>
+</body>
+</html>

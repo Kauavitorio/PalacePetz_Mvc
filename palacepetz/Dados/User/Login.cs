@@ -68,7 +68,7 @@ namespace palacepetz.Dados.Auth
                     else if (statusCode == 401)
                         return "401";
                     else
-                        return "500";
+                        return statusCode + "";
                 }
             }
             catch (WebException ex)
@@ -77,6 +77,8 @@ namespace palacepetz.Dados.Auth
                     return "405";
                 else if (ex.Message.Contains("(401)"))
                     return "401";
+                else if (ex.Message.Contains("(410)"))
+                    return "410";
                 else
                     return "500";
             }

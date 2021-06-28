@@ -2,6 +2,7 @@
 using palacepetz.Dados.Auth;
 using palacepetz.Dados.Product;
 using palacepetz.Models.products;
+using palacepetz.Models.Schedule;
 using palacepetz.Models.shoppingcart;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace palacepetz.Controllers
             if(email_user != null && email_user != "")
             {
                 string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -102,7 +103,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -267,7 +268,7 @@ namespace palacepetz.Controllers
                 if(cd_prod != 0)
                 {
                     userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                     {
                         RemoveCookie();
                         return RedirectToAction("Login", "Usuario");
@@ -289,6 +290,8 @@ namespace palacepetz.Controllers
                             ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
                         else
                             ViewBag.img_user = img_user;
+
+                        ViewBag.id_user = id_user;
 
                         if (!CheckEmployee(user_type))
                             return RedirectToAction("Index", "Employee");
@@ -337,6 +340,7 @@ namespace palacepetz.Controllers
                     string resultDetails = ac.Get_Product_Details(cd_prod);
                     if (resultDetails != "500" || resultDetails != "204")
                     {
+                        ViewBag.id_user = 0;
                         System.Diagnostics.Debug.WriteLine("" + resultDetails);
                         JObject objProds = JObject.Parse(resultDetails);
                         DtoProduct infoProd = new DtoProduct();
@@ -398,7 +402,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -482,7 +486,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -557,7 +561,7 @@ namespace palacepetz.Controllers
                 if (email_user != null && email_user != "")
                 {
                     userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                    if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                     {
                         RemoveCookie();
                         return RedirectToAction("Login", "Usuario");
@@ -646,7 +650,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -721,7 +725,7 @@ namespace palacepetz.Controllers
             if (email_user != null && email_user != "")
             {
                 userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
-                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
                 {
                     RemoveCookie();
                     return RedirectToAction("Login", "Usuario");
@@ -764,7 +768,360 @@ namespace palacepetz.Controllers
                     ViewBag.complement_user = complement;
                     ViewBag.cep_user = zipcode;
 
+                    List<SelectListItem> user_pet = new List<SelectListItem>(Dados.User.Pets.ActionPets.GetPetListShedule(id_user));
+                    ViewBag.cd_animal = new SelectList(user_pet, "Value", "Text");
+
+                    List<SelectListItem> veterinary = new List<SelectListItem>(Dados.Employees.EmployeeActions.GetVeterinarys());
+                    ViewBag.veterinary = new SelectList(veterinary, "Value", "Text");
+
                     return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Schedule_Appointment(DtoSchedule scheduleInfo)
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+
+                    List<SelectListItem> cd_animal_list = new List<SelectListItem>(Dados.User.Pets.ActionPets.GetPetListShedule(id_user));
+                    ViewBag.cd_animal = new SelectList(cd_animal_list, "Value", "Text");
+
+                    int cd_animal = int.Parse(Request["cd_animal"]);
+                    int cd_veterinary = int.Parse(Request["cd_veterinary"]);
+                    int payment_method = int.Parse(Request["payment_method"]);
+                    if (cd_animal == 0)
+                        ViewBag.status_schedule = "Selecione um animal!!";
+                    else if (cd_veterinary == 0)
+                        ViewBag.status_schedule = "Selecione um veterinário!!";
+                    else if (payment_method == 0 || payment_method == 999)
+                        ViewBag.status_schedule = "Selecione um metodo de pagamento!!";
+                    else if (scheduleInfo.date_schedule == null || scheduleInfo.date_schedule == "" || scheduleInfo.date_schedule == " ")
+                        ViewBag.status_schedule = "Selecione uma data para a consulta!!";
+                    else if (scheduleInfo.time_schedule == null || scheduleInfo.time_schedule == "" || scheduleInfo.time_schedule == " ")
+                        ViewBag.status_schedule = "Selecione um horario para a consulta!!";
+                    else
+                    {
+                        scheduleInfo.cd_animal = cd_animal;
+                        scheduleInfo.cd_veterinary = cd_veterinary;
+                        scheduleInfo.payment_type = payment_method;
+                        scheduleInfo.service_type = 1;
+                        int result_Schedule = await Dados.Schedule.ScheduleAction.Create_Schedule(scheduleInfo, id_user);
+                        if(result_Schedule == 201)
+                            return RedirectToAction("ScheduledServices", "Home");
+                        else
+                            ViewBag.status_schedule = "Estamos com problema em nossos servidore\nTente novamente mais tarde!!";
+                    }
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        public async Task<ActionResult> Schedule_Bath_and_tosa()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+                    List<SelectListItem> cd_animal = new List<SelectListItem>(Dados.User.Pets.ActionPets.GetPetListShedule(id_user));
+                    ViewBag.cd_animal = new SelectList(cd_animal, "Value", "Text");
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Schedule_Bath_and_tosa(DtoSchedule scheduleInfo)
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+                    List<SelectListItem> cd_animal_list = new List<SelectListItem>(Dados.User.Pets.ActionPets.GetPetListShedule(id_user));
+                    ViewBag.cd_animal = new SelectList(cd_animal_list, "Value", "Text");
+
+                    int cd_animal = int.Parse(Request["cd_animal"]);
+                    int delivery_type = int.Parse(Request["delivery_type"]);
+                    int payment_method = int.Parse(Request["payment_method"]);
+                    if (cd_animal == 0)
+                        ViewBag.status_schedule = "Selecione um animal!!";
+                    else if (delivery_type == 0)
+                        ViewBag.status_schedule = "Selecione um veterinário!!";
+                    else if (payment_method == 0 || payment_method == 999)
+                        ViewBag.status_schedule = "Selecione um metodo de pagamento!!";
+                    else if (scheduleInfo.date_schedule == null || scheduleInfo.date_schedule == "" || scheduleInfo.date_schedule == " ")
+                        ViewBag.status_schedule = "Selecione uma data para a consulta!!";
+                    else if (scheduleInfo.time_schedule == null || scheduleInfo.time_schedule == "" || scheduleInfo.time_schedule == " ")
+                        ViewBag.status_schedule = "Selecione um horario para a consulta!!";
+                    else
+                    {
+                        scheduleInfo.cd_animal = cd_animal;
+                        scheduleInfo.delivery = delivery_type;
+                        scheduleInfo.payment_type = payment_method;
+                        scheduleInfo.service_type = 2;
+                        int result_Schedule = await Dados.Schedule.ScheduleAction.Create_Schedule(scheduleInfo, id_user);
+                        if (result_Schedule == 201)
+                            return RedirectToAction("ScheduledServices", "Home");
+                        else
+                            ViewBag.status_schedule = "Estamos com problema em nossos servidore\nTente novamente mais tarde!!";
+                    }
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        public async Task<ActionResult> ScheduledServices()
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    return View(Dados.Schedule.ScheduleAction.GetAllSchedules(id_user));
 
                 }
             }

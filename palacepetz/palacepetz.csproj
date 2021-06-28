@@ -270,10 +270,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Dados\Cards\CardAction.cs" />
+    <Compile Include="Dados\Employees\EmployeeActions.cs" />
+    <Compile Include="Dados\Manager\ManagerActions.cs" />
     <Compile Include="Dados\Order\ActionOrder.cs" />
+    <Compile Include="Dados\Schedule\ScheduleAction.cs" />
     <Compile Include="Dados\User\Pets\ActionPets.cs" />
+    <Compile Include="Models\Employee\DtoEmployee.cs" />
+    <Compile Include="Models\Supplier\DtoSupplier.cs" />
     <Compile Include="Models\User\DtoCards.cs" />
     <Compile Include="Dados\User\Cpf_actions.cs" />
     <Compile Include="Dados\User\Cryption.cs" />
@@ -392,6 +398,19 @@
     <Content Include="Views\Usuario\RegisterMyPet.cshtml" />
     <Content Include="Views\Usuario\MyPets.cshtml" />
     <Content Include="Views\Usuario\EditMyPets.cshtml" />
+    <Content Include="Views\Manager\RegisterEmployee.cshtml" />
+    <Content Include="Views\Manager\EmployeeList.cshtml" />
+    <Content Include="Views\Manager\EditEmployee.cshtml" />
+    <Content Include="Views\Home\Schedule_Bath_and_tosa.cshtml" />
+    <Content Include="Views\Manager\SeeSupplier.cshtml" />
+    <Content Include="Views\Manager\Order_for_Supplier.cshtml" />
+    <Content Include="Views\Home\ScheduledServices.cshtml" />
+    <Content Include="Views\Employee\Statistics.cshtml" />
+    <Content Include="Views\Employee\FunctionsProducts.cshtml" />
+    <Content Include="Views\Employee\EditProduct.cshtml" />
+    <Content Include="Views\Employee\ListProducts.cshtml" />
+    <Content Include="Views\Employee\CheckCustommers.cshtml" />
+    <Content Include="Views\Employee\EditCustommers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
