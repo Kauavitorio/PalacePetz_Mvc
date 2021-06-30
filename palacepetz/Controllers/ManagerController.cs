@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using palacepetz.Dados.Auth;
 using palacepetz.Models.Employee;
+using palacepetz.Models.products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,14 +105,25 @@ namespace palacepetz.Controllers
                     {
                         employeeInfo.user_type = int.Parse(Request["employee_type_droplist"]);
                         if (employeeInfo.user_type == 999)
-                        {
                             ViewBag.insert_status = "Selecione o tipo de funcionario!!";
 
-                        }
-                        else if (!Dados.User.Cpf_actions.IsValid(employeeInfo.cpf_user.ToString()))
-                        {
+                        else if (employeeInfo.cpf_user == null || employeeInfo.cpf_user.Length <= 0)
                             ViewBag.insert_status = "CPF informado é invalido!!";
-                        }
+
+                        else if (!Dados.User.Cpf_actions.IsValid(employeeInfo.cpf_user.ToString()))
+                            ViewBag.insert_status = "CPF informado é invalido!!";
+
+                        else if (employeeInfo.number_ctps == null || employeeInfo.number_ctps.Length <= 0)
+                            ViewBag.insert_status = "CTPS informado é invalido!!";
+
+                        else if (employeeInfo.role == null || employeeInfo.role.Length <= 0)
+                            ViewBag.insert_status = "O cargo informado é invalido!!";
+
+                        else if (employeeInfo.birth_date == null || employeeInfo.birth_date.Length <= 0)
+                            ViewBag.insert_status = "Data de nascimento informado é invalido!!";
+
+                        else if (employeeInfo.zipcode == null || employeeInfo.zipcode.Length < 8)
+                            ViewBag.insert_status = "CEP informado é invalido!!";
                         else
                         {
                             if (employeeInfo.num_crmv == null || employeeInfo.num_crmv.Length <= 0)
@@ -265,7 +277,7 @@ namespace palacepetz.Controllers
                         else if (!Dados.User.Cpf_actions.IsValid(employeeInfo.cpf_user.ToString()))
                             ViewBag.insert_status = "CPF informado é invalido!!";
 
-                        else if(employeeInfo.password == null || employeeInfo.password.Length <= 8 || employeeInfo.password.Replace(" ", "") == "")
+                        else if(employeeInfo.password == null || employeeInfo.password.Length < 8 || employeeInfo.password.Replace(" ", "") == "")
                             ViewBag.insert_status = "Selecione a senha do funcionario!!\nMínimo de caracteres 8";
 
                         else
@@ -412,9 +424,125 @@ namespace palacepetz.Controllers
             else
                 return RedirectToAction("Login", "Usuario");
         }
+
         public async Task<ActionResult> Order_for_Supplier()
         {
-            return View();
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 2)
+                    {
+
+                        List<SelectListItem> products_list = new List<SelectListItem>(Dados.Employees.EmployeeActions.GetProductsSelectList());
+                        ViewBag.products_list = new SelectList(products_list, "Value", "Text");
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Order_for_Supplier(DtoProduct productInfo)
+        {
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                string userinfo = await Task.Run(() => Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (user_type > 2)
+                    {
+                        List<SelectListItem> products_list = new List<SelectListItem>(Dados.Employees.EmployeeActions.GetProductsSelectList());
+                        ViewBag.products_list = new SelectList(products_list, "Value", "Text");
+                        if (productInfo.amount == null || productInfo.amount.Length <= 0)
+                            ViewBag.status_amount_resuqest = "Insira a quantidade do produto";
+                        else
+                        {
+                            int cd_prod = int.Parse(Request["products_list"]);
+                            int amount = int.Parse(productInfo.amount);
+                            int result = Dados.Employees.EmployeeActions.PutMoreProductAmount(cd_prod, amount);
+                            if(result == 200) return RedirectToAction("ListProducts", "Employee");
+                            else return RedirectToAction("ListProducts", "Employee");
+                        }
+                        return View();
+
+                    }
+                    else
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Usuario");
         }
 
         public void RemoveCookie()

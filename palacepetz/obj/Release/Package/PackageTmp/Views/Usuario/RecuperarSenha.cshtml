@@ -39,21 +39,22 @@
     <section>
         @using (Html.BeginForm())
         {
-            <div class="main_conatiner">
-                <div class="img">
-                    <img src="https://www.kauavitorio.com/palacepetz/RecoverPassword/emoji.png">
-                </div>
-                <div class="container_text">
-                    <h2 class="text">
-                        esqueceu a senha?
-                        <h1 class="text1">Sem problemas,<br />vamos te ajudar.</h1>
-                    </h2>
-                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de e-mail", @class = "enter", @onclick = "hiddenTextDanger()" } })
-                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                    <h3 class="text-danger">@ViewBag.statusRecoverPassowrd</h3>
-                    <input type="submit" value="trocar senha" class="singup" />
-                </div>
+        <div class="main_conatiner">
+            
+            <div class="img">
+                <img src="https://www.kauavitorio.com/palacepetz/RecoverPassword/emoji.png">
             </div>
+            <div class="container_text">
+                <h2 class="text">
+                    esqueceu a senha?
+                    <h1 class="text1">Sem problemas,<br />vamos te ajudar.</h1>
+                </h2>
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Endereço de e-mail", @class = "enter", @onclick = "hiddenTextDanger()" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                <h3 class="text-danger">@ViewBag.statusRecoverPassowrd</h3>
+                <input type="submit" value="trocar senha" class="singup" />
+            </div>
+        </div>
         }
     </section>
 

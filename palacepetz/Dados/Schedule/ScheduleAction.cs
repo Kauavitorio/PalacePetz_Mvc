@@ -20,7 +20,8 @@ namespace palacepetz.Dados.Schedule
 
         public static async Task<int> Create_Schedule(DtoSchedule scheduleinfo, int id_user)
         {
-            string date_schedule = scheduleinfo.date_schedule;
+            string date_schedule_base = scheduleinfo.date_schedule;
+            string date_schedule = date_schedule_base.Replace("-", "/");
             string time_schedule = scheduleinfo.time_schedule;
             int cd_animal = scheduleinfo.cd_animal;
             int cd_veterinary = scheduleinfo.cd_veterinary;
@@ -164,9 +165,53 @@ namespace palacepetz.Dados.Schedule
             }
             catch (WebException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Erro on category request: " + ex);
+                System.Diagnostics.Debug.WriteLine("" + ex);
                 productlist.Add(null);
                 return productlist;
+            }
+        }
+
+        // Cancel Schedule
+        public static int DeleteSchedule(int cd_schedule, int id_user)
+        {
+            var url = BASE_URL + "user/schedule/cancel/" + cd_schedule + "/" + id_user + "/" + "Não especificado o motivo do cancelamento";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return 500;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                return statusCode;
+                            }
+                        }
+                    }
+                    else
+                        return statusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                statusCode = 500;
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                return statusCode;
             }
         }
     }

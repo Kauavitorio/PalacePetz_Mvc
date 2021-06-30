@@ -1,3 +1,4 @@
+C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.csproj.CoreCompileInputs.cache
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\palacepetz.dll.config
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\palacepetz.dll
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\palacepetz.pdb
@@ -82,8 +83,6 @@ C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\System.Net.Http.Form
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\System.Web.Http.xml
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\System.Web.Http.WebHost.xml
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.csprojAssemblyReference.cache
-C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.csproj.CoreCompileInputs.cache
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.csproj.CopyComplete
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.dll
 C:\Users\Kaua Vitorio\Desktop\MVC\palacepetz\palacepetz\obj\Debug\palacepetz.pdb

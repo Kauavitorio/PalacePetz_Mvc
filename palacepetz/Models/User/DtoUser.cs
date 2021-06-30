@@ -44,6 +44,7 @@ namespace palacepetz.Models.User
 
         [DisplayName("Tipo do usuário")]
         public int user_type { get; set; }
+        public int status { get; set; }
 
         [DisplayName("Imagem")]
         public string img_user { get; set; }

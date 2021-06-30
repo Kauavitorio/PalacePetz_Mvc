@@ -201,6 +201,12 @@ namespace palacepetz
                 defaults: new { controller = "Home", action = "ScheduledServices" }
             );
 
+             routes.MapRoute(//  Route to Cancel Services
+                name: "cancelservices",
+                url: "cancelar/servicos/{cd_schedule}",
+                defaults: new { controller = "Home", action = "ScheduledCancel" }
+            );
+
             //  Route to Shedule Bath
             routes.MapRoute(
                 name: "shedulebath",
@@ -216,6 +222,8 @@ namespace palacepetz
 
             /* ---------- Employee Routs ---------- */
 
+
+            
             routes.MapRoute( // Route to List Users
                 name: "funclistusers",
                 url: "clientes",
@@ -224,15 +232,35 @@ namespace palacepetz
 
             routes.MapRoute(//  Route to edit user
                 name: "edituser",
-                url: "funcionario/editar-cliente/{id_user}",
+                url: "funcionario/editar-cliente/{id_user_edit}",
                 defaults: new { controller = "Employee", action = "EditCustommers" }
             );
 
             routes.MapRoute(//  Route to disabled user
                 name: "disableduser",
-                url: "funcionario/desativa/{id_user}",
+                url: "funcionario/desativar/cliente/{id_user_disable}",
                 defaults: new { controller = "Employee", action = "DisabledUser" }
             );
+
+            routes.MapRoute(//  Route to enable user
+                name: "enableuser",
+                url: "funcionario/ativar/cliente/{id_user_enable}",
+                defaults: new { controller = "Employee", action = "EnableUser" }
+            );
+
+            routes.MapRoute( // Route to List User Services
+                name: "userservices",
+                url: "funcionario/servicos",
+                defaults: new { controller = "Employee", action = "UserScheduledServices" }
+            );
+
+            routes.MapRoute( //  Route to See Details Services
+                name: "detailsservices",
+                url: "funcionario/servicos/detalhes/{cd_schedule}/{id_user}",
+                defaults: new { controller = "Employee", action = "DatailsScheduledServices" }
+                
+            );
+
 
             routes.MapRoute(//  Route to Statistics
                 name: "statistics",
@@ -287,6 +315,25 @@ namespace palacepetz
                 url: "funcionario/fornecedores",
                 defaults: new { controller = "Manager", action = "SeeSupplier" }
             );
+
+            routes.MapRoute( // Route to information
+                name: "funcinformations",
+                url: "funcionario/informacoes",
+                defaults: new { controller = "Employee", action = "Informations" }
+            );
+
+            routes.MapRoute( //  Route to AllOrder
+                name: "allorders",
+                url: "funcionario/pedidos",
+                defaults: new { controller = "Employee", action = "AllOrder" }
+            );
+
+            routes.MapRoute( //  Route to Order Control
+                name: "controlorders",
+                url: "funcionario/pedidos/{cd_order}",
+                defaults: new { controller = "Employee", action = "OrderControl" }
+            );
+
 
             /* ---------- Manager Routes ---------- */
             routes.MapRoute(//  Route to register new employee

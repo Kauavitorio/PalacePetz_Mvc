@@ -35,42 +35,42 @@
     <section>
         <a href="/perfil"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
         <h2 class="title">Editar Perfil</h2>
+        @using (Html.BeginForm("EditProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
         <div class="box">
-            @using (Html.BeginForm("EditProfile", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                <div class="container_img">
-                    <label for="files" style="cursor: pointer;" class="btn">Mudar imagem de perfil</label>
-                    @Html.EditorFor(model => model.file, new { htmlAttributes = new { @id = "files", @class = "img_user", @style = "width: 10px; visibility:hidden;", @type = "file" } })
-                </div>
-                <div class="form">
-                    <div class="colunm_one">
+            <div class="container_img">
+                <label for="files" style="cursor: pointer;" class="btn">Mudar imagem de perfil</label>
+                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @id = "files", @class = "img_user", @style = "width: 10px; visibility:hidden;", @type = "file" } })
+            </div>
+            <div class="form">
+                <div class="colunm_one">
 
-                        @Html.EditorFor(model => model.Firstname_user, new { htmlAttributes = new { @class = "field" } })<br />
+                    @Html.EditorFor(model => model.Firstname_user, new { htmlAttributes = new { @class = "field" } })<br />
 
-                        @Html.EditorFor(model => model.Lastname_user, new { htmlAttributes = new { @class = "field" } })<br />
+                    @Html.EditorFor(model => model.Lastname_user, new { htmlAttributes = new { @class = "field" } })<br />
 
-                        @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @class = "field", @id = "cpfedit" } })<br />
-
-                    </div>
-                    <div class="colunm_two">
-
-                        @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @placeholder = "Celular", @class = "field", @id = "phone_edit" } })<br />
-
-                        @Html.EditorFor(model => model.birth_date, new { htmlAttributes = new { @id = "birth_date", @placeholder = "Data de aniversário", @class = "field" } })<br />
-
-                    </div>
+                    @Html.EditorFor(model => model.cpf_user, new { htmlAttributes = new { @class = "field", @id = "cpfedit" } })<br />
 
                 </div>
-                <div class="container_button">
-                    <h3>@ViewBag.statusupdate</h3>
-                    <input type="submit" value="Concluir Edição" style="width: 30%;" class="btnEdit">
+                <div class="colunm_two">
+
+                    @Html.EditorFor(model => model.phone_user, new { htmlAttributes = new { @placeholder = "Celular", @class = "field", @id = "phone_edit" } })<br />
+
+                    @Html.EditorFor(model => model.birth_date, new { htmlAttributes = new { @id = "birth_date", @placeholder = "Data de aniversário", @class = "field" } })<br />
+
                 </div>
-            }
+            </div>
+            <div class="container_button">
+                <h3>@ViewBag.statusupdate</h3>
+                <input type="submit" value="Concluir Edição" style="width: 30%;" class="btnEdit">
+            </div>
+
             <div class="container_button2">
                 <!--BOTÃO-->
                 <a href="/registrar-endereco"><input type="submit" value="Editar endereço" class="btnCad" style="margin-left: 8%; margin-top: -200px;"></a>
             </div>
         </div>
+        }
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://www.kauavitorio.com/palacepetz/header/header.js"></script>

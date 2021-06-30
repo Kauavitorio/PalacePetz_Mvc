@@ -57,11 +57,11 @@
                             @Html.DropDownList("cd_animal", (IEnumerable<SelectListItem>)ViewBag.cd_animal,
                            "Selecione seu animal", new { @class = "field-select" })
                             <br>
-                            @Html.DropDownList("cd_veterinary", (IEnumerable<SelectListItem>)ViewBag.veterinary, new { @class = "field-select" })
+                            @Html.DropDownList("cd_veterinary", (IEnumerable<SelectListItem>)ViewBag.cd_veterinaryr, new { @class = "field-select" })
                             <br>
-                            @Html.EditorFor(model => model.date_schedule, new { htmlAttributes = new { @class = "field-time", @type = "time" } })
+                            @Html.EditorFor(model => model.date_schedule, new { htmlAttributes = new { @class = "field-time", @type = "date" } })
                             <br>
-                            @Html.EditorFor(model => model.time_schedule, new { htmlAttributes = new { @class = "field-date", @type = "date" } })
+                            @Html.EditorFor(model => model.time_schedule, new { htmlAttributes = new { @class = "field-date", @type = "time" } })
                         </div>
                         <div class="colunm_two">
                             @Html.TextAreaFor(model => model.description, new { @cols = "30", @rows = "10", @placeholder = "Descrição...", @class = "field-description" })

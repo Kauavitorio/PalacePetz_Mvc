@@ -52,12 +52,13 @@
                 {
                     <div class="container_three col-lg-2 col-md-6 mb-4">
                         <div class="box">
-                            <h3 class="text_service">@Html.DisplayFor(modelItem => item.cd_shedule)</h3><br>
+                            <h3 class="text_service">@Html.DisplayFor(modelItem => item.service_type)</h3><br>
+                            <h4 class="text_resul">Código: @Html.DisplayFor(modelItem => item.cd_shedule)</h4>
                             <h4 class="text_resul">Animal: @Html.DisplayFor(modelItem => item.pet_user)</h4>
                             <h4 class="text_resul">Veterinário: @Html.DisplayFor(modelItem => item.name_vet)</h4>
                             <h4 class="text_resul">Hora: @Html.DisplayFor(modelItem => item.time)</h4>
                             <h4 class="text_resul">Data: @Html.DisplayFor(modelItem => item.date)</h4>
-                            <input type="submit" value="CANCELAR" class="button_cancel">
+                            <input type="submit" style="text-align:center;" value="CANCELAR" class="button_cancel">
                         </div>
                     </div>
                 }

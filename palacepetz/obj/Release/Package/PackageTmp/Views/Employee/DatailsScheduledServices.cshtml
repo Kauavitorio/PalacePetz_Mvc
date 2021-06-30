@@ -1,0 +1,107 @@
+﻿@model palacepetz.Models.Schedule.DtoSchedule
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Serviço - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Servicos/Detalhes_Servicos/Detalhes_Servicos.css">
+</head>
+<body onload="LogScheduleDetails()">
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
+            @if (@ViewBag.type_user == 1 || @ViewBag.type_user == 3)
+            {
+                <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Serviços</a></li>
+                if (@ViewBag.type_user == 3)
+                {
+                    <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
+                }
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
+            }
+            else
+            {
+                <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Consultas</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
+            }
+
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/informacoes" alt="" style="text-decoration:none">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a href="/logout/1" alt="" style="text-decoration:none">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        <a href="/funcionario/servicos"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Pedidos/Controle_Pedidos/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Detalhes do Serviço</h2>
+        <main>
+            <div class="box">
+                <h3 class="text_service" id="service">@Html.DisplayFor(model => model.service_type)</h3><br>
+                <h4 class="text_resul" id="status">Status: @Html.DisplayFor(model => model.status)</h4>
+                <h4 class="text_resul">Animal: @Html.DisplayFor(model => model.nm_animal)</h4>
+                <h4 class="text_resul">Cliente: @Html.DisplayFor(model => model.name_user)</h4>
+                <h4 class="text_resul">Hora:  @Html.DisplayFor(model => model.date_schedule)</h4>
+                <h4 class="text_resul">Data: @Html.DisplayFor(model => model.time_schedule)</h4>
+                <h4 class="text_resul" id="veterinary">Veterinário: @Html.DisplayFor(model => model.nm_veterinary)</h4><br> 
+                <h4 class="text_resul" id="delivery_type">Forma de Entrega: @Html.DisplayFor(model => model.delivery)</h4><br>
+                <h4 class="text_resul">Descrição: @Html.DisplayFor(model => model.description)</h4>
+            </div>
+        </main> 
+    </section>
+    <script>
+        function LogScheduleDetails() {
+            var service_type = document.getElementById('service');
+            var nm_veterinary = document.getElementById("veterinary");
+            if (service_type.innerHTML == 1) {
+                service_type.innerHTML = "Consulta Veterinária";
+            } else if (service_type.innerHTML == 2){
+                service_type.innerHTML = "Banho e Tosa";
+                nm_veterinary.style.display = "none";
+            }
+            var status = document.getElementById('status');
+            var status_replace = status.innerHTML.replace("Status: ", "")
+            if (status_replace == 0) {
+                status.innerHTML = "Agendado.";
+            } else if (status_replace == 1) {
+                status.innerHTML = "Concluído";
+            } else {
+                status.innerHTML = "Cancelado";
+                status.style.color = "#FF4444";
+            }
+
+            var delivery_type = document.getElementById('delivery_type');
+
+            var delivery_type_replace = parseInt(delivery_type.innerHTML.replace("Forma de Entrega: ", ""))
+            if (delivery_type_replace == 0)
+                delivery_type.style.display = "none";
+            else {
+                switch (delivery_type_replace) {
+                    case 1:
+                        delivery_type.innerHTML = "Forma de Entrega: Levarei o Pet | Receber na residência"
+                        break;
+                    case 2:
+                        delivery_type.innerHTML = "Forma de Entrega: Levarei o Pet | Retirar na Palace"
+                        break;
+                    case 3:
+                        delivery_type.innerHTML = "Forma de Entrega: Palace busca o animal | Retirar na Palace"
+                        break;
+                    case 4:
+                        delivery_type.innerHTML = "Forma de Entrega: Palace busca o animal | Receber na residência"
+                        break;
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>

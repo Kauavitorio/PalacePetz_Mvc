@@ -1,0 +1,175 @@
+﻿@model palacepetz.Models.User.DtoOrders
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle dos Pedidos - PalacePetz</title>
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Pedidos/Controle_Pedidos/controle_pedidos.css">
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <nav id="menu">
+        <ul id="menu2">
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Serviços</a></li>
+            @if (@ViewBag.type_user == 3)
+            {
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
+            }
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
+            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/informacoes" alt="" style="text-decoration:none">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a href="/logout/1" alt="" style="text-decoration:none">sair</a></li>
+        </ul>
+    </nav>
+    <section>
+        @using (Html.BeginForm("UpdateOrderStatus", "Employee", FormMethod.Post))
+        {
+        @Html.EditorFor(model => model.date_order, new { htmlAttributes = new { @class = "result_text", @style="display:none;"} })
+        @Html.EditorFor(model => model.cd_order, new { htmlAttributes = new { @class = "form-control", @style="display: none; "} })
+        <a href="/funcionario/pedidos"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
+        <h2 class="title">Controle de Pedidos</h2>
+        <main>
+            <div class="box_pedido">
+                <div class="field">
+                    <h3 class="title_text">Pedido:  </h3>
+                    @Html.DisplayFor(model => model.cd_order, new { htmlAttributes = new { @class = "result_text",@style="font-family: Segoe UI;"} })
+                </div>
+                <div class="field">
+                    <h3 class="title_text">Realizado em:  </h3>
+                    @Html.DisplayFor(model => model.date_order, new { htmlAttributes = new { @class = "result_text", @style="font-family: Segoe UI;" } })
+                </div>
+                <div class="field">
+                    <h3 class="title_text">Pagamento:  </h3>
+                    <h3 class="result_text">Cartão</h3>
+                </div>
+            </div>
+            @Html.EditorFor(model => model.id_user, new { htmlAttributes = new { @class = "form-control", @style="visibility:hidden" } })
+
+            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control", @id="status", @style="font: bold 1rem Segoe UI; visibility:hidden" } })
+            <div class="container">
+                <div class="progress-container">
+                    <div id="progress" class="progress"></div>
+                    <div class="circle active">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 class="text_progress">Aguardando Aprovação</h3>
+                    </div>
+                    <div class="circle ">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 class="text_progress">Preparando Produto</h3>
+                    </div>
+                    <div class="circle ">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 class="text_progress">A caminho</h3>
+                    </div>
+                    <div class="circle ">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 class="text_progress">Entregue</h3>
+                    </div>
+                    <div class="circle ">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 class="text_progress">Concluído</h3>
+                    </div>
+                </div>
+                <a class="btn" id="prev" disabled>Voltar</a>
+                <a class="btn" id="next">Avançar</a>
+                <input type="submit" class="btn" id="finish" value="Aplicar">
+            </div>
+        </main>
+        }
+    </section>
+    <script>
+        const progress = document.getElementById("progress");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+        const circles = document.querySelectorAll(".circle");
+        let currentActive = 1;
+        var current_status_get = document.getElementById("status").value
+        switch (current_status_get) {
+            case "Aguardando Aprovação":
+                currentActive = 1;
+                break;
+            case "Preparando Produto":
+                currentActive = 2;
+                break;
+            case "A caminho":
+                currentActive = 3;
+                break;
+            case "Entregue":
+                currentActive = 4;
+                break;
+            case "Concluído":
+                currentActive = 5;
+                break;
+        }
+        update();
+
+
+        next.addEventListener("click", () => {
+            currentActive++;
+
+            if (currentActive > circles.length) {
+                currentActive = circles.length;
+            }
+            update();
+        });
+
+        prev.addEventListener("click", () => {
+            currentActive--;
+
+
+
+            if (currentActive < 1) {
+                currentActive = 1;
+            }
+            update();
+        });
+
+        function update() {
+            switch (currentActive) {
+                case 1: document.getElementById("status").value = "Aguardando Aprovação"
+                    break;
+                case 2: document.getElementById("status").value = "Preparando Produto"
+                    break;
+                case 3: document.getElementById("status").value = "A caminho"
+                    break;
+                case 4: document.getElementById("status").value = "Entregue"
+                    break;
+                case 5: document.getElementById("status").value = "Concluído"
+                    break;
+            }
+            circles.forEach((circle, idx) => {
+                if (idx < currentActive) {
+                    circle.classList.add("active");
+                } else {
+                    circle.classList.remove("active");
+                }
+            });
+
+            const actives = document.querySelectorAll(".active");
+
+            progress.style.width = ((actives.length - 1) / (circles.length - 1)) * 100 + "%"
+
+            if (currentActive === 1) {
+                prev.disabled = true;
+            } else if (currentActive === circles.length) {
+                next.disabled = true;
+            } else {
+                prev.disabled = false;
+                next.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -19,20 +19,29 @@
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
             <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Serviços</a></li>
-            @if (@ViewBag.type_user == 3)
+            @if (@ViewBag.type_user == 1 || @ViewBag.type_user == 3)
             {
-                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Serviços</a></li>
+                if (@ViewBag.type_user == 3)
+                {
+                    <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
+                }
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
             }
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/infomacoes" alt="" style="text-decoration:none">informações</a></li>
+            else
+            {
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Consultas</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
+            }
+
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/informacoes" alt="" style="text-decoration:none">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a href="/logout/1" alt="" style="text-decoration:none">sair</a></li>
         </ul>
     </nav>
-    <section>
+    <section style="height: 95vh;">
         <div class="column_one">
             <div class="container_one">
                 <div class="container_text">
@@ -45,10 +54,20 @@
                 </div>
             </div>
             <div class="container_two">
-                <div class="box_one">
-                    <img class="img_products" src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/shortcuts/pet-shop.png" alt=""><br>
-                    <a class="button_product" href="/funcionario/funcoes/produtos">Consultar Produtos</a>
-                </div>
+                @if (@ViewBag.type_user == 2)
+                {
+                    <div class="box_one">
+                        <img class="img_products" src="https://cdn.discordapp.com/attachments/707671310104526863/859121115955724338/bicho-de-estimacao.png" alt=""><br>
+                        <a class="button_product" href="/funcionario/servicos">Minhas Consultas</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="box_one">
+                        <img class="img_products" src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/shortcuts/pet-shop.png" alt=""><br>
+                        <a class="button_product" href="/funcionario/produtos">Consultar Produtos</a>
+                    </div>
+                }
                 <div class="box_two">
                     <img class="img_forn" src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/shortcuts/caminhao-de-entrega.png" alt=""><br>
                     <a class="button_forn" href="/funcionario/fornecedores">Ver Fornecedores</a>

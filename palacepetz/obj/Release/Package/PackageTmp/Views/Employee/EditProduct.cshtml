@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Editar_Produto/Editar_Produto.css">
 </head>
 <body>
-    <nav id="menu">
+   <nav id="menu">
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
@@ -26,31 +26,31 @@
                 <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
             }
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
-            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
+            <li  id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/infomacoes" alt="" style="text-decoration:none">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/informacoes" alt="" style="text-decoration:none">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a href="/logout/1" alt="" style="text-decoration:none">sair</a></li>
         </ul>
     </nav>
     <section>
         @using (Html.BeginForm("EditProduct", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <div class="container">
-                <span style="visibility:hidden">@Html.DisplayFor(model => model.cd_prod)</span>
+            <div class="container" style="margin-left:-5">
+                <span style="visibility:hidden">@Html.EditorFor(model => model.cd_prod)</span>
                 <div class="column_one">
                     <h1 class="text_box">EDITAR PRODUTO</h1>
                     <div class="img_box">
                         <img src="@Html.DisplayFor(model => model.image_prod)" class="img_prod">
                     </div>
-                    <label for="files" style="pointer;" class="button_prod">Trocar imagem</label>
+                    <label for="files" style="cursor: pointer;" class="button_prod">Trocar imagem</label>
                     @Html.EditorFor(model => model.image_prod, new { htmlAttributes = new { @id = "files", @style = "width: 10px; visibility:hidden;", @class = "button_img", @type = "file" } })
                     <div class="desc_box">
                         <h4 class="text_edit">Descrição do produto...</h4>
-                        @Html.TextAreaFor(model => model.description, new { @class = "field area", @cols = "30", @rows = "10", @placeholder = "Descrição do produto..." })
+                        @Html.TextAreaFor(model => model.description, new { @class = "field area", @placeholder = "Descrição do produto..." })
                     </div>
                 </div>
-                <div class="column_two">
+                <div class="column_two" style="margin-rigth: 0%">
                     <h4 class="text_edit">Categoria</h4>
                     @Html.DropDownList("category",
                     (IEnumerable<SelectListItem>)ViewBag.category, new { @class = "field", @id = "field" })

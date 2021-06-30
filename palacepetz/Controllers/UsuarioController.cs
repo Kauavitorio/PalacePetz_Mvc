@@ -862,7 +862,75 @@ namespace palacepetz.Controllers
 
         public async Task<ActionResult> FollowOrder(int cd_order)
         {
-            return View();
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    ViewBag.zipcode = zipcode;
+
+
+                    DtoOrders orderInfo = Dados.User.Profile.GetOrderDetails(id_user, cd_order);
+                    ViewBag.cd_order = orderInfo.cd_order;
+                    ViewBag.deliveryTime = orderInfo.deliveryTime;
+                    ViewBag.address_user = address_user + " " + complement;
+                    ViewBag.status = orderInfo.status;
+
+                    return View();
+
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         [HttpPost]
@@ -951,7 +1019,7 @@ namespace palacepetz.Controllers
                             return View();
                         }
                         else if(result == 201)
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("MyCards", "Usuario");
                         else
                         {
                             ViewBag.errorregisterCard = "Estamos com problemas em nossos servidores, tente novamente mais tarde.";
@@ -1091,40 +1159,44 @@ namespace palacepetz.Controllers
                         else
                             ViewBag.cartsize = 0;
 
-                        if(file == null)
+                        if (petinfo.nm_animal == null || petinfo.nm_animal.Length <= 0)
+                            ViewBag.status_register_pet = "Digite o nome do seu animal de estimação.";
+                        else if (petinfo.age_animal == null || petinfo.age_animal.Length <= 0)
+                            ViewBag.status_register_pet = "Digite a idade de seu animal de estimação.";
+                        else if (petinfo.weight_animal == null || petinfo.weight_animal.Length <= 0)
+                            ViewBag.status_register_pet = "Digite o peso de seu animal de estimação.";
+                        else if (petinfo.breed_animal == null || petinfo.breed_animal.Length <= 0)
+                            ViewBag.status_register_pet = "Digite a raça de seu animal de estimação.";
+                        else if (petinfo.species_animal == null || petinfo.species_animal.Length <= 0)
+                            ViewBag.status_register_pet = "Digite a especie de seu animal de estimação.";
+                        else
                         {
-                            int updateUserResult = await Task.Run(() => Dados.User.Pets.ActionPets.RegisterPet(id_user, petinfo));
-                            if (updateUserResult == 200)
+                            if (file == null)
                             {
-                                return RedirectToAction("MyPets", "Usuario");
+                                int updateUserResult = await Task.Run(() => Dados.User.Pets.ActionPets.RegisterPet(id_user, petinfo));
+                                if (updateUserResult == 200)
+                                    return RedirectToAction("MyPets", "Usuario");
+                                else
+                                    return RedirectToAction("MyPets", "Usuario");
                             }
                             else
                             {
-                                return RedirectToAction("MyPets", "Usuario");
+                                FileStream stream;
+                                if (file.ContentLength > 0)
+                                {
+                                    string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
+                                    file.SaveAs(path);
+                                    stream = new FileStream(Path.Combine(path), FileMode.Open);
+                                    int updateUserResult = await Task.Run(() => Dados.User.Pets.ActionPets.RegisterPet_With_image(stream, id_user, petinfo));
+                                    if (updateUserResult == 200)
+                                        return RedirectToAction("MyPets", "Usuario");
+                                    else
+                                        return RedirectToAction("MyPets", "Usuario");
+
+                                }
                             }
                         }
-                        else
-                        {
-                            FileStream stream;
-                            if (file.ContentLength > 0)
-                            {
-                                string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
-                                file.SaveAs(path);
-                                stream = new FileStream(Path.Combine(path), FileMode.Open);
-                                int updateUserResult = await Task.Run(() => Dados.User.Pets.ActionPets.RegisterPet_With_image(stream, id_user, petinfo));
-                                if (updateUserResult == 200)
-                                {
-                                    return RedirectToAction("MyPets", "Usuario");
-                                }
-                                else
-                                {
-                                    return RedirectToAction("MyPets", "Usuario");
-                                }
-
-                            }
-                            return View();
-                        }
-
+                        return View();
                     }
                 }
                 else

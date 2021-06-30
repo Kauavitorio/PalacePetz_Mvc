@@ -4,17 +4,18 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossos Fornecedores - PalacePetz</title>
+    <title>informações - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/Ver_Fornecedores.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Info/Info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <nav id="menu">
+     <nav id="menu">
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
@@ -41,23 +42,31 @@
         </ul>
     </nav>
     <section>
-        <div class="container" style="display: flex;">
-            <a href="/funcionario"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Editar_Perfil/icon-back.png" alt="" class="img_back"></div></a>
-            <h2 class="title" style="text-transform: uppercase; margin: 3.5% 0 0 10%;">Nossos Fornecedores</h2>
-            @if(@ViewBag.type_user == 3){
-                <h1 class="text" style="font-size: 13pt; text-decoration: underline; margin: 3.5% 0 0 45%; cursor: pointer;"><a href="/gerente/pedido-fornecedor" style="color: #444b54; font-family:'Segoe UI'" >Fazer Pedido ao Fornecedor</a></h1>
-            }
-        </div>
+        <h2 class="title">informações sobre a empresa</h2>
         <main>
-            <div class="column_one" style="margin-bottom: -120px;">
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_one.png" alt=""></div>
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_two.png" alt=""></div>
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_three.jpg" alt=""></div>
-            </div>
-            <div class="column_two">
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_four.png" alt=""></div>
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_five.jpg" alt=""></div>
-                <div class="box"><img src="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Ver_Fornecedores/fornecedor_six.png" alt=""></div>
+            <div class="container">
+                <div class="box">
+                    <i class="fas fa-users" style="line-height: 100px; font-size: 50px; color: #00aeff"></i>
+                    <h2>Quem Somos Nós?</h2>
+                    <h4>
+                        A Palace Petz foi criada pelo amor que os proprietários têm pelos animais.
+                        Visando um bom tratamento aos bichinhos de estimação, não só com produtos, mas
+                        auxiliando no cuidado fornecendo consultas veterinárias.
+                    </h4>
+                </div>
+                <div class="box">
+                    <i class="fas fa-pencil-ruler" style=" line-height: 100px; font-size: 50px; color: #00aeff"></i>
+                    <h2>Missão e Visão</h2>
+                    <h4>Pensando no que o seu bichinho de estimação precisa, com a melhor forma, que é com amor e carinho.</h4>
+                </div>
+                <div class="box">
+                    <i class="fa fa-star" style=" line-height: 100px; font-size: 50px; color: #00aeff"></i>
+                    <h2>Valores</h2>
+                    <h4>
+                        A satisfação da Palace é oferecer produtos de ótima qualidade que atenda desde os mimos até a necessidade
+                        mais importante de nossos Petz.
+                    </h4>
+                </div>
             </div>
         </main>
     </section>

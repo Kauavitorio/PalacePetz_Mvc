@@ -71,7 +71,7 @@
         <div class="container_two">
             <div class="filter_animals">
                 <select style="outline: none;" name="" id="filterspecies" class="field-select">
-                    <option value="default">Filtrar por animais</option>
+                    <option value="/produtos">Filtrar por animais</option>
                     <option value="/produtos/filtro/especie/Dogs">Cachorro</option>
                     <option value="/produtos/filtro/especie/Cats">Gato</option>
                     <option value="/produtos/filtro/especie/Birds">Pássaros</option>
@@ -89,62 +89,65 @@
         <h2 id="demo" class="tit_product">Todos os Produtos</h2>
         @foreach (var item in Model)
         {
-            <h4 id="checkUserId" style="display: none;">@Html.DisplayFor(modelItem => item.id_user)</h4>
-            <div id="containerProduct" class="container_three col-lg-2 col-md-6 mb-4" style="margin: 2% 3%">
-                @if (item.amount == "0")
-                {
-                    <a class="box_container" style="text-decoration: none;" title="Sem Estoque!!" href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)">
-                        <div class="box" style=" background: #c3cfe2; opacity: 70%;">
-                            <div class="img_box" style="background: #c3cfe2; border-radius: 30px; opacity: 50%;"><img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt=""></div>
-                            <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
-                            <h3 id="productPrice">R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
-                            <h3 id="productAmount" style="display: none;">@Html.DisplayFor(modelItem => item.amount)</h3>
-                        </div>
-                    </a>
-                }
-                else
-                {
-                    <a class="box_container" title="@Html.DisplayFor(modelItem => item.nm_product)" style="text-decoration: none;" href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)">
-                        <div class="box">
-                            @{
-                                switch (item.nm_category)
-                                {
-                                    case "Alimentos":
+            if (item != null)
+            {
+                <h4 id="checkUserId" style="display: none;">@Html.DisplayFor(modelItem => item.id_user)</h4>
+                <div id="containerProduct" class="container_three col-lg-2 col-md-6 mb-4" style="margin: 2% 3%">
+                    @if (item.amount == "0")
+                    {
+                        <a class="box_container" style="text-decoration: none;" title="Sem Estoque!!" href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)">
+                            <div class="box" style=" background: #c3cfe2; opacity: 70%;">
+                                <div class="img_box" style="background: #c3cfe2; border-radius: 30px; opacity: 50%;"><img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt=""></div>
+                                <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
+                                <h3 id="productPrice">R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
+                                <h3 id="productAmount" style="display: none;">@Html.DisplayFor(modelItem => item.amount)</h3>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="box_container" title="@Html.DisplayFor(modelItem => item.nm_product)" style="text-decoration: none;" href="/detalhes/@Html.DisplayFor(modelItem => item.cd_prod)">
+                            <div class="box">
+                                @{
+                                    switch (item.nm_category)
+                                    {
+                                        case "Alimentos":
 
-                                        <div class="img_box" style="background-image: linear-gradient(45deg, #FF94A1 0%, #FACCD6 100%); border-radius: 30px;">
-                                            <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
-                                        </div>
+                                            <div class="img_box" style="background-image: linear-gradient(45deg, #FF94A1 0%, #FACCD6 100%); border-radius: 30px;">
+                                                <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
+                                            </div>
 
-                                        break;
-                                    case "Acessórios":
+                                            break;
+                                        case "Acessórios":
 
-                                        <div class="img_box" style="background-image: linear-gradient(45deg, #88D6FF 0%, #44BFFF 100%); border-radius: 30px;">
-                                            <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
-                                        </div>
+                                            <div class="img_box" style="background-image: linear-gradient(45deg, #88D6FF 0%, #44BFFF 100%); border-radius: 30px;">
+                                                <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
+                                            </div>
 
-                                        break;
-                                    case "Medicamentos":
+                                            break;
+                                        case "Medicamentos":
 
-                                        <div class="img_box" style="background-image: linear-gradient(45deg, #F0DD76 0%, #FFF098 100%); border-radius: 30px;">
-                                            <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
-                                        </div>
+                                            <div class="img_box" style="background-image: linear-gradient(45deg, #F0DD76 0%, #FFF098 100%); border-radius: 30px;">
+                                                <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
+                                            </div>
 
-                                        break;
-                                    case "Estética":
+                                            break;
+                                        case "Estética":
 
-                                        <div class="img_box" style="background-image: linear-gradient(45deg, #6ADFD6 0%, #51E6B7 100%); border-radius: 30px;">
-                                            <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
-                                        </div>
-                                        break;
+                                            <div class="img_box" style="background-image: linear-gradient(45deg, #6ADFD6 0%, #51E6B7 100%); border-radius: 30px;">
+                                                <img id="imgProduct" src="@Html.DisplayFor(modelItem => item.image_prod)" alt="">
+                                            </div>
+                                            break;
+                                    }
                                 }
-                            }
-                            <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
-                            <h3 id="productPrice">R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
-                            <h3 id="productAmount" style="display: none;">@Html.DisplayFor(modelItem => item.amount)</h3>
-                        </div>
-                    </a>
-                }
-            </div>
+                                <h4>@Html.DisplayFor(modelItem => item.nm_product)</h4>
+                                <h3 id="productPrice">R$ @Html.DisplayFor(modelItem => item.product_price)</h3>
+                                <h3 id="productAmount" style="display: none;">@Html.DisplayFor(modelItem => item.amount)</h3>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
         }
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -177,7 +180,7 @@
             else if (x == "/produtos/filtro/especie/Hamster")
                 $("div.filter_animals select").val("/produtos/filtro/especie/Hamster");
             else
-                $("div.filter_animals select").val("default");
+                $("div.filter_animals select").val("/produtos");
 
             if (x == "/produtos/filtro/menor-preco")
                 document.getElementById('btnLowestPrice').style.border = "solid 3px var(--button)"

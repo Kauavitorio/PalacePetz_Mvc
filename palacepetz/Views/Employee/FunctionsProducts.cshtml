@@ -14,47 +14,39 @@
     <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/Functions.css">
 </head>
 <body>
-    <nav id="menu">
+   <nav id="menu">
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a href="/funcionario" alt="" style="text-decoration:none">home</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a href="/funcionario/servicos" alt="" style="text-decoration:none">Serviços</a></li>
             @if (@ViewBag.type_user == 3)
             {
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
+                <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a href="/gerente/funcionarios" alt="" style="text-decoration:none">Funcionários</a></li>
             }
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
-            <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
+            <li  id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a href="/funcionario/funcoes/produtos" alt="" style="text-decoration:none">produtos</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a href="/empresa/estatisticas" alt="" style="text-decoration:none">relatório</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a href="/funcionario/pedidos" alt="" style="text-decoration:none">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/infomacoes" alt="" style="text-decoration:none">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a href="/funcionario/informacoes" alt="" style="text-decoration:none">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a href="/logout/1" alt="" style="text-decoration:none">sair</a></li>
         </ul>
     </nav>
     <section>
         <div class="column_one">
-            <div class="container_one">
-                <img class="img_box" style="width: 22rem; height: 11em;" src="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/shortcuts/img_registerProduct.jpg" alt="">
-                <div class="container_text">
+            <div class="container_one" style="width: 95%">
+                <img class="img_box" style="width: 22rem; height: 12em;" src="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/shortcuts/img_registerProduct.jpg" alt="">
+                <div class="container_text"><br>
                     <h2 class="title_box">CADASTRAR PRODUTOS</h2><br>
                     <h4 class="text_box">Registre um produto.</h4><br>
                     <a class="button_box" href="/funcionario/registrar/produto">Cadastrar</a>
                 </div>
             </div>
-            <div class="container_one">
-                <img class="img_box" style="width: 22rem; height: 11em;" src="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/shortcuts/img_updateProduct.jpg" alt="">
-                <div class="container_text">
-                    <h2 class="title_box">EDITAR PRODUTOS</h2><br>
-                    <h4 class="text_box">Edite um produto.</h4><br>
-                    <a class="button_box" style="background: var(--color-button);" href="/funcionario/produtos">Editar</a>
-                </div>
-            </div>
-            <div class="container_one">
-                <img class="img_box" style="width: 22rem; height: 11em;" src="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/shortcuts/img_deleteProduct.jpg" alt="">
-                <div class="container_text">
-                    <h2 class="title_box">EXCULIR PRODUTOS</h2><br>
-                    <h4 class="text_box">Exclua um produto.</h4><br>
-                    <a class="button_box" style="background: var(--color-button3);" href="/funcionario/produtos">Excluir</a>
+            <div class="container_one" style="width: 95%">
+                <img class="img_box" style="width: 22rem; height: 12em;" src="https://www.kauavitorio.com/palacepetz/Funcionario/Produtos/Functions_Products/shortcuts/img_updateProduct.jpg" alt="">
+                <div class="container_text"><br>
+                    <h2 class="title_box">CONSULTAR PRODUTOS</h2><br>
+                    <h4 class="text_box">Consulte os produtos.</h4><br>
+                    <a class="button_box" style="background: var(--color-button);" href="/funcionario/produtos">Consultar</a>
                 </div>
             </div>
         </div>

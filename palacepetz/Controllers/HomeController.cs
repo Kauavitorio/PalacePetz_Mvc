@@ -771,8 +771,8 @@ namespace palacepetz.Controllers
                     List<SelectListItem> user_pet = new List<SelectListItem>(Dados.User.Pets.ActionPets.GetPetListShedule(id_user));
                     ViewBag.cd_animal = new SelectList(user_pet, "Value", "Text");
 
-                    List<SelectListItem> veterinary = new List<SelectListItem>(Dados.Employees.EmployeeActions.GetVeterinarys());
-                    ViewBag.veterinary = new SelectList(veterinary, "Value", "Text");
+                    List<SelectListItem> cd_veterinary = new List<SelectListItem>(Dados.Employees.EmployeeActions.GetVeterinarys());
+                    ViewBag.cd_veterinary = new SelectList(cd_veterinary, "Value", "Text");
 
                     return View();
 
@@ -1131,6 +1131,81 @@ namespace palacepetz.Controllers
                 return RedirectToAction("Login", "Usuario");
             }
         }
+
+        public async Task<ActionResult> ScheduledCancel(int cd_schedule)
+        {
+            string userinfo;
+            HttpCookie reqCookies = Request.Cookies["userInfo"];
+            if (reqCookies != null)
+            {
+                email_user = Cryption.DecryptAES(reqCookies["User_email"].ToString());
+                password = Cryption.DecryptAES(reqCookies["User_password"].ToString());
+            }
+            else
+            {
+                email_user = (string)Session["email_user"];
+                password = (string)Session["password_user"];
+            }
+            if (email_user != null && email_user != "")
+            {
+                userinfo = await Task.Run(() => Dados.Auth.Login.Authlogin(email_user, password));
+                if (userinfo == "401" || userinfo == "405" || userinfo == "500" || userinfo == "410" || userinfo == "" || userinfo == " " || userinfo == null)
+                {
+                    RemoveCookie();
+                    return RedirectToAction("Login", "Usuario");
+                }
+                else
+                {
+                    JObject obj = JObject.Parse(userinfo);
+                    id_user = (int)obj["id_user"];
+                    name_user = (string)obj["name_user"];
+                    cpf_user = (string)obj["cpf_user"];
+                    address_user = (string)obj["address_user"];
+                    complement = (string)obj["complement"];
+                    zipcode = (string)obj["zipcode"];
+                    phone_user = (string)obj["phone_user"];
+                    birth_date = (string)obj["birth_date"];
+                    user_type = (int)obj["user_type"];
+                    img_user = (string)obj["img_user"];
+                    if (img_user == null || img_user == " ")
+                        ViewBag.img_user = "https://www.kauavitorio.com/host-itens/Default_Profile_Image_palacepetz.png";
+                    else
+                        ViewBag.img_user = img_user;
+
+                    ViewBag.name_user = name_user;
+                    ViewBag.cpf_user = cpf_user;
+                    ViewBag.email_user = email_user;
+                    ViewBag.street_user = address_user;
+                    ViewBag.complement_user = complement;
+                    ViewBag.cep_user = zipcode;
+
+
+                    if (!CheckEmployee(user_type))
+                        return RedirectToAction("Index", "Employee");
+
+                    string resultCart = Dados.ShoppingCart.CartActions.GetCartSize(id_user);
+                    if (resultCart != "404" && resultCart != "500")
+                    {
+                        obj = JObject.Parse(resultCart);
+                        int cartSize = (int)obj["length"];
+                        ViewBag.cartsize = cartSize;
+                    }
+                    else
+                        ViewBag.cartsize = 0;
+
+                    int result_delete = Dados.Schedule.ScheduleAction.DeleteSchedule(cd_schedule, id_user);
+                    if(result_delete == 200) return RedirectToAction("ScheduledServices");
+                    else return RedirectToAction("ScheduledServices");
+                }
+            }
+            else
+            {
+                RemoveCookie();
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+
 
         public void RemoveCookie()
         {

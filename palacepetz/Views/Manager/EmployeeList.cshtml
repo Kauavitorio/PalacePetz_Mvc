@@ -6,36 +6,37 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Consultar Funcionários - PalacePetz</title>
-        <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
-        <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Consultar_Funcionario/Consultar_Funcionario.css">
-    </head>
-    <body>
-        <nav id="menu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Funcionários - PalacePetz</title>
+    <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Consultar_Funcionario/Consultar_Funcionario.css">
+</head>
+<body>
+    <nav id="menu">
         <ul id="menu2">
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logo.png" style="width: 8rem" class="logo"></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
             <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="/funcionario/funcoes/produtos" alt="">produtos</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/informacoes" alt="">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
         </ul>
     </nav>
-        <section>
-            <div class="container" style="display: flex;">
-                <h1 class="text_title" style="text-transform: uppercase; margin: 5% 0 0 5%;">Funcionários Cadastrados</h1>
-                <h1 class="text" style="font-size: 13pt; text-decoration: underline; margin: 5% 0 0 51%; cursor: pointer; "><a style="color: #444b54;" href="/gerente/registrar-funcionario">Cadastrar Funcionário</a></h1>
-            </div>
-            <main>
-            @foreach (var item in Model) {
+    <section>
+        <div class="container" style="display: flex;">
+            <h1 class="text_title" style="text-transform: uppercase; margin: 5% 0 0 5%;">Funcionários Cadastrados</h1>
+            <h1 class="text" style="font-size: 13pt; text-decoration: underline; margin: 5% 0 0 51%; cursor: pointer; "><a style="color: #444b54;" href="/gerente/registrar-funcionario">Cadastrar Funcionário</a></h1>
+        </div>
+        <main>
+            @foreach (var item in Model)
+            {
                 <div class="box">
                     <table>
                         <tr>
@@ -51,26 +52,34 @@
                             <td class="subtext">@Html.DisplayFor(modelItem => item.role)</td>
                             <td class="subtext">@Html.DisplayFor(modelItem => item.email)</td>
                             @switch (item.user_type)
-                                {
-                                    case 1:
-                            <td class="subtext">Funcionário</td>
-                                        break;
-                                    case 2:
-                            <td class="subtext">Veterinário</td>
-                                        break;
-                                    case 3:
-                            <td class="subtext">Gerente</td>
-                                        break;
-                                }
+                            {
+                                case 1:
+                                    <td class="subtext">Funcionário</td>
+                                    break;
+                                case 2:
+                                    <td class="subtext">Veterinário</td>
+                                    break;
+                                case 3:
+                                    <td class="subtext">Gerente</td>
+                                    break;
+                            }
                             <td style="display: flex; flex-direction: column; padding-left: 30%;">
                                 <a class="btn_edit" style="text-decoration:none" href="/gerente/editar-funcionario/@Html.DisplayFor(modelItem => item.id_user)">Editar</a>
-                                <a class="btn_remove" style="text-decoration:none" href="/gerente/funcionario/excluir/@Html.DisplayFor(modelItem => item.id_user)">Remover</a>
+                                <a class="btn_remove" style="text-decoration:none;" onclick="DeleteEmployee(@Html.DisplayFor(modelItem => item.id_user))">Remover</a>
                             </td>
                         </tr>
                     </table>
                 </div>
-                }
-            </main>
-        </section>
-    </body>
+            }
+        </main>
+    </section>
+    <script>
+        function DeleteEmployee(id_user) {
+            var deleteFunc = confirm("Tem certeza de que deseja remover este funcionário?")
+            if (deleteFunc) {
+                window.open(`/gerente/funcionario/excluir/${id_user}`, '_self');
+            }
+        }
+    </script>
+</body>
 </html>
