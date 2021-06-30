@@ -36,7 +36,7 @@
     @using (Html.BeginForm())
     {
         <section>
-            <a href="/servicos"><div class="back"><img src="./icon-back.png" alt="" class="img_back"></div></a>
+            <a href="/servicos"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.pn" alt="" class="img_back"></div></a>
             <main>
                 <div class="box_profile">
                     <div class="back_img">
@@ -64,9 +64,9 @@
                                 new SelectListItem { Text = "3 - Palace busca o animal | Retirar na Palace", Value = "3" },
                                 new SelectListItem { Text = "4 - Palace busca o animal | Receber na residência", Value = "4" }
                             }, new { @class = "field-select", @style = "width: 95%; font-size: 7.8pt;" })<br>
-                            @Html.EditorFor(model => model.date_schedule, new { htmlAttributes = new { @class = "field-time", @type = "time" } })
+                            @Html.EditorFor(model => model.date_schedule, new { htmlAttributes = new { @class = "field-time", @type = "date" } })
                             <br>
-                            @Html.EditorFor(model => model.time_schedule, new { htmlAttributes = new { @class = "field-date", @type = "date" } })
+                            @Html.EditorFor(model => model.time_schedule, new { htmlAttributes = new { @class = "field-date", @type = "time" } })
                         </div>
                         <div class="colunm_two" style="margin-left: 5%;">
                             @Html.TextAreaFor(model => model.description, new { cols = "30", rows = "10", @placeholder = "Descrição...", @class = "field-description" })

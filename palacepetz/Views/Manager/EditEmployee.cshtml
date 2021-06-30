@@ -21,22 +21,23 @@
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/home.png" alt=""><a style="text-decoration:none" href="/funcionario" alt="">home</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
             <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="/clientes" alt="" style="text-decoration:none">clientes</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="/funcionario/funcoes/produtos" alt="">produtos</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/informacoes" alt="">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
         </ul>
     </nav>
     <section>
         <h2 class="title">Editar Funcionário</h2>
         <h1 class="text">
-            <a>Consultar Funcionários</a>
+            <a href="/gerente/funcionarios" style="color: #444B54">Consultar Funcionários</a>
         </h1>
 
         @using (Html.BeginForm())
         {
+                @Html.EditorFor(model => model.id_user, new { htmlAttributes = new { @class = "field", @style = "display:none" } })
         <div class="container">
             <div class="column_one">
                 <label class="label">Nome do Funcionário</label>
@@ -57,7 +58,7 @@
                 <label class="label">Tipo de Usuário</label>
                 @Html.DropDownList("employee_type_droplist", new List<SelectListItem>
                 {
-                    new SelectListItem{ Text="Tipo do Funcionário", Value = "999" },
+                    new SelectListItem{ Text="Tipo de Usuário", Value = "999" },
                     new SelectListItem{ Text="Funcionário", Value = "1" },
                     new SelectListItem{ Text="Veterinário", Value = "2" },
                     new SelectListItem { Text = "Gerente", Value = "3" }
@@ -71,11 +72,10 @@
             </div>
             <div class="column_two">
                 <label class="label">CEP</label>
-                @Html.EditorFor(model => model.id_user, new { htmlAttributes = new { @class = "field", @id = "cep", @style = "display:none" } })
                 @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "field", @id = "cep" } })
 
                 <label class="label">Endereço</label>
-                @Html.EditorFor(model => model.address_user, new { htmlAttributes = new { @class = "field" } })
+                @Html.EditorFor(model => model.address_user, new { htmlAttributes = new { @class = "field", @id="logradouro" } })
 
                 <label class="label">Complemento</label>
                 @Html.EditorFor(model => model.complement, new { htmlAttributes = new { @class = "field" } })

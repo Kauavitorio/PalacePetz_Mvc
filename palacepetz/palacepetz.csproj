@@ -411,6 +411,11 @@
     <Content Include="Views\Employee\ListProducts.cshtml" />
     <Content Include="Views\Employee\CheckCustommers.cshtml" />
     <Content Include="Views\Employee\EditCustommers.cshtml" />
+    <Content Include="Views\Employee\UserScheduledServices.cshtml" />
+    <Content Include="Views\Employee\DatailsScheduledServices.cshtml" />
+    <Content Include="Views\Employee\Informations.cshtml" />
+    <Content Include="Views\Employee\AllOrder.cshtml" />
+    <Content Include="Views\Employee\OrderControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

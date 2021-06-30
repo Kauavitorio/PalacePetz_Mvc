@@ -515,6 +515,71 @@ namespace palacepetz.Dados.User
             }
         }
 
+        public static DtoOrders GetOrderDetails(int id_user, int cd_order)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "order/details/" + id_user + "/" + cd_order;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            DtoOrders order = new DtoOrders();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                order.cd_order = (int)itens_response.cd_order;
+                                order.id_user = (int)itens_response.id_user;
+                                order.discount = (string)itens_response.discount;
+                                order.coupom = (string)itens_response.coupom;
+                                order.sub_total = (string)itens_response.sub_total;
+                                order.totalPrice = (string)itens_response.totalPrice;
+                                order.date_order = (string)itens_response.date_order;
+                                order.cd_card = (int)itens_response.cd_card;
+                                order.status = (string)itens_response.status;
+                                order.deliveryTime = (int)itens_response.deliveryTime;
+                                order.payment = (string)itens_response.payment;
+                            }
+                        }
+                    }
+                }
+                return order;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                order = null;
+                return order;
+            }
+        }
+
         public static int Remove_user_card(int cd_card, int id_user)
         {
             //  Variable set for storing api responses

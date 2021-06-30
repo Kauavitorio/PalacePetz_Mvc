@@ -27,10 +27,10 @@
             <li><a href="/meus-pedidos" id="loc" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
             <li><a href="/logout/1" id="LogoutOrLogin" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
             <li>
-                <a onclick="SeeMyCart()" id="SeeMyCart"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                 <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
                 <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
             </li>
-            <li><a onclick="SeeMyProfile()" id="SeeMyProfile"><img src="@ViewBag.img_user" class="user"></a></li>
+           <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
         </ul>
     </header>
     <section>
@@ -38,25 +38,31 @@
         <main>
             @foreach (var item in Model)
             {
-                <div class="box">
-                    <table>
-                        <tr>
-                            <td class="text_title">Pedido:</td>
-                            <td class="text_title">Realizado em: </td>
-                            <td class="text_title">Pagamento:</td>
-                            <td class="text_title">Status:</td>
-                        </tr>
-                        <tr>
-                            <td class="text_result">@Html.DisplayFor(model => item.cd_order)</td>
-                            <td class="text_result">@Html.DisplayFor(model => item.date_order)</td>
-                            <td class="text_result">@Html.DisplayFor(model => item.payment)</td>
-                            <td class="text_result">@Html.DisplayFor(model => item.status)</td>
-                        </tr>
-                        <a href="/pedido/@Html.DisplayFor(model => item.cd_order)" class="btn_AcompanhaPedido">Acompanhar Pedido</a>
-                    </table>
-                </div>
+                if (item != null)
+                {
+                    <div class="box">
+                        <table>
+                            <tr>
+                                <td class="text_title">Pedido:</td>
+                                <td class="text_title">Realizado em: </td>
+                                <td class="text_title">Pagamento:</td>
+                                <td class="text_title">Status:</td>
+                            </tr>
+                            <tr>
+                                <td class="text_result">@Html.DisplayFor(model => item.cd_order)</td>
+                                <td class="text_result">@Html.DisplayFor(model => item.date_order)</td>
+                                <td class="text_result">@Html.DisplayFor(model => item.payment)</td>
+                                <td class="text_result">@Html.DisplayFor(model => item.status)</td>
+                            </tr>
+                            @if (item.status != "Aguardando Aprovação")
+                            {
+                                <a href="/pedido/@Html.DisplayFor(model => item.cd_order)" class="btn_AcompanhaPedido">Acompanhar Pedido</a>
+                            }
+                        </table>
+                    </div>
+                }
             }
-            </main>
+        </main>
     </section>
 </body>
 </html>

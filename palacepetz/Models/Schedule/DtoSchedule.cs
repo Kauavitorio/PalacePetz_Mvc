@@ -19,6 +19,7 @@ namespace palacepetz.Models.Schedule
 
         [DisplayName("Horário do agendamento")]
         public string time_schedule { get; set; }
+        public string name_user { get; set; }
 
         [DisplayName("Código do animal")]
         public int cd_animal { get; set; }

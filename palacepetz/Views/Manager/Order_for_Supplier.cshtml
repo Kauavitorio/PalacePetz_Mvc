@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido ao Fornecedor - PalacePetz</title>
     <link rel="shortcut icon" href="https://www.kauavitorio.com/host-itens/logoPalacePetzMVC.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Pedido_Fornecedor/Pedido_Fornecedor.css">
+    <link rel="stylesheet" href="https://www.kauavitorio.com/palacepetz/Gerente/Fornecedor/Pedido_Fornecedor/Pedido_Fornecedor.css">
 </head>
 <body>
    <nav id="menu">
@@ -23,10 +23,10 @@
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/veterinario.png" alt=""><a style="text-decoration:none" href="/funcionario/servicos" alt="">Serviços</a></li>
             <li ><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/employee.png" alt=""><a style="text-decoration:none" href="/gerente/funcionarios" alt="">Funcionários</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/users.png" alt=""><a href="" alt="/clientes" style="text-decoration:none">clientes</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="" alt="/funcionario/funcoes/produtos">produtos</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/products.png" alt=""><a style="text-decoration:none" href="/funcionario/funcoes/produtos" alt="">produtos</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/stats.png" alt=""><a style="text-decoration:none" href="/empresa/estatisticas" alt="">relatório</a></li>
             <li id="loc"><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/pedidos.png" alt=""><a style="text-decoration:none" href="/funcionario/pedidos" alt="">pedidos</a></li>
-            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/infomacoes" alt="">informações</a></li>
+            <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/info.png" alt=""><a style="text-decoration:none" href="/funcionario/informacoes" alt="">informações</a></li>
             <li><img src="https://www.kauavitorio.com/palacepetz/Funcionario/Home/navbar/logout.png" alt=""><a style="text-decoration:none" href="/logout/1" alt="">sair</a></li>
         </ul>
     </nav>
@@ -35,7 +35,7 @@
         {
             @Html.AntiForgeryToken()
             <h2 class="title">Pedido ao Fornecedor</h2>
-            <div class="column">
+            <div class="column" style="width: 100%">
                 <label for="forn">Selecione um Fornecedor</label>
                 @Html.DropDownList("supplier", new List<SelectListItem>
                 {
@@ -49,14 +49,15 @@
                     }, new { @class = "field", @id="forn"})
 
                 <label for="nome_prod">Nome do Produto</label>
-                @Html.EditorFor(model => model.nm_product, new { htmlAttributes = new { @class = "field", @placeholder="Nome do Produto", @id="nome_prod" } })
+                @Html.DropDownList("products_list",
+                (IEnumerable<SelectListItem>)ViewBag.products_lista, new { @class = "field", @id = "field", @multiple="" })
                 @Html.ValidationMessageFor(model => model.nm_product, "", new { @class = "text-danger" })
 
                 <label for="qtd">Quantidade</label>
                 @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "field", @placeholder="Quantidade", @id="qtd", @type="number" } })
                 @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
             </div>
-            <input type="submit" value="Realizar Pedido" class="button_order">
+            <input type="submit" value="Realizar Pedido" class="button_order" style="width: 50%">
         }
     </section>
 </body>

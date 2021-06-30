@@ -26,7 +26,7 @@
             <li><a href="/meus-pedidos" alt="" style="text-decoration: none; color: var(--white)">pedidos</a></li>
             <li><a href="/logout/1" alt="" style="text-decoration: none; color: var(--white)">sair</a></li>
             <li>
-                <a href="/carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
+                <a href="/meu-carrinho"><img src="https://www.kauavitorio.com/palacepetz/Home/Menu/shopping-cart.png" class="car"></a>
                 <span class='badge badge-warning' id='lblCartCount'>@ViewBag.cartsize</span>
             </li>
             <li><a href="/perfil"><img src="@ViewBag.img_user" class="user"></a></li>
@@ -50,23 +50,42 @@
                 <h2 class="title_service">Serviços Agendados</h2><br>
                 @foreach (var item in Model)
                 {
-                    <div class="container_three" style="margin-inline: auto">
-                        <div class="box">
-                            <h3 class="text_service">#@Html.DisplayFor(modelItem => item.cd_schedule)</h3><br>
-                            <h4 class="text_resul">Animal: @Html.DisplayFor(modelItem => item.nm_animal)</h4>
-                            @if (item.service_type == 1)
-                            {
+                    if (item != null)
+                    {
+                        <div class="container_three" style="margin-inline: auto">
+                            <div class="box">
+                                @if (item.service_type == 1)
+                                {
+                                    <h3 class="text_service">Consulta Veterinária</h3><br>
+                                }
+                                else
+                                {
+                                    <h3 class="text_service">Banho e Tosa</h3><br>
+                                }
+                                <h4 class="text_resul">Código: #@Html.DisplayFor(modelItem => item.cd_schedule)</h4>
+                                <h4 class="text_resul">Animal: @Html.DisplayFor(modelItem => item.nm_animal)</h4>
+                                @if (item.service_type == 1)
+                                {
 
-                                <h4 class="text_resul">Veterinário: @Html.DisplayFor(modelItem => item.nm_veterinary)</h4>
-                            }
-                            <h4 class="text_resul">Hora: @Html.DisplayFor(modelItem => item.date_schedule)</h4>
-                            <h4 class="text_resul">Data: @Html.DisplayFor(modelItem => item.time_schedule)</h4>
-                            <input type="submit" value="CANCELAR" style="position: relative; width: 80%" class="button_cancel">
+                                    <h4 class="text_resul">Veterinário: @Html.DisplayFor(modelItem => item.nm_veterinary)</h4>
+                                }
+                                <h4 class="text_resul">Hora: @Html.DisplayFor(modelItem => item.time_schedule)</h4>
+                                <h4 class="text_resul">Data: @Html.DisplayFor(modelItem => item.date_schedule)</h4>
+                                <a onclick="CancelSchedule(@Html.DisplayFor(modelItem=> item.cd_schedule))" style="position: relative; width: 80%; text-decoration: none; text-align:center;" class="button_cancel">CANCELAR</a>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-                </div>
+            </div>
             </main> 
     </section>
+    <script>
+        function CancelSchedule(cd_schedule){
+            var cancelSchedule = confirm("Tem certeza de que deseja cancelar esse serviço?")
+            if (cancelSchedule) {
+                window.open(`/cancelar/servicos/${cd_schedule}`, '_self');
+            }
+        }
+    </script>
 </body>
 </html>

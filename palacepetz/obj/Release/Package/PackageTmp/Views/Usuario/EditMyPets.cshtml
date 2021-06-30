@@ -33,7 +33,6 @@
         </ul>
     </header>
     <section>
-        <h3>@ViewBag.status_edit_pet</h3>
         <a href="/meus-pets"><div class="back"><img src="https://www.kauavitorio.com/palacepetz/Agendamento_Consulta/icon-back.png" alt="" class="img_back"></div></a>
         <h2 class="title">Editar Animal</h2>
 
@@ -61,8 +60,9 @@
                     </div>
                 </div>
                 <div class="container_button">
-                    <a href="/meus-pets" class="btnAnimais">Ver meus animais</a>
-                    <input type="submit" value="Editar" class="btnEdit">
+                    <h3>@ViewBag.status_edit_pet</h3>
+                    <a href="/meus-pets" class="btnAnimais" style="font-family:'Segoe UI'; text-decoration:none;">Ver meus animais</a>
+                    <input type="submit" value="Concluir" class="btnEdit">
                 </div>
             }
             </div>

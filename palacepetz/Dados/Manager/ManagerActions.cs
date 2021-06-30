@@ -195,7 +195,7 @@ namespace palacepetz.Dados.Manager
                             Console.WriteLine(responseBody);
                             System.Diagnostics.Debug.WriteLine("" + responseBody);
                             return statusCode;
-                        } 
+                        }
                     }
                 }
             }
@@ -214,7 +214,6 @@ namespace palacepetz.Dados.Manager
             var request = (HttpWebRequest)WebRequest.Create(url);
             string json = $"{{\"id_user\":\"{id_employee}\",\"id_employee\":\"{id_manager}\"}}";
 
-            System.Diagnostics.Debug.WriteLine("" + json); 
             request.Method = "DELETE";
             request.ContentType = "application/json";
             request.Accept = "application/json";

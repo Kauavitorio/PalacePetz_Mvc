@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using palacepetz.Models.Employee;
 using palacepetz.Models.products;
+using palacepetz.Models.Schedule;
+using palacepetz.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -100,6 +102,70 @@ namespace palacepetz.Dados.Employees
                 return employeeList;
             }
         }
+        public static List<DtoUser> GetCustomers(int id_employee)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/customer/list/" + id_employee;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of cards
+            List<DtoUser> customerList = new List<DtoUser>();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                customerList.Add(
+                                    new DtoUser
+                                    {
+                                        id_user = (int)itens_response.id_user,
+                                        name_user = (string)itens_response.name_user,
+                                        email = (string)itens_response.email,
+                                        cpf_user = (string)itens_response.cpf_user,
+                                        phone_user = (string)itens_response.phone_user,
+                                        user_type = (int) itens_response.user_type,
+                                        status = (int) itens_response.status
+                                    });
+                            }
+                        }
+                    }
+                }
+                return customerList;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                customerList.Add(null);
+                return customerList;
+            }
+        }
 
         public static string GetEmployeeInformation(int id_user)
         {
@@ -163,6 +229,7 @@ namespace palacepetz.Dados.Employees
                     return "500";
             }
         }
+
         public static List<SelectListItem> GetVeterinarys()
         {
             //  Variable to storing Api Response
@@ -227,6 +294,67 @@ namespace palacepetz.Dados.Employees
             }
         }
 
+        public static List<SelectListItem> GetProductsSelectList()
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "products/list";
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            List<SelectListItem> productsList = new List<SelectListItem>();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                productsList.Add(
+                                        new SelectListItem
+                                        {
+                                            Value = itens_response.cd_prod + "",
+                                            Text = (string)itens_response.nm_product
+                                        }
+                                       );
+                            }
+                        }
+                    }
+                }
+                return productsList;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                productsList.Add(null);
+                return productsList;
+            }
+        }
+
         public static string GetStatistics()
         {
             //  Variable set for storing api responses
@@ -285,14 +413,14 @@ namespace palacepetz.Dados.Employees
             }
         }
 
-        public static int DeleteProduct(int cd_prod)
+        public static int PutMoreProductAmount(int cd_prod, int amount)
         {
             //  Variable set for storing api responses
-            var url = BASE_URL + "user/pet/remove/";
+            var url = BASE_URL + "employee/products/update/amount/" + cd_prod + "/" + amount;
             var request = (HttpWebRequest)WebRequest.Create(url);
 
             /**** Starting Creating request body ****/
-            request.Method = "DELETE";
+            request.Method = "PATCH";
             request.ContentType = "application/json";
             request.Accept = "application/json";
             /**** End Creating request body ****/
@@ -341,16 +469,132 @@ namespace palacepetz.Dados.Employees
             string description = prodInfo.description;
             string shelf_life = prodInfo.shelf_life;
             string image_prod = prodInfo.image_prod;
+            var new_desc = description.ToString();
+            //var new_desc = description.Replace("\n", " ").Replace("\r", "");
 
             //  Variable set for storing api responses
             var url = BASE_URL + "employee/update/product";
             var request = (HttpWebRequest)WebRequest.Create(url);
             string json = $"{{\"cd_category\":\"{cd_category}\",\"nm_product\":\"{nm_product}\",\"amount\":\"{amount}\",\"species\":\"{species}\",\"product_price\":\"{product_price}\"" +
-                $",\"description\":\"{description}\",\"shelf_life\":\"{shelf_life}\",\"image_prod\":\"{image_prod}\",\"cd_prod\":\"{cd_prod}\"}}";
+                $",\"description\":\"{new_desc}\",\"shelf_life\":\"{shelf_life}\",\"image_prod\":\"{image_prod}\",\"cd_prod\":\"{cd_prod}\"}}";
 
             /**** Starting Creating request body ****/
             System.Diagnostics.Debug.WriteLine("" + json);
             request.Method = "PATCH";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            /**** End Creating request body ****/
+
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return 500;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                return statusCode;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return statusCode;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                return statusCode;
+            }
+        }
+
+        public static async Task<int> DisableCustomer(int id_user, int id_employee)
+        {
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/customer/disable/";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            string json = $"{{\"id_user\":\"{id_user}\",\"id_employee\":\"{id_employee}\"}}";
+
+            /**** Starting Creating request body ****/
+            System.Diagnostics.Debug.WriteLine("" + json);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            /**** End Creating request body ****/
+
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return 500;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                return statusCode;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return statusCode;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                return statusCode;
+            }
+        }
+
+        public static async Task<int> EnableCustomer(int id_user, int id_employee)
+        {
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/customer/enable/";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            string json = $"{{\"id_user\":\"{id_user}\",\"id_employee\":\"{id_employee}\"}}";
+
+            /**** Starting Creating request body ****/
+            System.Diagnostics.Debug.WriteLine("" + json);
+            request.Method = "POST";
             request.ContentType = "application/json";
             request.Accept = "application/json";
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
@@ -439,6 +683,484 @@ namespace palacepetz.Dados.Employees
 
                 }
                 return "500";
+            }
+        }
+
+        public static List<DtoSchedule> GetAllScheduledServices(int id_employee, int user_type)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/services/scheduled/" + id_employee;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of cards
+            List<DtoSchedule> scheduledList = new List<DtoSchedule>();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                if(user_type == 2)
+                                {
+                                    if((int)itens_response.service_type == 1)
+                                    {
+                                        if ((int)itens_response.service_type == 1)
+                                        {
+                                            if ((int)itens_response.cd_veterinary == id_employee)
+                                            {
+                                                scheduledList.Add(
+                                                   new DtoSchedule
+                                                   {
+                                                       cd_schedule = (int)itens_response.cd_schedule,
+                                                       id_user = (int)itens_response.id_user,
+                                                       name_user = (string)itens_response.name_user,
+                                                       date_schedule = itens_response.date_schedule + "",
+                                                       time_schedule = itens_response.time_schedule + "",
+                                                       cd_animal = (int)itens_response.cd_animal,
+                                                       description = (string)itens_response.description + "",
+                                                       nm_veterinary = (string)itens_response.nm_veterinary,
+                                                       nm_animal = itens_response.nm_animal + "",
+                                                       service_type = (int)itens_response.service_type,
+                                                       delivery = (int)itens_response.delivery,
+                                                       status = (int)itens_response.status
+                                                   });
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    scheduledList.Add(
+                                   new DtoSchedule
+                                   {
+                                       cd_schedule = (int)itens_response.cd_schedule,
+                                       id_user = (int)itens_response.id_user,
+                                       name_user = (string)itens_response.name_user,
+                                       date_schedule = itens_response.date_schedule + "",
+                                       time_schedule = itens_response.time_schedule + "",
+                                       cd_animal = (int)itens_response.cd_animal,
+                                       description = (string)itens_response.description + "",
+                                       nm_veterinary = (string)itens_response.nm_veterinary,
+                                       nm_animal = itens_response.nm_animal + "",
+                                       service_type = (int)itens_response.service_type,
+                                       delivery = (int)itens_response.delivery,
+                                       status = (int)itens_response.status
+                                   });
+                                }
+                               
+                            }
+                        }
+                    }
+                }
+                return scheduledList;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                scheduledList.Add(null);
+                return scheduledList;
+            }
+        }
+
+        public static DtoUser GetCustomerInfo(int id_user)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/custumer/get/" + id_user;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            DtoUser user = new DtoUser();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                user.id_user = (int)itens_response.id_user;
+                                user.name_user = (string)itens_response.name_user;
+                                user.cpf_user = (string)itens_response.cpf_user;
+                                user.phone_user = (string)itens_response.phone_user;
+                                user.email = (string)itens_response.email;
+                                user.zipcode = (string)itens_response.zipcode;
+                                user.address_user = (string)itens_response.address_user;
+                                user.complement = (string)itens_response.complement;
+                            }
+                        }
+                    }
+                }
+                return user;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                user = null;
+                return user;
+            }
+        }
+
+        public static DtoSchedule GetScheduledServicenfo(int id_employee, int cd_schedule, int id_user)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/services/scheduled/details/" + id_employee + "/" + cd_schedule + "/" + id_user;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of categoria
+            DtoSchedule service = new DtoSchedule();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                service.cd_schedule = (int)itens_response.cd_schedule;
+                                service.id_user = (int)itens_response.id_user;
+                                service.name_user = (string)itens_response.name_user;
+                                service.date_schedule = itens_response.date_schedule + "";
+                                service.time_schedule = itens_response.time_schedule + "";
+                                service.cd_animal = (int)itens_response.cd_animal;
+                                service.description = (string)itens_response.description + "";
+                                service.nm_veterinary = (string)itens_response.nm_veterinary;
+                                service.nm_animal = itens_response.nm_animal + "";
+                                service.service_type = (int)itens_response.service_type;
+                                service.delivery = (int)itens_response.delivery; 
+                                service.status = (int)itens_response.status;
+                            }
+                        }
+                    }
+                }
+                return service;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                service = null;
+                return service;
+            }
+        }
+
+        public static async Task<int> UpdateCustomerProfile(DtoUser userinfo, int id_user)
+        {
+            var name_user = userinfo.name_user;
+            var cpf_user = userinfo.cpf_user;
+            var phone_user = userinfo.phone_user;
+            var birth_date = userinfo.birth_date;
+            var address_user = userinfo.address_user;
+            var complement = userinfo.complement;
+            var zipcode = userinfo.zipcode;
+            var password = userinfo.password;
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/custumer/edit/";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            string json = $"{{\"name_user\":\"{name_user}\",\"cpf_user\":\"{cpf_user}\",\"address_user\":\"{address_user}\",\"complement\":\"{complement}\",\"zipcode\":\"{zipcode}\"" +
+                $",\"phone_user\":\"{phone_user}\",\"birth_date\":\"{birth_date}\",\"id_user\":\"{id_user}\",\"password\":\"{password}\"}}";
+
+            /**** Starting Creating request body ****/
+            System.Diagnostics.Debug.WriteLine("" + json);
+            request.Method = "PATCH";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            /**** End Creating request body ****/
+
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return 500;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                return statusCode;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return statusCode;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                return statusCode;
+            }
+        }
+
+        public static List<DtoOrders> GetAllOrder(int id_employee)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/order/get/" + id_employee;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of cards
+            List<DtoOrders> ordersList = new List<DtoOrders>();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                ordersList.Add(
+                                    new DtoOrders
+                                    {
+                                        cd_order = (long)itens_response.cd_order,
+                                        id_user = (int)itens_response.id_user,
+                                        date_order = (string)itens_response.date_order,
+                                        status = (string)itens_response.status
+                                    }
+                                   );
+                            }
+                        }
+                    }
+                }
+                return ordersList;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                ordersList.Add(null);
+                return ordersList;
+            }
+        }
+
+        public static DtoOrders GetDetailsOrder(int id_employee, int cd_order)
+        {
+            //  Variable to storing Api Response
+            string responseBody;
+
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/order/get/details/" + id_employee + "/" + cd_order;
+
+            /**** Starting Creating request body ****/
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            /**** End Creating request body ****/
+
+            //  Creating list of cards
+            DtoOrders order = new DtoOrders();
+            try
+            {
+                //  Sending request to api
+                using (WebResponse response = request.GetResponse())
+                {
+                    //  After sending the request to the api, the system was created to handle the data received
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        //  Checking if respose is null
+                        if (strReader == null) return null;
+
+                        //  If not null will start to read respose
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            //  Saving everything that was read in the responseBody
+                            responseBody = objReader.ReadToEnd();
+
+                            //  System created to be able to read individual items from the api response
+                            dynamic config = JsonConvert.DeserializeObject<ExpandoObject>(responseBody, new ExpandoObjectConverter());
+
+                            //  Selecting everything within the json "Search" list and putting where i want
+                            foreach (var itens_response in ((IEnumerable<dynamic>)config.Search))
+                            {
+                                order = new DtoOrders
+                                {
+                                    cd_order = (long)itens_response.cd_order,
+                                    id_user = (int)itens_response.id_user,
+                                    date_order = (string)itens_response.date_order,
+                                    status = (string)itens_response.status
+                                };
+                            }
+                        }
+                    }
+                }
+                return order;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                order = null;
+                return order;
+            }
+        }
+
+        public static async Task<int> UpdateOrderStatus(DtoOrders orderinfo, int id_employee)
+        {
+            var status = orderinfo.status;
+            var cd_order = orderinfo.cd_order;
+            var id_user = orderinfo.id_user;
+            //  Variable set for storing api responses
+            var url = BASE_URL + "employee/order/update/" + id_employee;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            string json = $"{{\"status\":\"{status}\",\"cd_order\":\"{cd_order}\",\"id_user\":\"{id_user}\"}}";
+
+            /**** Starting Creating request body ****/
+            System.Diagnostics.Debug.WriteLine("" + json);
+            request.Method = "PATCH";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            /**** End Creating request body ****/
+
+            try
+            {
+                //  Sending request to api
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    statusCode = (int)response.StatusCode;
+                    if (statusCode == 200)
+                    {
+                        //  After sending the request to the api, the system was created to handle the data received
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            //  Checking if respose is null
+                            if (strReader == null) return 500;
+
+                            //  If not null will start to read respose
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                //  Saving everything that was read in the responseBody
+                                responseBody = objReader.ReadToEnd();
+                                return statusCode;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return statusCode;
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine("" + ex);
+                return statusCode;
             }
         }
     }
