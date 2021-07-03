@@ -45,36 +45,39 @@
 
                     @foreach (var item in Model)
                     {
+                        if (item != null)
+                        {
                             <div class="box_card" style="background-color: #1B304B;" onclick="DeleteSelectCard(@Html.DisplayFor(modelItem => item.cd_card))">
                                 <div class="row_one">
                                     @{
                                         switch (item.flag_card)
                                         {
                                             case "MasterCard":
-                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmastercard.png?alt=media&token=79df43fd-494c-4160-93f1-7194266f76b9" alt="" class="img_flag">
+                                                <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmastercard.png?alt=media&token=79df43fd-494c-4160-93f1-7194266f76b9" alt="" class="img_flag">
                                                 break;
                                             case "Visa":
-                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fvisa.png?alt=media&token=e9dd2e2b-dd30-444e-b745-2a1dd2273db9" alt="" class="img_flag">
+                                                <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fvisa.png?alt=media&token=e9dd2e2b-dd30-444e-b745-2a1dd2273db9" alt="" class="img_flag">
                                                 break;
                                             case "Maestro":
-                                                    <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmaestro.png?alt=media&token=28fd5789-f277-4027-8b0f-9ff1f38b2d5d" alt="" class="img_flag">
+                                                <img src="https://firebasestorage.googleapis.com/v0/b/coffeeforcode.appspot.com/o/cards_flag%2Fmaestro.png?alt=media&token=28fd5789-f277-4027-8b0f-9ff1f38b2d5d" alt="" class="img_flag">
                                                 break;
                                             case "Elo":
-                                                    <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/elo.png" alt="" class="img_flag">
+                                                <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/elo.png" alt="" class="img_flag">
                                                 break;
                                             case "Hipercard":
-                                                    <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/hipercard.png" alt="" class="img_flag">
+                                                <img src="https://www.kauavitorio.com/palacepetz/Cadastrar_Cartao/hipercard.png" alt="" class="img_flag">
                                                 break;
                                         }
                                     }
                                     <h3 class="text" style="padding-top: 6%;">@Html.DisplayFor(modelItem => item.number_card)</h3>
                                 </div><br>
-                            <div class="row_two">
-                                <h2 class="text">@Html.DisplayFor(modelItem => item.nmUser_card)</h2>
+                                <div class="row_two">
+                                    <h2 class="text">@Html.DisplayFor(modelItem => item.nmUser_card)</h2>
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
-                    </div>
+                </div>
 
             </div>
         </main>
